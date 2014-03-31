@@ -18,11 +18,12 @@
  */
 
 /**
- * This is the model class for table "et_ophnuintraopnurse_whosignout".
+ * This is the model class for table "et_ophnuintraopnurse_identifiers".
  *
  * The followings are the available columns in table:
  * @property string $id
  * @property integer $event_id
+ * @property integer $wrist_band
  *
  * The followings are the available model relations:
  *
@@ -31,9 +32,10 @@
  * @property Event $event
  * @property User $user
  * @property User $usermodified
+ * @property Element_OphNuIntraoperativenursing_Identifiers_Idoptions_Assignment $idoptionss
  */
 
-class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeElement
+class Element_OphNuIntraoperativenursing_Identifiers  extends  BaseEventTypeElement
 {
 	public $service;
 
@@ -51,7 +53,7 @@ class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeEleme
 	 */
 	public function tableName()
 	{
-		return 'et_ophnuintraopnurse_whosignout';
+		return 'et_ophnuintraopnurse_identifiers';
 	}
 
 	/**
@@ -62,11 +64,11 @@ class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeEleme
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('event_id, ', 'safe'),
-			array('', 'required'),
+			array('event_id, wrist_band, ', 'safe'),
+			array('wrist_band, ', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, event_id, ', 'safe', 'on' => 'search'),
+			array('id, event_id, wrist_band, ', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -83,6 +85,7 @@ class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeEleme
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
+			'idoptionss' => array(self::HAS_MANY, 'Element_OphNuIntraoperativenursing_Identifiers_Idoptions_Assignment', 'element_id'),
 		);
 	}
 
@@ -94,6 +97,8 @@ class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeEleme
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
+			'wrist_band' => 'Patient ID Wrist Band with two identifiers',
+			'idoptions' => 'Select two identifiers',
 		);
 	}
 
@@ -110,6 +115,8 @@ class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeEleme
 
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('event_id', $this->event_id, true);
+		$criteria->compare('wrist_band', $this->wrist_band);
+		$criteria->compare('idoptions', $this->idoptions);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
@@ -117,6 +124,13 @@ class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeEleme
 	}
 
 
+	public function getophnuintraopnurse_identifiers_idoptions_defaults() {
+		$ids = array();
+		foreach (OphNuIntraoperativenursing_Identifiers_Idoptions::model()->findAll('`default` = ?',array(1)) as $item) {
+			$ids[] = $item->id;
+		}
+		return $ids;
+	}
 
 	protected function beforeSave()
 	{
@@ -125,6 +139,35 @@ class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeEleme
 
 	protected function afterSave()
 	{
+		if (!empty($_POST['MultiSelect_idoptions'])) {
+
+			$existing_ids = array();
+
+			foreach (Element_OphNuIntraoperativenursing_Identifiers_Idoptions_Assignment::model()->findAll('element_id = :elementId', array(':elementId' => $this->id)) as $item) {
+				$existing_ids[] = $item->ophnuintraopnurse_identifiers_idoptions_id;
+			}
+
+			foreach ($_POST['MultiSelect_idoptions'] as $id) {
+				if (!in_array($id,$existing_ids)) {
+					$item = new Element_OphNuIntraoperativenursing_Identifiers_Idoptions_Assignment;
+					$item->element_id = $this->id;
+					$item->ophnuintraopnurse_identifiers_idoptions_id = $id;
+
+					if (!$item->save()) {
+						throw new Exception('Unable to save MultiSelect item: '.print_r($item->getErrors(),true));
+					}
+				}
+			}
+
+			foreach ($existing_ids as $id) {
+				if (!in_array($id,$_POST['MultiSelect_idoptions'])) {
+					$item = Element_OphNuIntraoperativenursing_Identifiers_Idoptions_Assignment::model()->find('element_id = :elementId and ophnuintraopnurse_identifiers_idoptions_id = :lookupfieldId',array(':elementId' => $this->id, ':lookupfieldId' => $id));
+					if (!$item->delete()) {
+						throw new Exception('Unable to delete MultiSelect item: '.print_r($item->getErrors(),true));
+					}
+				}
+			}
+		}
 
 		return parent::afterSave();
 	}

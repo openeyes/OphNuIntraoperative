@@ -18,7 +18,7 @@
  */
 
 /**
- * This is the model class for table "et_ophnuintraoperativenursin_timetrackin".
+ * This is the model class for table "et_ophnuintraopnurse_timetrackin".
  *
  * The followings are the available columns in table:
  * @property string $id
@@ -59,7 +59,7 @@ class Element_OphNuIntraoperativenursing_TimeTracking  extends  BaseEventTypeEle
 	 */
 	public function tableName()
 	{
-		return 'et_ophnuintraoperativenursin_timetrackin';
+		return 'et_ophnuintraopnurse_timetrackin';
 	}
 
 	/**

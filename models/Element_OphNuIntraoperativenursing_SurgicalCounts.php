@@ -18,11 +18,14 @@
  */
 
 /**
- * This is the model class for table "et_ophnuintraopnurse_whosignout".
+ * This is the model class for table "et_ophnuintraopnurse_surgicalcou".
  *
  * The followings are the available columns in table:
  * @property string $id
  * @property integer $event_id
+ * @property integer $count_descrepancies
+ * @property integer $surgeon_notified
+ * @property string $comments
  *
  * The followings are the available model relations:
  *
@@ -33,7 +36,7 @@
  * @property User $usermodified
  */
 
-class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeElement
+class Element_OphNuIntraoperativenursing_SurgicalCounts  extends  BaseEventTypeElement
 {
 	public $service;
 
@@ -51,7 +54,7 @@ class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeEleme
 	 */
 	public function tableName()
 	{
-		return 'et_ophnuintraopnurse_whosignout';
+		return 'et_ophnuintraopnurse_surgicalcou';
 	}
 
 	/**
@@ -62,11 +65,11 @@ class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeEleme
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('event_id, ', 'safe'),
-			array('', 'required'),
+			array('event_id, count_descrepancies, surgeon_notified, comments, ', 'safe'),
+			array('count_descrepancies, surgeon_notified, comments, ', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, event_id, ', 'safe', 'on' => 'search'),
+			array('id, event_id, count_descrepancies, surgeon_notified, comments, ', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -94,6 +97,9 @@ class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeEleme
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
+			'count_descrepancies' => 'Count Descrepancies',
+			'surgeon_notified' => 'Surgeon Notified',
+			'comments' => 'Comments',
 		);
 	}
 
@@ -110,6 +116,9 @@ class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeEleme
 
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('event_id', $this->event_id, true);
+		$criteria->compare('count_descrepancies', $this->count_descrepancies);
+		$criteria->compare('surgeon_notified', $this->surgeon_notified);
+		$criteria->compare('comments', $this->comments);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,

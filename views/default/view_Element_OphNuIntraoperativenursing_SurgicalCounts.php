@@ -16,41 +16,25 @@
  * @copyright Copyright (c) 2011-2013, OpenEyes Foundation
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
+?>
 
-/**
- * This is the module class for $this->moduleSuffix
- *
- * The followings are the available columns in table:
- * @property string $moduleShortSuffix
-  */
+<section class="element">
+	<header class="element-header">
+		<h3 class="element-title"><?php echo $element->elementType->name?></h3>
+	</header>
 
-class OphNuIntraoperativenursingModule extends BaseEventTypeModule
-{
-	// this property is really only relevant to gii auto-generation, specifically
-	// for updates to the module through gii
-	public $moduleShortSuffix;
-
-	public function init()
-	{
-		// this method is called when the module is being created
-		// you may place code here to customize the module or the application
-
-		// import the module-level models and components
-		$this->setImport(array(
-			'OphNuIntraoperativenursing.models.*',
-			'OphNuIntraoperativenursing.components.*',
-		));
-
-		$this->moduleShortSuffix = "intraopnurse";
-	}
-
-	public function beforeControllerAction($controller, $action)
-	{
-		if (parent::beforeControllerAction($controller, $action)) {
-			// this method is called before any module controller action is performed
-			// you may place customized code here
-			return true;
-		} else
-			return false;
-	}
-}
+		<div class="element-data">
+				<div class="row data-row">
+			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('count_descrepancies'))?>:</div></div>
+			<div class="large-10 column end"><div class="data-value"><?php echo $element->count_descrepancies ? 'Yes' : 'No'?></div></div>
+		</div>
+		<div class="row data-row">
+			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('surgeon_notified'))?></div></div>
+			<div class="large-10 column end"><div class="data-value"><?php echo $element->surgeon_notified ? 'Yes' : 'No'?></div></div>
+		</div>
+		<div class="row data-row">
+			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('comments'))?></div></div>
+			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->comments)?></div></div>
+		</div>
+			</div>
+</section>

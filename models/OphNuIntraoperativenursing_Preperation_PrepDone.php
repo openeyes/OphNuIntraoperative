@@ -1,5 +1,4 @@
-<?php
-/**
+<?php /**
  * OpenEyes
  *
  * (C) Moorfields Eye Hospital NHS Foundation Trust, 2008-2011
@@ -18,11 +17,11 @@
  */
 
 /**
- * This is the model class for table "et_ophnuintraopnurse_whosignout".
+ * This is the model class for table "ophnuintraopnurse_preperation_prep_done".
  *
  * The followings are the available columns in table:
  * @property string $id
- * @property integer $event_id
+ * @property string $name
  *
  * The followings are the available model relations:
  *
@@ -33,10 +32,8 @@
  * @property User $usermodified
  */
 
-class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeElement
+class OphNuIntraoperativenursing_Preperation_PrepDone extends BaseActiveRecord
 {
-	public $service;
-
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return the static model class
@@ -51,7 +48,7 @@ class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeEleme
 	 */
 	public function tableName()
 	{
-		return 'et_ophnuintraopnurse_whosignout';
+		return 'ophnuintraopnurse_preperation_prep_done';
 	}
 
 	/**
@@ -62,11 +59,11 @@ class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeEleme
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('event_id, ', 'safe'),
-			array('', 'required'),
+			array('name', 'safe'),
+			array('name', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, event_id, ', 'safe', 'on' => 'search'),
+			array('id, name', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -93,7 +90,7 @@ class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeEleme
 	{
 		return array(
 			'id' => 'ID',
-			'event_id' => 'Event',
+			'name' => 'Name',
 		);
 	}
 
@@ -109,14 +106,19 @@ class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeEleme
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('id', $this->id, true);
-		$criteria->compare('event_id', $this->event_id, true);
+		$criteria->compare('name', $this->name, true);
 
 		return new CActiveDataProvider(get_class($this), array(
-			'criteria' => $criteria,
-		));
+				'criteria' => $criteria,
+			));
 	}
 
-
+	/**
+	 * Set default values for forms on create
+	 */
+	public function setDefaultOptions()
+	{
+	}
 
 	protected function beforeSave()
 	{
@@ -125,7 +127,6 @@ class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeEleme
 
 	protected function afterSave()
 	{
-
 		return parent::afterSave();
 	}
 

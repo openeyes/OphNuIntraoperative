@@ -18,11 +18,15 @@
  */
 
 /**
- * This is the model class for table "et_ophnuintraopnurse_whosignout".
+ * This is the model class for table "et_ophnuintraopnurse_anasthesia".
  *
  * The followings are the available columns in table:
  * @property string $id
  * @property integer $event_id
+ * @property integer $allergies_verfied
+ * @property integer $hand_off_from_id
+ * @property integer $hand_off_to_id
+ * @property integer $anesthesia_type_id
  *
  * The followings are the available model relations:
  *
@@ -31,9 +35,12 @@
  * @property Event $event
  * @property User $user
  * @property User $usermodified
+ * @property OphNuIntraoperativenursing_Anesthesia_HandOffFrom $hand_off_from
+ * @property OphNuIntraoperativenursing_Anesthesia_HandOffTo $hand_off_to
+ * @property OphNuIntraoperativenursing_Anesthesia_AnesthesiaType $anesthesia_type
  */
 
-class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeElement
+class Element_OphNuIntraoperativenursing_Anesthesia  extends  BaseEventTypeElement
 {
 	public $service;
 
@@ -51,7 +58,7 @@ class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeEleme
 	 */
 	public function tableName()
 	{
-		return 'et_ophnuintraopnurse_whosignout';
+		return 'et_ophnuintraopnurse_anasthesia';
 	}
 
 	/**
@@ -62,11 +69,11 @@ class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeEleme
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('event_id, ', 'safe'),
-			array('', 'required'),
+			array('event_id, allergies_verfied, hand_off_from_id, hand_off_to_id, anesthesia_type_id, ', 'safe'),
+			array('allergies_verfied, hand_off_from_id, hand_off_to_id, anesthesia_type_id, ', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, event_id, ', 'safe', 'on' => 'search'),
+			array('id, event_id, allergies_verfied, hand_off_from_id, hand_off_to_id, anesthesia_type_id, ', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -83,6 +90,9 @@ class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeEleme
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
+			'hand_off_from' => array(self::BELONGS_TO, 'OphNuIntraoperativenursing_Anesthesia_HandOffFrom', 'hand_off_from_id'),
+			'hand_off_to' => array(self::BELONGS_TO, 'OphNuIntraoperativenursing_Anesthesia_HandOffTo', 'hand_off_to_id'),
+			'anesthesia_type' => array(self::BELONGS_TO, 'OphNuIntraoperativenursing_Anesthesia_AnesthesiaType', 'anesthesia_type_id'),
 		);
 	}
 
@@ -94,6 +104,10 @@ class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeEleme
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
+			'allergies_verfied' => 'Allergies Verfied',
+			'hand_off_from_id' => 'Hand off from',
+			'hand_off_to_id' => 'Hand off to',
+			'anesthesia_type_id' => 'Anesthesia Type',
 		);
 	}
 
@@ -110,6 +124,10 @@ class Element_OphNuIntraoperativenursing_WhoSignOut  extends  BaseEventTypeEleme
 
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('event_id', $this->event_id, true);
+		$criteria->compare('allergies_verfied', $this->allergies_verfied);
+		$criteria->compare('hand_off_from_id', $this->hand_off_from_id);
+		$criteria->compare('hand_off_to_id', $this->hand_off_to_id);
+		$criteria->compare('anesthesia_type_id', $this->anesthesia_type_id);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,

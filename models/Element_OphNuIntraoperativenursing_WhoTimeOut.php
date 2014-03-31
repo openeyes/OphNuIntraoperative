@@ -18,7 +18,7 @@
  */
 
 /**
- * This is the model class for table "et_ophnuintraoperativenursin_whotimeout".
+ * This is the model class for table "et_ophnuintraopnurse_whotimeout".
  *
  * The followings are the available columns in table:
  * @property string $id
@@ -51,7 +51,7 @@ class Element_OphNuIntraoperativenursing_WhoTimeOut  extends  BaseEventTypeEleme
 	 */
 	public function tableName()
 	{
-		return 'et_ophnuintraoperativenursin_whotimeout';
+		return 'et_ophnuintraopnurse_whotimeout';
 	}
 
 	/**
