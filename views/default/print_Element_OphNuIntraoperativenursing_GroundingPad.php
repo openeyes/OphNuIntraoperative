@@ -22,30 +22,24 @@
 <table class="subtleWhite normalText">
 	<tbody>
 		<tr>
-			<td colspan="2">
-				<div class="colThird">
-					<b><?php echo CHtml::encode($element->getAttributeLabel('prep_done'))?>:</b>
-					<div class="eventHighlight medium">
-						<?php if (!$element->prep_dones) {?>
-							<h4>None</h4>
-						<?php } else {?>
-							<h4>
-								<?php foreach ($element->prep_dones as $item) {
-									echo $item->ophnuintraopnurse_preperation_prep_done->name?><br/>
-								<?php }?>
-							</h4>
-						<?php }?>
-					</div>
-				</div>
-			</td>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('grounding_pad'))?>:</td>
+			<td><span class="big"><?php echo $element->grounding_pad ? 'Yes' : 'No'?></span></td>
+		</tr>
+		<tr>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('location_id'))?></td>
+			<td><span class="big"><?php echo $element->location ? $element->location->name : 'None'?></span></td>
+		</tr>
+		<tr>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('side_id'))?></td>
+			<td><span class="big"><?php echo $element->side ? $element->side->name : 'None'?></span></td>
+		</tr>
+		<tr>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('post_skin_id'))?></td>
+			<td><span class="big"><?php echo $element->post_skin ? $element->post_skin->name : 'None'?></span></td>
 		</tr>
 		<tr>
 			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('other'))?></td>
 			<td><span class="big"><?php echo CHtml::encode($element->other)?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('viscoelastic_id'))?></td>
-			<td><span class="big"><?php echo $element->viscoelastic ? $element->viscoelastic->name : 'None'?></span></td>
 		</tr>
 	</tbody>
 </table>

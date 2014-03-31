@@ -25,23 +25,24 @@
 
 		<div class="element-data">
 				<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('prep_done'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php if (!$element->prep_dones) {?>
-							None
-						<?php } else {?>
-								<?php foreach ($element->prep_dones as $item) {
-									echo $item->ophnuintraopnurse_preperation_prep_done->name?><br/>
-								<?php }?>
-						<?php }?>
-			</div></div>
+			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('grounding_pad'))?>:</div></div>
+			<div class="large-10 column end"><div class="data-value"><?php echo $element->grounding_pad ? 'Yes' : 'No'?></div></div>
+		</div>
+		<div class="row data-row">
+			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('location_id'))?></div></div>
+			<div class="large-10 column end"><div class="data-value"><?php echo $element->location ? $element->location->name : 'None'?></div></div>
+		</div>
+		<div class="row data-row">
+			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('side_id'))?></div></div>
+			<div class="large-10 column end"><div class="data-value"><?php echo $element->side ? $element->side->name : 'None'?></div></div>
+		</div>
+		<div class="row data-row">
+			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('post_skin_id'))?></div></div>
+			<div class="large-10 column end"><div class="data-value"><?php echo $element->post_skin ? $element->post_skin->name : 'None'?></div></div>
 		</div>
 		<div class="row data-row">
 			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('other'))?></div></div>
 			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->other)?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('viscoelastic_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->viscoelastic ? $element->viscoelastic->name : 'None'?></div></div>
 		</div>
 			</div>
 </section>

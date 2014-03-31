@@ -1,5 +1,4 @@
-<?php
-/**
+<?php /**
  * OpenEyes
  *
  * (C) Moorfields Eye Hospital NHS Foundation Trust, 2008-2011
@@ -18,13 +17,11 @@
  */
 
 /**
- * This is the model class for table "et_ophnuintraopnurse_preperation".
+ * This is the model class for table "ophnuintraopnurse_groundingpa_side".
  *
  * The followings are the available columns in table:
  * @property string $id
- * @property integer $event_id
- * @property string $other
- * @property integer $viscoelastic_id
+ * @property string $name
  *
  * The followings are the available model relations:
  *
@@ -33,14 +30,10 @@
  * @property Event $event
  * @property User $user
  * @property User $usermodified
- * @property Element_OphNuIntraoperativenursing_Preperation_PrepDone_Assignment $prep_dones
- * @property OphNuIntraoperativenursing_Preperation_Viscoelastic $viscoelastic
  */
 
-class Element_OphNuIntraoperativenursing_Preperation  extends  BaseEventTypeElement
+class OphNuIntraoperativenursing_GroundingPad_Side extends BaseActiveRecord
 {
-	public $service;
-
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return the static model class
@@ -55,7 +48,7 @@ class Element_OphNuIntraoperativenursing_Preperation  extends  BaseEventTypeElem
 	 */
 	public function tableName()
 	{
-		return 'et_ophnuintraopnurse_preperation';
+		return 'ophnuintraopnurse_groundingpa_side';
 	}
 
 	/**
@@ -66,11 +59,11 @@ class Element_OphNuIntraoperativenursing_Preperation  extends  BaseEventTypeElem
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('event_id, other, viscoelastic_id, ', 'safe'),
-			array('viscoelastic_id, ', 'required'),
+			array('name', 'safe'),
+			array('name', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, event_id, other, viscoelastic_id, ', 'safe', 'on' => 'search'),
+			array('id, name', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -87,8 +80,6 @@ class Element_OphNuIntraoperativenursing_Preperation  extends  BaseEventTypeElem
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-			'prep_dones' => array(self::HAS_MANY, 'Element_OphNuIntraoperativenursing_Preperation_PrepDone_Assignment', 'element_id'),
-			'viscoelastic' => array(self::BELONGS_TO, 'OphNuIntraoperativenursing_Preperation_Viscoelastic', 'viscoelastic_id'),
 		);
 	}
 
@@ -99,10 +90,7 @@ class Element_OphNuIntraoperativenursing_Preperation  extends  BaseEventTypeElem
 	{
 		return array(
 			'id' => 'ID',
-			'event_id' => 'Event',
-			'prep_done' => 'Prep Done',
-			'other' => 'Other',
-			'viscoelastic_id' => 'Viscoelastic',
+			'name' => 'Name',
 		);
 	}
 
@@ -118,23 +106,18 @@ class Element_OphNuIntraoperativenursing_Preperation  extends  BaseEventTypeElem
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('id', $this->id, true);
-		$criteria->compare('event_id', $this->event_id, true);
-		$criteria->compare('prep_done', $this->prep_done);
-		$criteria->compare('other', $this->other);
-		$criteria->compare('viscoelastic_id', $this->viscoelastic_id);
+		$criteria->compare('name', $this->name, true);
 
 		return new CActiveDataProvider(get_class($this), array(
-			'criteria' => $criteria,
-		));
+				'criteria' => $criteria,
+			));
 	}
 
-
-	public function getophnuintraopnurse_preperation_prep_done_defaults() {
-		$ids = array();
-		foreach (OphNuIntraoperativenursing_Preperation_PrepDone::model()->findAll('`default` = ?',array(1)) as $item) {
-			$ids[] = $item->id;
-		}
-		return $ids;
+	/**
+	 * Set default values for forms on create
+	 */
+	public function setDefaultOptions()
+	{
 	}
 
 	protected function beforeSave()
@@ -144,36 +127,6 @@ class Element_OphNuIntraoperativenursing_Preperation  extends  BaseEventTypeElem
 
 	protected function afterSave()
 	{
-		if (!empty($_POST['MultiSelect_prep_done'])) {
-
-			$existing_ids = array();
-
-			foreach (Element_OphNuIntraoperativenursing_Preperation_PrepDone_Assignment::model()->findAll('element_id = :elementId', array(':elementId' => $this->id)) as $item) {
-				$existing_ids[] = $item->ophnuintraopnurse_preperation_prep_done_id;
-			}
-
-			foreach ($_POST['MultiSelect_prep_done'] as $id) {
-				if (!in_array($id,$existing_ids)) {
-					$item = new Element_OphNuIntraoperativenursing_Preperation_PrepDone_Assignment;
-					$item->element_id = $this->id;
-					$item->ophnuintraopnurse_preperation_prep_done_id = $id;
-
-					if (!$item->save()) {
-						throw new Exception('Unable to save MultiSelect item: '.print_r($item->getErrors(),true));
-					}
-				}
-			}
-
-			foreach ($existing_ids as $id) {
-				if (!in_array($id,$_POST['MultiSelect_prep_done'])) {
-					$item = Element_OphNuIntraoperativenursing_Preperation_PrepDone_Assignment::model()->find('element_id = :elementId and ophnuintraopnurse_preperation_prep_done_id = :lookupfieldId',array(':elementId' => $this->id, ':lookupfieldId' => $id));
-					if (!$item->delete()) {
-						throw new Exception('Unable to delete MultiSelect item: '.print_r($item->getErrors(),true));
-					}
-				}
-			}
-		}
-
 		return parent::afterSave();
 	}
 

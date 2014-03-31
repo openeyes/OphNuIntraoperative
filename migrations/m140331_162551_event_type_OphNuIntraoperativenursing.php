@@ -63,6 +63,12 @@ class m140331_162551_event_type_OphNuIntraoperativenursing extends CDbMigration
 		}
 		// select the element_type_id for this element type name
 		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Preperation'))->queryRow();
+		// create an element_type entry for this element type name if one doesn't already exist
+		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Grounding Pad',':eventTypeId'=>$event_type['id']))->queryRow()) {
+			$this->insert('element_type', array('name' => 'Grounding Pad','class_name' => 'Element_OphNuIntraoperativenursing_GroundingPad', 'event_type_id' => $event_type['id'], 'display_order' => 1));
+		}
+		// select the element_type_id for this element type name
+		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Grounding Pad'))->queryRow();
 
 
 
@@ -385,6 +391,24 @@ class m140331_162551_event_type_OphNuIntraoperativenursing extends CDbMigration
 		$this->insert('ophnuintraopnurse_preperation_prep_done',array('name'=>'Aqueus Chlorhexadine','display_order'=>3));
 		$this->insert('ophnuintraopnurse_preperation_prep_done',array('name'=>'Other','display_order'=>4));
 
+		// element lookup table ophnuintraopnurse_preperation_viscoelastic
+		$this->createTable('ophnuintraopnurse_preperation_viscoelastic', array(
+				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
+				'name' => 'varchar(128) COLLATE utf8_bin NOT NULL',
+				'display_order' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'PRIMARY KEY (`id`)',
+				'KEY `ophnuintraopnurse_preperation_viscoelastic_lmui_fk` (`last_modified_user_id`)',
+				'KEY `ophnuintraopnurse_preperation_viscoelastic_cui_fk` (`created_user_id`)',
+				'CONSTRAINT `ophnuintraopnurse_preperation_viscoelastic_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `ophnuintraopnurse_preperation_viscoelastic_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+
+		$this->insert('ophnuintraopnurse_preperation_viscoelastic',array('name'=>'Value1','display_order'=>1));
+
 
 
 		// create the table for this element type: et_modulename_elementtypename
@@ -392,6 +416,7 @@ class m140331_162551_event_type_OphNuIntraoperativenursing extends CDbMigration
 				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
 				'event_id' => 'int(10) unsigned NOT NULL',
 				'other' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'', // Other
+				'viscoelastic_id' => 'int(10) unsigned NOT NULL', // Viscoelastic
 				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
@@ -400,9 +425,11 @@ class m140331_162551_event_type_OphNuIntraoperativenursing extends CDbMigration
 				'KEY `et_ophnuintraopnurse_preperation_lmui_fk` (`last_modified_user_id`)',
 				'KEY `et_ophnuintraopnurse_preperation_cui_fk` (`created_user_id`)',
 				'KEY `et_ophnuintraopnurse_preperation_ev_fk` (`event_id`)',
+				'KEY `ophnuintraopnurse_preperation_viscoelastic_fk` (`viscoelastic_id`)',
 				'CONSTRAINT `et_ophnuintraopnurse_preperation_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
 				'CONSTRAINT `et_ophnuintraopnurse_preperation_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
 				'CONSTRAINT `et_ophnuintraopnurse_preperation_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
+				'CONSTRAINT `ophnuintraopnurse_preperation_viscoelastic_fk` FOREIGN KEY (`viscoelastic_id`) REFERENCES `ophnuintraopnurse_preperation_viscoelastic` (`id`)',
 			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
 
 		$this->createTable('et_ophnuintraopnurse_preperation_prep_done_assignment', array(
@@ -422,6 +449,95 @@ class m140331_162551_event_type_OphNuIntraoperativenursing extends CDbMigration
 				'CONSTRAINT `et_ophnuintraopnurse_preperation_prep_done_assignment_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
 				'CONSTRAINT `et_ophnuintraopnurse_preperation_prep_done_assignment_ele_fk` FOREIGN KEY (`element_id`) REFERENCES `et_ophnuintraopnurse_preperation` (`id`)',
 				'CONSTRAINT `et_ophnuintraopnurse_preperation_prep_done_assignment_lku_fk` FOREIGN KEY (`ophnuintraopnurse_preperation_prep_done_id`) REFERENCES `ophnuintraopnurse_preperation_prep_done` (`id`)',
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+
+		// element lookup table ophnuintraopnurse_groundingpa_location
+		$this->createTable('ophnuintraopnurse_groundingpa_location', array(
+				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
+				'name' => 'varchar(128) COLLATE utf8_bin NOT NULL',
+				'display_order' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'PRIMARY KEY (`id`)',
+				'KEY `ophnuintraopnurse_groundingpa_location_lmui_fk` (`last_modified_user_id`)',
+				'KEY `ophnuintraopnurse_groundingpa_location_cui_fk` (`created_user_id`)',
+				'CONSTRAINT `ophnuintraopnurse_groundingpa_location_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `ophnuintraopnurse_groundingpa_location_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+
+		$this->insert('ophnuintraopnurse_groundingpa_location',array('name'=>'Leg','display_order'=>1));
+		$this->insert('ophnuintraopnurse_groundingpa_location',array('name'=>'Buttocks','display_order'=>2));
+
+		// element lookup table ophnuintraopnurse_groundingpa_side
+		$this->createTable('ophnuintraopnurse_groundingpa_side', array(
+				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
+				'name' => 'varchar(128) COLLATE utf8_bin NOT NULL',
+				'display_order' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'PRIMARY KEY (`id`)',
+				'KEY `ophnuintraopnurse_groundingpa_side_lmui_fk` (`last_modified_user_id`)',
+				'KEY `ophnuintraopnurse_groundingpa_side_cui_fk` (`created_user_id`)',
+				'CONSTRAINT `ophnuintraopnurse_groundingpa_side_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `ophnuintraopnurse_groundingpa_side_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+
+		$this->insert('ophnuintraopnurse_groundingpa_side',array('name'=>'Right','display_order'=>1));
+		$this->insert('ophnuintraopnurse_groundingpa_side',array('name'=>'Left','display_order'=>2));
+
+		// element lookup table ophnuintraopnurse_groundingpa_post_skin
+		$this->createTable('ophnuintraopnurse_groundingpa_post_skin', array(
+				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
+				'name' => 'varchar(128) COLLATE utf8_bin NOT NULL',
+				'display_order' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'PRIMARY KEY (`id`)',
+				'KEY `ophnuintraopnurse_groundingpa_post_skin_lmui_fk` (`last_modified_user_id`)',
+				'KEY `ophnuintraopnurse_groundingpa_post_skin_cui_fk` (`created_user_id`)',
+				'CONSTRAINT `ophnuintraopnurse_groundingpa_post_skin_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `ophnuintraopnurse_groundingpa_post_skin_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+
+		$this->insert('ophnuintraopnurse_groundingpa_post_skin',array('name'=>'Intact','display_order'=>1));
+		$this->insert('ophnuintraopnurse_groundingpa_post_skin',array('name'=>'Reddened','display_order'=>2));
+		$this->insert('ophnuintraopnurse_groundingpa_post_skin',array('name'=>'Swollen','display_order'=>3));
+		$this->insert('ophnuintraopnurse_groundingpa_post_skin',array('name'=>'Other','display_order'=>4));
+
+
+
+		// create the table for this element type: et_modulename_elementtypename
+		$this->createTable('et_ophnuintraopnurse_groundingpa', array(
+				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
+				'event_id' => 'int(10) unsigned NOT NULL',
+				'grounding_pad' => 'tinyint(1) unsigned NOT NULL DEFAULT 0', // Grounding Pad
+				'location_id' => 'int(10) unsigned NOT NULL', // Location
+				'side_id' => 'int(10) unsigned NOT NULL', // Side
+				'post_skin_id' => 'int(10) unsigned NOT NULL', // Post Skin Assessment
+				'other' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'', // Other
+				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'PRIMARY KEY (`id`)',
+				'KEY `et_ophnuintraopnurse_groundingpa_lmui_fk` (`last_modified_user_id`)',
+				'KEY `et_ophnuintraopnurse_groundingpa_cui_fk` (`created_user_id`)',
+				'KEY `et_ophnuintraopnurse_groundingpa_ev_fk` (`event_id`)',
+				'KEY `ophnuintraopnurse_groundingpa_location_fk` (`location_id`)',
+				'KEY `ophnuintraopnurse_groundingpa_side_fk` (`side_id`)',
+				'KEY `ophnuintraopnurse_groundingpa_post_skin_fk` (`post_skin_id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_groundingpa_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_groundingpa_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_groundingpa_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
+				'CONSTRAINT `ophnuintraopnurse_groundingpa_location_fk` FOREIGN KEY (`location_id`) REFERENCES `ophnuintraopnurse_groundingpa_location` (`id`)',
+				'CONSTRAINT `ophnuintraopnurse_groundingpa_side_fk` FOREIGN KEY (`side_id`) REFERENCES `ophnuintraopnurse_groundingpa_side` (`id`)',
+				'CONSTRAINT `ophnuintraopnurse_groundingpa_post_skin_fk` FOREIGN KEY (`post_skin_id`) REFERENCES `ophnuintraopnurse_groundingpa_post_skin` (`id`)',
 			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
 
 	}
@@ -470,6 +586,14 @@ class m140331_162551_event_type_OphNuIntraoperativenursing extends CDbMigration
 
 
 		$this->dropTable('ophnuintraopnurse_preperation_prep_done');
+		$this->dropTable('ophnuintraopnurse_preperation_viscoelastic');
+
+		$this->dropTable('et_ophnuintraopnurse_groundingpa');
+
+
+		$this->dropTable('ophnuintraopnurse_groundingpa_location');
+		$this->dropTable('ophnuintraopnurse_groundingpa_side');
+		$this->dropTable('ophnuintraopnurse_groundingpa_post_skin');
 
 
 		// --- delete event entries ---

@@ -28,9 +28,11 @@
 	</header>
 
 		<div class="element-fields">
-			<?php echo $form->multiSelectList($element, 'MultiSelect_prep_done', 'prep_dones', 'ophnuintraopnurse_preperation_prep_done_id', CHtml::listData(OphNuIntraoperativenursing_Preperation_PrepDone::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnuintraopnurse_preperation_prep_done_defaults, array('empty' => '- Please select -', 'label' => 'Prep Done'))?>
+			<?php echo $form->radioBoolean($element, 'grounding_pad')?>
+	<?php echo $form->dropDownList($element, 'location_id', CHtml::listData(OphNuIntraoperativenursing_GroundingPad_Location::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'))?>
+	<?php echo $form->dropDownList($element, 'side_id', CHtml::listData(OphNuIntraoperativenursing_GroundingPad_Side::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'))?>
+	<?php echo $form->dropDownList($element, 'post_skin_id', CHtml::listData(OphNuIntraoperativenursing_GroundingPad_PostSkin::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'))?>
 	<?php echo $form->textField($element, 'other', array('size' => '10'))?>
-	<?php echo $form->dropDownList($element, 'viscoelastic_id', CHtml::listData(OphNuIntraoperativenursing_Preperation_Viscoelastic::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'))?>
 	</div>
 	
 </section>
