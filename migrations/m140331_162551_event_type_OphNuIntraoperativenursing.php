@@ -16,18 +16,6 @@ class m140331_162551_event_type_OphNuIntraoperativenursing extends CDbMigration
 		// --- ELEMENT TYPE ENTRIES ---
 
 		// create an element_type entry for this element type name if one doesn't already exist
-		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'WHO Time Out',':eventTypeId'=>$event_type['id']))->queryRow()) {
-			$this->insert('element_type', array('name' => 'WHO Time Out','class_name' => 'Element_OphNuIntraoperativenursing_WhoTimeOut', 'event_type_id' => $event_type['id'], 'display_order' => 1));
-		}
-		// select the element_type_id for this element type name
-		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'WHO Time Out'))->queryRow();
-		// create an element_type entry for this element type name if one doesn't already exist
-		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'WHO Sign Out',':eventTypeId'=>$event_type['id']))->queryRow()) {
-			$this->insert('element_type', array('name' => 'WHO Sign Out','class_name' => 'Element_OphNuIntraoperativenursing_WhoSignOut', 'event_type_id' => $event_type['id'], 'display_order' => 1));
-		}
-		// select the element_type_id for this element type name
-		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'WHO Sign Out'))->queryRow();
-		// create an element_type entry for this element type name if one doesn't already exist
 		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Time Tracking',':eventTypeId'=>$event_type['id']))->queryRow()) {
 			$this->insert('element_type', array('name' => 'Time Tracking','class_name' => 'Element_OphNuIntraoperativenursing_TimeTracking', 'event_type_id' => $event_type['id'], 'display_order' => 1));
 		}
@@ -69,44 +57,48 @@ class m140331_162551_event_type_OphNuIntraoperativenursing extends CDbMigration
 		}
 		// select the element_type_id for this element type name
 		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Grounding Pad'))->queryRow();
-
-
-
-		// create the table for this element type: et_modulename_elementtypename
-		$this->createTable('et_ophnuintraopnurse_whotimeout', array(
-				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
-				'event_id' => 'int(10) unsigned NOT NULL',
-				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
-				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
-				'PRIMARY KEY (`id`)',
-				'KEY `et_ophnuintraopnurse_whotimeout_lmui_fk` (`last_modified_user_id`)',
-				'KEY `et_ophnuintraopnurse_whotimeout_cui_fk` (`created_user_id`)',
-				'KEY `et_ophnuintraopnurse_whotimeout_ev_fk` (`event_id`)',
-				'CONSTRAINT `et_ophnuintraopnurse_whotimeout_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_ophnuintraopnurse_whotimeout_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_ophnuintraopnurse_whotimeout_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
-			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
-
-
-
-		// create the table for this element type: et_modulename_elementtypename
-		$this->createTable('et_ophnuintraopnurse_whosignout', array(
-				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
-				'event_id' => 'int(10) unsigned NOT NULL',
-				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
-				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
-				'PRIMARY KEY (`id`)',
-				'KEY `et_ophnuintraopnurse_whosignout_lmui_fk` (`last_modified_user_id`)',
-				'KEY `et_ophnuintraopnurse_whosignout_cui_fk` (`created_user_id`)',
-				'KEY `et_ophnuintraopnurse_whosignout_ev_fk` (`event_id`)',
-				'CONSTRAINT `et_ophnuintraopnurse_whosignout_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_ophnuintraopnurse_whosignout_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_ophnuintraopnurse_whosignout_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
-			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+		// create an element_type entry for this element type name if one doesn't already exist
+		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Nasal Pack',':eventTypeId'=>$event_type['id']))->queryRow()) {
+			$this->insert('element_type', array('name' => 'Nasal Pack','class_name' => 'Element_OphNuIntraoperativenursing_NasalPack', 'event_type_id' => $event_type['id'], 'display_order' => 1));
+		}
+		// select the element_type_id for this element type name
+		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Nasal Pack'))->queryRow();
+		// create an element_type entry for this element type name if one doesn't already exist
+		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Throat Pack',':eventTypeId'=>$event_type['id']))->queryRow()) {
+			$this->insert('element_type', array('name' => 'Throat Pack','class_name' => 'Element_OphNuIntraoperativenursing_ThroatPack', 'event_type_id' => $event_type['id'], 'display_order' => 1));
+		}
+		// select the element_type_id for this element type name
+		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Throat Pack'))->queryRow();
+		// create an element_type entry for this element type name if one doesn't already exist
+		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Aditionals',':eventTypeId'=>$event_type['id']))->queryRow()) {
+			$this->insert('element_type', array('name' => 'Aditionals','class_name' => 'Element_OphNuIntraoperativenursing_Aditionals', 'event_type_id' => $event_type['id'], 'display_order' => 1));
+		}
+		// select the element_type_id for this element type name
+		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Aditionals'))->queryRow();
+		// create an element_type entry for this element type name if one doesn't already exist
+		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Implant Prosthesis Scleral Buckle',':eventTypeId'=>$event_type['id']))->queryRow()) {
+			$this->insert('element_type', array('name' => 'Implant Prosthesis Scleral Buckle','class_name' => 'Element_OphNuIntraoperativenursing_ImplantProsthesisScleralBuckle', 'event_type_id' => $event_type['id'], 'display_order' => 1));
+		}
+		// select the element_type_id for this element type name
+		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Implant Prosthesis Scleral Buckle'))->queryRow();
+		// create an element_type entry for this element type name if one doesn't already exist
+		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Specimen',':eventTypeId'=>$event_type['id']))->queryRow()) {
+			$this->insert('element_type', array('name' => 'Specimen','class_name' => 'Element_OphNuIntraoperativenursing_Specimen', 'event_type_id' => $event_type['id'], 'display_order' => 1));
+		}
+		// select the element_type_id for this element type name
+		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Specimen'))->queryRow();
+		// create an element_type entry for this element type name if one doesn't already exist
+		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Dressing',':eventTypeId'=>$event_type['id']))->queryRow()) {
+			$this->insert('element_type', array('name' => 'Dressing','class_name' => 'Element_OphNuIntraoperativenursing_Dressing', 'event_type_id' => $event_type['id'], 'display_order' => 1));
+		}
+		// select the element_type_id for this element type name
+		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Dressing'))->queryRow();
+		// create an element_type entry for this element type name if one doesn't already exist
+		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Procedure Performed',':eventTypeId'=>$event_type['id']))->queryRow()) {
+			$this->insert('element_type', array('name' => 'Procedure Performed','class_name' => 'Element_OphNuIntraoperativenursing_ProcedurePerformed', 'event_type_id' => $event_type['id'], 'display_order' => 1));
+		}
+		// select the element_type_id for this element type name
+		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Procedure Performed'))->queryRow();
 
 
 
@@ -540,20 +532,341 @@ class m140331_162551_event_type_OphNuIntraoperativenursing extends CDbMigration
 				'CONSTRAINT `ophnuintraopnurse_groundingpa_post_skin_fk` FOREIGN KEY (`post_skin_id`) REFERENCES `ophnuintraopnurse_groundingpa_post_skin` (`id`)',
 			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
 
+
+
+		// create the table for this element type: et_modulename_elementtypename
+		$this->createTable('et_ophnuintraopnurse_nasalpack', array(
+				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
+				'event_id' => 'int(10) unsigned NOT NULL',
+				'nasal_pack_inserted' => 'tinyint(1) unsigned NOT NULL DEFAULT 0', // Nasal Pack Inserted
+				'inserted_time' => 'text COLLATE utf8_bin DEFAULT \'\'', // Inserted Time
+				'removal_time' => 'text COLLATE utf8_bin DEFAULT \'\'', // Removal Time
+				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'PRIMARY KEY (`id`)',
+				'KEY `et_ophnuintraopnurse_nasalpack_lmui_fk` (`last_modified_user_id`)',
+				'KEY `et_ophnuintraopnurse_nasalpack_cui_fk` (`created_user_id`)',
+				'KEY `et_ophnuintraopnurse_nasalpack_ev_fk` (`event_id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_nasalpack_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_nasalpack_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_nasalpack_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+
+
+
+		// create the table for this element type: et_modulename_elementtypename
+		$this->createTable('et_ophnuintraopnurse_throatpack', array(
+				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
+				'event_id' => 'int(10) unsigned NOT NULL',
+				'throat_pack_inserted' => 'tinyint(1) unsigned NOT NULL DEFAULT 0', // Throat Pack Inserted
+				'inserted_time' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'', // Inserted Time
+				'removal_time' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'', // Removal Time
+				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'PRIMARY KEY (`id`)',
+				'KEY `et_ophnuintraopnurse_throatpack_lmui_fk` (`last_modified_user_id`)',
+				'KEY `et_ophnuintraopnurse_throatpack_cui_fk` (`created_user_id`)',
+				'KEY `et_ophnuintraopnurse_throatpack_ev_fk` (`event_id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_throatpack_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_throatpack_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_throatpack_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+
+		// element lookup table ophnuintraopnurse_aditionals_aditionals
+		$this->createTable('ophnuintraopnurse_aditionals_aditionals', array(
+				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
+				'name' => 'varchar(128) COLLATE utf8_bin NOT NULL',
+				'display_order' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'default' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
+				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'PRIMARY KEY (`id`)',
+				'KEY `ophnuintraopnurse_aditionals_aditionals_lmui_fk` (`last_modified_user_id`)',
+				'KEY `ophnuintraopnurse_aditionals_aditionals_cui_fk` (`created_user_id`)',
+				'CONSTRAINT `ophnuintraopnurse_aditionals_aditionals_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `ophnuintraopnurse_aditionals_aditionals_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+
+		$this->insert('ophnuintraopnurse_aditionals_aditionals',array('name'=>'Vision Blue','display_order'=>1));
+		$this->insert('ophnuintraopnurse_aditionals_aditionals',array('name'=>'ICG','display_order'=>2));
+		$this->insert('ophnuintraopnurse_aditionals_aditionals',array('name'=>'Xylocaine','display_order'=>3));
+		$this->insert('ophnuintraopnurse_aditionals_aditionals',array('name'=>'Sub-Conjunctival Injection','display_order'=>4));
+		$this->insert('ophnuintraopnurse_aditionals_aditionals',array('name'=>'Mitomycin','display_order'=>5));
+		$this->insert('ophnuintraopnurse_aditionals_aditionals',array('name'=>'Intravitreal Injections','display_order'=>6));
+		$this->insert('ophnuintraopnurse_aditionals_aditionals',array('name'=>'5FU','display_order'=>7));
+		$this->insert('ophnuintraopnurse_aditionals_aditionals',array('name'=>'Other','display_order'=>8));
+
+
+
+		// create the table for this element type: et_modulename_elementtypename
+		$this->createTable('et_ophnuintraopnurse_aditionals', array(
+				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
+				'event_id' => 'int(10) unsigned NOT NULL',
+				'other' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'', // Other
+				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'PRIMARY KEY (`id`)',
+				'KEY `et_ophnuintraopnurse_aditionals_lmui_fk` (`last_modified_user_id`)',
+				'KEY `et_ophnuintraopnurse_aditionals_cui_fk` (`created_user_id`)',
+				'KEY `et_ophnuintraopnurse_aditionals_ev_fk` (`event_id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_aditionals_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_aditionals_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_aditionals_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+
+		$this->createTable('et_ophnuintraopnurse_aditionals_aditionals_assignment', array(
+				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
+				'element_id' => 'int(10) unsigned NOT NULL',
+				'ophnuintraopnurse_aditionals_aditionals_id' => 'int(10) unsigned NOT NULL',
+				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'PRIMARY KEY (`id`)',
+				'KEY `et_ophnuintraopnurse_aditionals_aditionals_assignment_lmui_fk` (`last_modified_user_id`)',
+				'KEY `et_ophnuintraopnurse_aditionals_aditionals_assignment_cui_fk` (`created_user_id`)',
+				'KEY `et_ophnuintraopnurse_aditionals_aditionals_assignment_ele_fk` (`element_id`)',
+				'KEY `et_ophnuintraopnurse_aditionals_aditionals_assignment_lku_fk` (`ophnuintraopnurse_aditionals_aditionals_id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_aditionals_aditionals_assignment_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_aditionals_aditionals_assignment_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_aditionals_aditionals_assignment_ele_fk` FOREIGN KEY (`element_id`) REFERENCES `et_ophnuintraopnurse_aditionals` (`id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_aditionals_aditionals_assignment_lku_fk` FOREIGN KEY (`ophnuintraopnurse_aditionals_aditionals_id`) REFERENCES `ophnuintraopnurse_aditionals_aditionals` (`id`)',
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+
+		// element lookup table ophnuintraopnurse_implantpros_iol_type
+		$this->createTable('ophnuintraopnurse_implantpros_iol_type', array(
+				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
+				'name' => 'varchar(128) COLLATE utf8_bin NOT NULL',
+				'display_order' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'PRIMARY KEY (`id`)',
+				'KEY `ophnuintraopnurse_implantpros_iol_type_lmui_fk` (`last_modified_user_id`)',
+				'KEY `ophnuintraopnurse_implantpros_iol_type_cui_fk` (`created_user_id`)',
+				'CONSTRAINT `ophnuintraopnurse_implantpros_iol_type_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `ophnuintraopnurse_implantpros_iol_type_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+
+		$this->insert('ophnuintraopnurse_implantpros_iol_type',array('name'=>'Item1','display_order'=>1));
+
+		// element lookup table ophnuintraopnurse_implantpros_iol_size
+		$this->createTable('ophnuintraopnurse_implantpros_iol_size', array(
+				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
+				'name' => 'varchar(128) COLLATE utf8_bin NOT NULL',
+				'display_order' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'PRIMARY KEY (`id`)',
+				'KEY `ophnuintraopnurse_implantpros_iol_size_lmui_fk` (`last_modified_user_id`)',
+				'KEY `ophnuintraopnurse_implantpros_iol_size_cui_fk` (`created_user_id`)',
+				'CONSTRAINT `ophnuintraopnurse_implantpros_iol_size_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `ophnuintraopnurse_implantpros_iol_size_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+
+		$this->insert('ophnuintraopnurse_implantpros_iol_size',array('name'=>'Item1','display_order'=>1));
+
+
+
+		// create the table for this element type: et_modulename_elementtypename
+		$this->createTable('et_ophnuintraopnurse_implantpros', array(
+				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
+				'event_id' => 'int(10) unsigned NOT NULL',
+				'intraocular_lens' => 'tinyint(1) unsigned NOT NULL', // Intraocular Lens
+				'iol_type_id' => 'int(10) unsigned NOT NULL', // IOL Type
+				'iol_size_id' => 'int(10) unsigned NOT NULL', // IOL Size
+				'ocular_sphere_ball' => 'tinyint(1) unsigned NOT NULL', // Ocular Sphere Ball
+				'comments' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'', // Comments
+				'glaucoma_valve' => 'tinyint(1) unsigned NOT NULL', // Glaucoma Valve
+				'comments' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'', // Comments
+				'lid_weights' => 'tinyint(1) unsigned NOT NULL', // Lid Weights
+				'lid_comments' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'', // Comments
+				'sutures' => 'tinyint(1) unsigned NOT NULL', // Sutures
+				'sutures_comments' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'', // Comments
+				'drains' => 'tinyint(1) unsigned NOT NULL', // Drains
+				'drains_comments' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'', // Comments
+				'other' => 'tinyint(1) unsigned NOT NULL', // Other
+				'other_comments' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'', // Comments
+				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'PRIMARY KEY (`id`)',
+				'KEY `et_ophnuintraopnurse_implantpros_lmui_fk` (`last_modified_user_id`)',
+				'KEY `et_ophnuintraopnurse_implantpros_cui_fk` (`created_user_id`)',
+				'KEY `et_ophnuintraopnurse_implantpros_ev_fk` (`event_id`)',
+				'KEY `ophnuintraopnurse_implantpros_iol_type_fk` (`iol_type_id`)',
+				'KEY `ophnuintraopnurse_implantpros_iol_size_fk` (`iol_size_id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_implantpros_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_implantpros_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_implantpros_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
+				'CONSTRAINT `ophnuintraopnurse_implantpros_iol_type_fk` FOREIGN KEY (`iol_type_id`) REFERENCES `ophnuintraopnurse_implantpros_iol_type` (`id`)',
+				'CONSTRAINT `ophnuintraopnurse_implantpros_iol_size_fk` FOREIGN KEY (`iol_size_id`) REFERENCES `ophnuintraopnurse_implantpros_iol_size` (`id`)',
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+
+		// element lookup table ophnuintraopnurse_specimen_speciment_collected
+		$this->createTable('ophnuintraopnurse_specimen_speciment_collected', array(
+				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
+				'name' => 'varchar(128) COLLATE utf8_bin NOT NULL',
+				'display_order' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'PRIMARY KEY (`id`)',
+				'KEY `ophnuintraopnurse_specimen_speciment_collected_lmui_fk` (`last_modified_user_id`)',
+				'KEY `ophnuintraopnurse_specimen_speciment_collected_cui_fk` (`created_user_id`)',
+				'CONSTRAINT `ophnuintraopnurse_specimen_speciment_collected_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `ophnuintraopnurse_specimen_speciment_collected_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+
+		$this->insert('ophnuintraopnurse_specimen_speciment_collected',array('name'=>'Yes','display_order'=>1));
+		$this->insert('ophnuintraopnurse_specimen_speciment_collected',array('name'=>'N/A','display_order'=>2));
+
+
+
+		// create the table for this element type: et_modulename_elementtypename
+		$this->createTable('et_ophnuintraopnurse_specimen', array(
+				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
+				'event_id' => 'int(10) unsigned NOT NULL',
+				'speciment_collected_id' => 'int(10) unsigned NOT NULL', // Speciment Collected and Documented
+				'comments' => 'text COLLATE utf8_bin DEFAULT \'\'', // Comments
+				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'PRIMARY KEY (`id`)',
+				'KEY `et_ophnuintraopnurse_specimen_lmui_fk` (`last_modified_user_id`)',
+				'KEY `et_ophnuintraopnurse_specimen_cui_fk` (`created_user_id`)',
+				'KEY `et_ophnuintraopnurse_specimen_ev_fk` (`event_id`)',
+				'KEY `ophnuintraopnurse_specimen_speciment_collected_fk` (`speciment_collected_id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_specimen_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_specimen_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_specimen_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
+				'CONSTRAINT `ophnuintraopnurse_specimen_speciment_collected_fk` FOREIGN KEY (`speciment_collected_id`) REFERENCES `ophnuintraopnurse_specimen_speciment_collected` (`id`)',
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+
+		// element lookup table ophnuintraopnurse_dressing_dressing
+		$this->createTable('ophnuintraopnurse_dressing_dressing', array(
+				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
+				'name' => 'varchar(128) COLLATE utf8_bin NOT NULL',
+				'display_order' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'default' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
+				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'PRIMARY KEY (`id`)',
+				'KEY `ophnuintraopnurse_dressing_dressing_lmui_fk` (`last_modified_user_id`)',
+				'KEY `ophnuintraopnurse_dressing_dressing_cui_fk` (`created_user_id`)',
+				'CONSTRAINT `ophnuintraopnurse_dressing_dressing_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `ophnuintraopnurse_dressing_dressing_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+
+		$this->insert('ophnuintraopnurse_dressing_dressing',array('name'=>'NA','display_order'=>1));
+		$this->insert('ophnuintraopnurse_dressing_dressing',array('name'=>'Eye Pod','display_order'=>2));
+		$this->insert('ophnuintraopnurse_dressing_dressing',array('name'=>'Steri-strips','display_order'=>3));
+		$this->insert('ophnuintraopnurse_dressing_dressing',array('name'=>'Ointment','display_order'=>4));
+		$this->insert('ophnuintraopnurse_dressing_dressing',array('name'=>'Dry','display_order'=>5));
+		$this->insert('ophnuintraopnurse_dressing_dressing',array('name'=>'Wet','display_order'=>6));
+		$this->insert('ophnuintraopnurse_dressing_dressing',array('name'=>'Other','display_order'=>7));
+
+
+
+		// create the table for this element type: et_modulename_elementtypename
+		$this->createTable('et_ophnuintraopnurse_dressing', array(
+				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
+				'event_id' => 'int(10) unsigned NOT NULL',
+				'na' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'', // Other
+				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'PRIMARY KEY (`id`)',
+				'KEY `et_ophnuintraopnurse_dressing_lmui_fk` (`last_modified_user_id`)',
+				'KEY `et_ophnuintraopnurse_dressing_cui_fk` (`created_user_id`)',
+				'KEY `et_ophnuintraopnurse_dressing_ev_fk` (`event_id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_dressing_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_dressing_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_dressing_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+
+		$this->createTable('et_ophnuintraopnurse_dressing_dressing_assignment', array(
+				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
+				'element_id' => 'int(10) unsigned NOT NULL',
+				'ophnuintraopnurse_dressing_dressing_id' => 'int(10) unsigned NOT NULL',
+				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'PRIMARY KEY (`id`)',
+				'KEY `et_ophnuintraopnurse_dressing_dressing_assignment_lmui_fk` (`last_modified_user_id`)',
+				'KEY `et_ophnuintraopnurse_dressing_dressing_assignment_cui_fk` (`created_user_id`)',
+				'KEY `et_ophnuintraopnurse_dressing_dressing_assignment_ele_fk` (`element_id`)',
+				'KEY `et_ophnuintraopnurse_dressing_dressing_assignment_lku_fk` (`ophnuintraopnurse_dressing_dressing_id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_dressing_dressing_assignment_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_dressing_dressing_assignment_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_dressing_dressing_assignment_ele_fk` FOREIGN KEY (`element_id`) REFERENCES `et_ophnuintraopnurse_dressing` (`id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_dressing_dressing_assignment_lku_fk` FOREIGN KEY (`ophnuintraopnurse_dressing_dressing_id`) REFERENCES `ophnuintraopnurse_dressing_dressing` (`id`)',
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+
+		// element lookup table ophnuintraopnurse_procedurepe_procedure_performed
+		$this->createTable('ophnuintraopnurse_procedurepe_procedure_performed', array(
+				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
+				'name' => 'varchar(128) COLLATE utf8_bin NOT NULL',
+				'display_order' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'PRIMARY KEY (`id`)',
+				'KEY `ophnuintraopnurse_procedurepe_procedure_performed_lmui_fk` (`last_modified_user_id`)',
+				'KEY `ophnuintraopnurse_procedurepe_procedure_performed_cui_fk` (`created_user_id`)',
+				'CONSTRAINT `ophnuintraopnurse_procedurepe_procedure_performed_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `ophnuintraopnurse_procedurepe_procedure_performed_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+
+		$this->insert('ophnuintraopnurse_procedurepe_procedure_performed',array('name'=>'value1','display_order'=>1));
+
+
+
+		// create the table for this element type: et_modulename_elementtypename
+		$this->createTable('et_ophnuintraopnurse_procedurepe', array(
+				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
+				'event_id' => 'int(10) unsigned NOT NULL',
+				'procedure_performed_id' => 'int(10) unsigned NOT NULL', // Actual Procedure Performed
+				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'PRIMARY KEY (`id`)',
+				'KEY `et_ophnuintraopnurse_procedurepe_lmui_fk` (`last_modified_user_id`)',
+				'KEY `et_ophnuintraopnurse_procedurepe_cui_fk` (`created_user_id`)',
+				'KEY `et_ophnuintraopnurse_procedurepe_ev_fk` (`event_id`)',
+				'KEY `ophnuintraopnurse_procedurepe_procedure_performed_fk` (`procedure_performed_id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_procedurepe_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_procedurepe_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnuintraopnurse_procedurepe_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
+				'CONSTRAINT `ophnuintraopnurse_procedurepe_procedure_performed_fk` FOREIGN KEY (`procedure_performed_id`) REFERENCES `ophnuintraopnurse_procedurepe_procedure_performed` (`id`)',
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+
 	}
 
 	public function down()
 	{
 		// --- drop any element related tables ---
 		// --- drop element tables ---
-		$this->dropTable('et_ophnuintraopnurse_whotimeout');
-
-
-
-		$this->dropTable('et_ophnuintraopnurse_whosignout');
-
-
-
 		$this->dropTable('et_ophnuintraopnurse_timetrackin');
 
 
@@ -594,6 +907,42 @@ class m140331_162551_event_type_OphNuIntraoperativenursing extends CDbMigration
 		$this->dropTable('ophnuintraopnurse_groundingpa_location');
 		$this->dropTable('ophnuintraopnurse_groundingpa_side');
 		$this->dropTable('ophnuintraopnurse_groundingpa_post_skin');
+
+		$this->dropTable('et_ophnuintraopnurse_nasalpack');
+
+
+
+		$this->dropTable('et_ophnuintraopnurse_throatpack');
+
+
+
+		$this->dropTable('et_ophnuintraopnurse_aditionals_aditionals_assignment');
+		$this->dropTable('et_ophnuintraopnurse_aditionals');
+
+
+		$this->dropTable('ophnuintraopnurse_aditionals_aditionals');
+
+		$this->dropTable('et_ophnuintraopnurse_implantpros');
+
+
+		$this->dropTable('ophnuintraopnurse_implantpros_iol_type');
+		$this->dropTable('ophnuintraopnurse_implantpros_iol_size');
+
+		$this->dropTable('et_ophnuintraopnurse_specimen');
+
+
+		$this->dropTable('ophnuintraopnurse_specimen_speciment_collected');
+
+		$this->dropTable('et_ophnuintraopnurse_dressing_dressing_assignment');
+		$this->dropTable('et_ophnuintraopnurse_dressing');
+
+
+		$this->dropTable('ophnuintraopnurse_dressing_dressing');
+
+		$this->dropTable('et_ophnuintraopnurse_procedurepe');
+
+
+		$this->dropTable('ophnuintraopnurse_procedurepe_procedure_performed');
 
 
 		// --- delete event entries ---
