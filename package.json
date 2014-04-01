@@ -1,15 +1,15 @@
 {
   "name": "openeyes",
   "version": "1.4.0",
-  "description": "OphNuIntraoperativenursing event module.",
+  "description": "OphNuIntraoperative event module.",
   "repository": {
     "type": "git",
-    "url": "git://github.com/openeyes/OphNuIntraoperativenursing.git"
+    "url": "git://github.com/openeyes/OphNuIntraoperative.git"
   },
   "author": "OpenEyes",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/openeyes/OphNuIntraoperativenursing/issues"
+    "url": "https://github.com/openeyes/OphNuIntraoperative/issues"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
