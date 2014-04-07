@@ -17,17 +17,17 @@
  */
 
 /**
- * This is the model class for table "et_ophnuintraopnurse_incisionsit_incision_assignment".
+ * This is the model class for table "et_ophnuintraoperative_incisionsit_incision_assignment".
  *
  * The followings are the available columns in table:
  * @property string $id
  * @property integer $element_id
- * @property integer $ophnuintraopnurse_incisionsit_incision_id
+ * @property integer $ophnuintraoperative_incisionsit_incision_id
  *
  * The followings are the available model relations:
  *
  * @property Element_OphNuIntraoperative_IncisionSite $element
- * @property OphNuIntraoperative_IncisionSite_Incision $ophnuintraopnurse_incisionsit_incision
+ * @property OphNuIntraoperative_IncisionSite_Incision $ophnuintraoperative_incisionsit_incision
  * @property User $user
  * @property User $usermodified
  */
@@ -48,7 +48,7 @@ class Element_OphNuIntraoperative_IncisionSite_Incision_Assignment extends BaseA
 	 */
 	public function tableName()
 	{
-		return 'et_ophnuintraopnurse_incisionsit_incision_assignment';
+		return 'et_ophnuintraoperative_incisionsit_incision_assignment';
 	}
 
 	/**
@@ -56,14 +56,10 @@ class Element_OphNuIntraoperative_IncisionSite_Incision_Assignment extends BaseA
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
 		return array(
-			array('element_id, ophnuintraopnurse_incisionsit_incision_id', 'safe'),
-			array('element_id, ophnuintraopnurse_incisionsit_incision_id', 'required'),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, element_id, ophnuintraopnurse_incisionsit_incision_id', 'safe', 'on' => 'search'),
+			array('element_id, ophnuintraoperative_incisionsit_incision_id', 'safe'),
+			array('element_id, ophnuintraoperative_incisionsit_incision_id', 'required'),
+			array('id, element_id, ophnuintraoperative_incisionsit_incision_id', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -72,11 +68,9 @@ class Element_OphNuIntraoperative_IncisionSite_Incision_Assignment extends BaseA
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
 		return array(
 			'element' => array(self::BELONGS_TO, 'Element_OphNuIntraoperative_IncisionSite', 'element_id'),
-			'ophnuintraopnurse_incisionsit_incision' => array(self::BELONGS_TO, 'OphNuIntraoperative_IncisionSite_Incision', 'ophnuintraopnurse_incisionsit_incision_id'),
+			'ophnuintraoperative_incisionsit_incision' => array(self::BELONGS_TO, 'OphNuIntraoperative_IncisionSite_Incision', 'ophnuintraoperative_incisionsit_incision_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 		);
@@ -99,39 +93,14 @@ class Element_OphNuIntraoperative_IncisionSite_Incision_Assignment extends BaseA
 	 */
 	public function search()
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
-
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('name', $this->name, true);
 
 		return new CActiveDataProvider(get_class($this), array(
-				'criteria' => $criteria,
-			));
-	}
-
-	/**
-	 * Set default values for forms on create
-	 */
-	public function setDefaultOptions()
-	{
-	}
-
-	protected function beforeSave()
-	{
-		return parent::beforeSave();
-	}
-
-	protected function afterSave()
-	{
-		return parent::afterSave();
-	}
-
-	protected function beforeValidate()
-	{
-		return parent::beforeValidate();
+			'criteria' => $criteria,
+		));
 	}
 }
 ?>

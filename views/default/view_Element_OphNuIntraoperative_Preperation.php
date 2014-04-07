@@ -30,7 +30,7 @@
 							None
 						<?php } else {?>
 								<?php foreach ($element->prep_dones as $item) {
-									echo $item->ophnuintraopnurse_preperation_prep_done->name?><br/>
+									echo $item->ophnuintraoperative_preperation_prep_done->name?><br/>
 								<?php }?>
 						<?php }?>
 			</div></div>

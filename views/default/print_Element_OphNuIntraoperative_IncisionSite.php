@@ -31,7 +31,7 @@
 						<?php } else {?>
 							<h4>
 								<?php foreach ($element->incisions as $item) {
-									echo $item->ophnuintraopnurse_incisionsit_incision->name?><br/>
+									echo $item->ophnuintraoperative_incisionsit_incision->name?><br/>
 								<?php }?>
 							</h4>
 						<?php }?>

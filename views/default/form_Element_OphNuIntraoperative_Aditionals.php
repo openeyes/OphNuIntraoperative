@@ -28,7 +28,7 @@
 	</header>
 
 		<div class="element-fields">
-			<?php echo $form->multiSelectList($element, 'MultiSelect_aditionals', 'aditionalss', 'ophnuintraopnurse_aditionals_aditionals_id', CHtml::listData(OphNuIntraoperative_Aditionals_Aditionals::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnuintraopnurse_aditionals_aditionals_defaults, array('empty' => '- Please select -', 'label' => 'Aditionals'))?>
+			<?php echo $form->multiSelectList($element, 'MultiSelect_aditionals', 'aditionalss', 'ophnuintraoperative_aditionals_aditionals_id', CHtml::listData(OphNuIntraoperative_Aditionals_Aditionals::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnuintraoperative_aditionals_aditionals_defaults, array('empty' => '- Please select -', 'label' => 'Aditionals'))?>
 	<?php echo $form->textField($element, 'other', array('size' => '10'))?>
 	</div>
 	

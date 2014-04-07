@@ -18,7 +18,7 @@
  */
 
 /**
- * This is the model class for table "et_ophnuintraopnurse_implantpros".
+ * This is the model class for table "et_ophnuintraoperative_implantpros".
  *
  * The followings are the available columns in table:
  * @property string $id
@@ -68,7 +68,7 @@ class Element_OphNuIntraoperative_ImplantProsthesisScleralBuckle  extends  BaseE
 	 */
 	public function tableName()
 	{
-		return 'et_ophnuintraopnurse_implantpros';
+		return 'et_ophnuintraoperative_implantpros';
 	}
 
 	/**
@@ -76,13 +76,9 @@ class Element_OphNuIntraoperative_ImplantProsthesisScleralBuckle  extends  BaseE
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
 		return array(
 			array('event_id, intraocular_lens, iol_type_id, iol_size_id, ocular_sphere_ball, comments, glaucoma_valve, comments, lid_weights, lid_comments, sutures, sutures_comments, drains, drains_comments, other, other_comments, ', 'safe'),
 			array('intraocular_lens, iol_type_id, iol_size_id, ocular_sphere_ball, comments, glaucoma_valve, comments, lid_weights, sutures, drains, other, ', 'required'),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
 			array('id, event_id, intraocular_lens, iol_type_id, iol_size_id, ocular_sphere_ball, comments, glaucoma_valve, comments, lid_weights, lid_comments, sutures, sutures_comments, drains, drains_comments, other, other_comments, ', 'safe', 'on' => 'search'),
 		);
 	}
@@ -92,8 +88,6 @@ class Element_OphNuIntraoperative_ImplantProsthesisScleralBuckle  extends  BaseE
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
 		return array(
 			'element_type' => array(self::HAS_ONE, 'ElementType', 'id','on' => "element_type.class_name='".get_class($this)."'"),
 			'eventType' => array(self::BELONGS_TO, 'EventType', 'event_type_id'),
@@ -137,9 +131,6 @@ class Element_OphNuIntraoperative_ImplantProsthesisScleralBuckle  extends  BaseE
 	 */
 	public function search()
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
-
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('id', $this->id, true);
@@ -167,20 +158,10 @@ class Element_OphNuIntraoperative_ImplantProsthesisScleralBuckle  extends  BaseE
 
 
 
-	protected function beforeSave()
-	{
-		return parent::beforeSave();
-	}
-
 	protected function afterSave()
 	{
 
 		return parent::afterSave();
-	}
-
-	protected function beforeValidate()
-	{
-		return parent::beforeValidate();
 	}
 }
 ?>

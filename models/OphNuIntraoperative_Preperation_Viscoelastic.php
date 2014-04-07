@@ -17,7 +17,7 @@
  */
 
 /**
- * This is the model class for table "ophnuintraopnurse_preperation_viscoelastic".
+ * This is the model class for table "ophnuintraoperative_preperation_viscoelastic".
  *
  * The followings are the available columns in table:
  * @property string $id
@@ -48,7 +48,7 @@ class OphNuIntraoperative_Preperation_Viscoelastic extends BaseActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'ophnuintraopnurse_preperation_viscoelastic';
+		return 'ophnuintraoperative_preperation_viscoelastic';
 	}
 
 	/**
@@ -56,13 +56,9 @@ class OphNuIntraoperative_Preperation_Viscoelastic extends BaseActiveRecord
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
 		return array(
 			array('name', 'safe'),
 			array('name', 'required'),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
 			array('id, name', 'safe', 'on' => 'search'),
 		);
 	}
@@ -72,8 +68,6 @@ class OphNuIntraoperative_Preperation_Viscoelastic extends BaseActiveRecord
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
 		return array(
 			'element_type' => array(self::HAS_ONE, 'ElementType', 'id','on' => "element_type.class_name='".get_class($this)."'"),
 			'eventType' => array(self::BELONGS_TO, 'EventType', 'event_type_id'),
@@ -100,39 +94,14 @@ class OphNuIntraoperative_Preperation_Viscoelastic extends BaseActiveRecord
 	 */
 	public function search()
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
-
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('name', $this->name, true);
 
 		return new CActiveDataProvider(get_class($this), array(
-				'criteria' => $criteria,
-			));
-	}
-
-	/**
-	 * Set default values for forms on create
-	 */
-	public function setDefaultOptions()
-	{
-	}
-
-	protected function beforeSave()
-	{
-		return parent::beforeSave();
-	}
-
-	protected function afterSave()
-	{
-		return parent::afterSave();
-	}
-
-	protected function beforeValidate()
-	{
-		return parent::beforeValidate();
+			'criteria' => $criteria,
+		));
 	}
 }
 ?>

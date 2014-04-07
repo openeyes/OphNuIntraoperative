@@ -18,7 +18,7 @@
  */
 
 /**
- * This is the model class for table "et_ophnuintraopnurse_anasthesia".
+ * This is the model class for table "et_ophnuintraoperative_anasthesia".
  *
  * The followings are the available columns in table:
  * @property string $id
@@ -58,7 +58,7 @@ class Element_OphNuIntraoperative_Anesthesia  extends  BaseEventTypeElement
 	 */
 	public function tableName()
 	{
-		return 'et_ophnuintraopnurse_anasthesia';
+		return 'et_ophnuintraoperative_anasthesia';
 	}
 
 	/**
@@ -66,13 +66,9 @@ class Element_OphNuIntraoperative_Anesthesia  extends  BaseEventTypeElement
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
 		return array(
 			array('event_id, allergies_verfied, hand_off_from_id, hand_off_to_id, anesthesia_type_id, ', 'safe'),
 			array('allergies_verfied, hand_off_from_id, hand_off_to_id, anesthesia_type_id, ', 'required'),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
 			array('id, event_id, allergies_verfied, hand_off_from_id, hand_off_to_id, anesthesia_type_id, ', 'safe', 'on' => 'search'),
 		);
 	}
@@ -82,8 +78,6 @@ class Element_OphNuIntraoperative_Anesthesia  extends  BaseEventTypeElement
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
 		return array(
 			'element_type' => array(self::HAS_ONE, 'ElementType', 'id','on' => "element_type.class_name='".get_class($this)."'"),
 			'eventType' => array(self::BELONGS_TO, 'EventType', 'event_type_id'),
@@ -117,9 +111,6 @@ class Element_OphNuIntraoperative_Anesthesia  extends  BaseEventTypeElement
 	 */
 	public function search()
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
-
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('id', $this->id, true);
@@ -136,20 +127,10 @@ class Element_OphNuIntraoperative_Anesthesia  extends  BaseEventTypeElement
 
 
 
-	protected function beforeSave()
-	{
-		return parent::beforeSave();
-	}
-
 	protected function afterSave()
 	{
 
 		return parent::afterSave();
-	}
-
-	protected function beforeValidate()
-	{
-		return parent::beforeValidate();
 	}
 }
 ?>

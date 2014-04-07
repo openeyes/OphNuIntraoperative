@@ -28,7 +28,7 @@
 	</header>
 
 		<div class="element-fields">
-			<?php echo $form->multiSelectList($element, 'MultiSelect_prep_done', 'prep_dones', 'ophnuintraopnurse_preperation_prep_done_id', CHtml::listData(OphNuIntraoperative_Preperation_PrepDone::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnuintraopnurse_preperation_prep_done_defaults, array('empty' => '- Please select -', 'label' => 'Prep Done'))?>
+			<?php echo $form->multiSelectList($element, 'MultiSelect_prep_done', 'prep_dones', 'ophnuintraoperative_preperation_prep_done_id', CHtml::listData(OphNuIntraoperative_Preperation_PrepDone::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnuintraoperative_preperation_prep_done_defaults, array('empty' => '- Please select -', 'label' => 'Prep Done'))?>
 	<?php echo $form->textField($element, 'other', array('size' => '10'))?>
 	<?php echo $form->dropDownList($element, 'viscoelastic_id', CHtml::listData(OphNuIntraoperative_Preperation_Viscoelastic::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'))?>
 	</div>

@@ -28,7 +28,7 @@
 	</header>
 
 		<div class="element-fields">
-			<?php echo $form->radioButtons($element, 'speciment_collected_id', 'ophnuintraopnurse_specimen_speciment_collected')?>
+			<?php echo $form->radioButtons($element, 'speciment_collected_id', 'ophnuintraoperative_specimen_speciment_collected')?>
 	<?php echo $form->textArea($element, 'comments', array('rows' => 6, 'cols' => 80))?>
 	</div>
 	

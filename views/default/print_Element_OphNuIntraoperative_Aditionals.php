@@ -31,7 +31,7 @@
 						<?php } else {?>
 							<h4>
 								<?php foreach ($element->aditionalss as $item) {
-									echo $item->ophnuintraopnurse_aditionals_aditionals->name?><br/>
+									echo $item->ophnuintraoperative_aditionals_aditionals->name?><br/>
 								<?php }?>
 							</h4>
 						<?php }?>

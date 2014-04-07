@@ -29,8 +29,8 @@
 
 		<div class="element-fields">
 			<?php echo $form->radioBoolean($element, 'nasal_pack_inserted')?>
-	<?php echo $form->textArea($element, 'inserted_time', array('rows' => 6, 'cols' => 80))?>
-	<?php echo $form->textArea($element, 'removal_time', array('rows' => 6, 'cols' => 80))?>
+	<?php echo $form->textField($element, 'inserted_time', array('size' => '10'))?>
+	<?php echo $form->textField($element, 'removal_time', array('size' => '10'))?>
 	</div>
 	
 </section>

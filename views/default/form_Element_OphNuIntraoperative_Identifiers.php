@@ -29,7 +29,7 @@
 
 		<div class="element-fields">
 			<?php echo $form->checkBox($element, 'wrist_band')?>
-	<?php echo $form->multiSelectList($element, 'MultiSelect_idoptions', 'idoptionss', 'ophnuintraopnurse_identifiers_idoptions_id', CHtml::listData(OphNuIntraoperative_Identifiers_Idoptions::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnuintraopnurse_identifiers_idoptions_defaults, array('empty' => '- Please select -', 'label' => 'Select two identifiers'))?>
+	<?php echo $form->multiSelectList($element, 'MultiSelect_idoptions', 'idoptionss', 'ophnuintraoperative_identifiers_idoptions_id', CHtml::listData(OphNuIntraoperative_Identifiers_Idoptions::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnuintraoperative_identifiers_idoptions_defaults, array('empty' => '- Please select -', 'label' => 'Select two identifiers'))?>
 	</div>
 	
 </section>

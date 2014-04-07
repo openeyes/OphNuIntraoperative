@@ -34,7 +34,7 @@
 							None
 						<?php } else {?>
 								<?php foreach ($element->idoptionss as $item) {
-									echo $item->ophnuintraopnurse_identifiers_idoptions->name?><br/>
+									echo $item->ophnuintraoperative_identifiers_idoptions->name?><br/>
 								<?php }?>
 						<?php }?>
 			</div></div>

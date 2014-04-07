@@ -17,17 +17,17 @@
  */
 
 /**
- * This is the model class for table "et_ophnuintraopnurse_dressing_dressing_assignment".
+ * This is the model class for table "et_ophnuintraoperative_dressing_dressing_assignment".
  *
  * The followings are the available columns in table:
  * @property string $id
  * @property integer $element_id
- * @property integer $ophnuintraopnurse_dressing_dressing_id
+ * @property integer $ophnuintraoperative_dressing_dressing_id
  *
  * The followings are the available model relations:
  *
  * @property Element_OphNuIntraoperative_Dressing $element
- * @property OphNuIntraoperative_Dressing_Dressing $ophnuintraopnurse_dressing_dressing
+ * @property OphNuIntraoperative_Dressing_Dressing $ophnuintraoperative_dressing_dressing
  * @property User $user
  * @property User $usermodified
  */
@@ -48,7 +48,7 @@ class Element_OphNuIntraoperative_Dressing_Dressing_Assignment extends BaseActiv
 	 */
 	public function tableName()
 	{
-		return 'et_ophnuintraopnurse_dressing_dressing_assignment';
+		return 'et_ophnuintraoperative_dressing_dressing_assignment';
 	}
 
 	/**
@@ -56,14 +56,10 @@ class Element_OphNuIntraoperative_Dressing_Dressing_Assignment extends BaseActiv
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
 		return array(
-			array('element_id, ophnuintraopnurse_dressing_dressing_id', 'safe'),
-			array('element_id, ophnuintraopnurse_dressing_dressing_id', 'required'),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, element_id, ophnuintraopnurse_dressing_dressing_id', 'safe', 'on' => 'search'),
+			array('element_id, ophnuintraoperative_dressing_dressing_id', 'safe'),
+			array('element_id, ophnuintraoperative_dressing_dressing_id', 'required'),
+			array('id, element_id, ophnuintraoperative_dressing_dressing_id', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -72,11 +68,9 @@ class Element_OphNuIntraoperative_Dressing_Dressing_Assignment extends BaseActiv
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
 		return array(
 			'element' => array(self::BELONGS_TO, 'Element_OphNuIntraoperative_Dressing', 'element_id'),
-			'ophnuintraopnurse_dressing_dressing' => array(self::BELONGS_TO, 'OphNuIntraoperative_Dressing_Dressing', 'ophnuintraopnurse_dressing_dressing_id'),
+			'ophnuintraoperative_dressing_dressing' => array(self::BELONGS_TO, 'OphNuIntraoperative_Dressing_Dressing', 'ophnuintraoperative_dressing_dressing_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 		);
@@ -99,39 +93,14 @@ class Element_OphNuIntraoperative_Dressing_Dressing_Assignment extends BaseActiv
 	 */
 	public function search()
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
-
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('name', $this->name, true);
 
 		return new CActiveDataProvider(get_class($this), array(
-				'criteria' => $criteria,
-			));
-	}
-
-	/**
-	 * Set default values for forms on create
-	 */
-	public function setDefaultOptions()
-	{
-	}
-
-	protected function beforeSave()
-	{
-		return parent::beforeSave();
-	}
-
-	protected function afterSave()
-	{
-		return parent::afterSave();
-	}
-
-	protected function beforeValidate()
-	{
-		return parent::beforeValidate();
+			'criteria' => $criteria,
+		));
 	}
 }
 ?>
