@@ -83,7 +83,7 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 	{
 		return array(
 			array('event_id, incision_site_id, patient_in_sulpine_position, prep_solution_id, other_solution, viscoelastic, viscoelastic_type_id, viscoelastic_quantity_id, grounding_pad, grounding_pad_location_id, grounding_pad_side_id, post_skin_assessment_id, post_skin_assessment_other, nasal_throat_pack, nasal_insert_time, nasal_remove_time, additional_other, ', 'safe'),
-			array('incision_site_id, patient_in_sulpine_position, prep_solution_id, other_solution, viscoelastic, viscoelastic_type_id, viscoelastic_quantity_id, grounding_pad, grounding_pad_location_id, grounding_pad_side_id, post_skin_assessment_id, post_skin_assessment_other, nasal_throat_pack, nasal_insert_time, nasal_remove_time, additional_other, ', 'required'),
+			array('incision_site_id, patient_in_sulpine_position, prep_solution_id, viscoelastic, grounding_pad, post_skin_assessment_id, nasal_throat_pack', 'required'),
 			array('id, event_id, incision_site_id, patient_in_sulpine_position, prep_solution_id, other_solution, viscoelastic, viscoelastic_type_id, viscoelastic_quantity_id, grounding_pad, grounding_pad_location_id, grounding_pad_side_id, post_skin_assessment_id, post_skin_assessment_other, nasal_throat_pack, nasal_insert_time, nasal_remove_time, additional_other, ', 'safe', 'on' => 'search'),
 		);
 	}
@@ -171,48 +171,53 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 		));
 	}
 
-
-	public function getophnuintraoperative_operationprep_additional_defaults() {
-		$ids = array();
-		foreach (OphNuIntraoperative_OperationPrep_Additional::model()->findAll('`default` = ?',array(1)) as $item) {
-			$ids[] = $item->id;
-		}
-		return $ids;
-	}
-
-	protected function afterSave()
+	protected function beforeValidate()
 	{
-		if (!empty($_POST['MultiSelect_additional'])) {
-
-			$existing_ids = array();
-
-			foreach (Element_OphNuIntraoperative_OperationPrep_Additional_Assignment::model()->findAll('element_id = :elementId', array(':elementId' => $this->id)) as $item) {
-				$existing_ids[] = $item->ophnuintraoperative_operationprep_additional_id;
+		if ($this->prep_solution && $this->prep_solution->name == 'Other (please specify)') {
+			if (!$this->other_solution) {
+				$this->addError('other_solution',$this->getAttributeLabel('other_solution').' cannot be blank');
 			}
+		}
 
-			foreach ($_POST['MultiSelect_additional'] as $id) {
-				if (!in_array($id,$existing_ids)) {
-					$item = new Element_OphNuIntraoperative_OperationPrep_Additional_Assignment;
-					$item->element_id = $this->id;
-					$item->ophnuintraoperative_operationprep_additional_id = $id;
-
-					if (!$item->save()) {
-						throw new Exception('Unable to save MultiSelect item: '.print_r($item->getErrors(),true));
-					}
-				}
-			}
-
-			foreach ($existing_ids as $id) {
-				if (!in_array($id,$_POST['MultiSelect_additional'])) {
-					$item = Element_OphNuIntraoperative_OperationPrep_Additional_Assignment::model()->find('element_id = :elementId and ophnuintraoperative_operationprep_additional_id = :lookupfieldId',array(':elementId' => $this->id, ':lookupfieldId' => $id));
-					if (!$item->delete()) {
-						throw new Exception('Unable to delete MultiSelect item: '.print_r($item->getErrors(),true));
-					}
+		if ($this->viscoelastic) {
+			foreach (array('viscoelastic_type_id','viscoelastic_quantity_id') as $field) {
+				if (!$this->$field) {
+					$this->addError($field,$this->getAttributeLabel($field).' cannot be blank');
 				}
 			}
 		}
 
-		return parent::afterSave();
+		if ($this->grounding_pad) {
+			foreach (array('grounding_pad_location_id','grounding_pad_side_id') as $field) {
+				if (!$this->$field) {
+					$this->addError($field,$this->getAttributeLabel($field).' cannot be blank');
+				}
+			}
+		}
+
+		if ($this->post_skin_assessment && $this->post_skin_assessment->name == 'Other (please specify)') {
+			if (!$this->post_skin_assessment_other) {
+				$this->addError('post_skin_assessment_other',$this->getAttributeLabel('post_skin_assessment_other').' cannot be blank');
+			}
+		}
+
+		if ($this->nasal_throat_pack) {
+			foreach (array('nasal_insert_time','nasal_remove_time') as $field) {
+				if (!$this->$field) {
+					$this->addError($field,$this->getAttributeLabel($field).' cannot be blank');
+				} else if (!preg_match('/^([0-9]{1,2}):([0-9]{2})$/',$this->{$field},$m) || $m[1] > 23 || $m[2] > 59) {
+					$this->addError($field,'Invalid time format for '.$this->getAttributeLabel($field));
+				}
+			}
+		}
+
+		if ($this->hasMultiSelectValue('additionals','Other (please specify)')) {
+			if (!$this->additional_other) {
+				$this->addError('additional_other',$this->getAttributeLabel('additional_other').' cannot be blank');
+			}
+		}
+
+		return parent::beforeValidate();
 	}
 }
 ?>

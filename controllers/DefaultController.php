@@ -68,7 +68,7 @@ class DefaultController extends BaseEventTypeController
 		$criteria = new CDbCriteria;
 		$criteria->addCondition('element_id = :element_id');
 		$criteria->params[':element_id'] = $element->id;
-		$criteria->addNotInCondition('ophnuintraoperative_handoff_two_identifiers_id',$data['MultiSelect_two_identifiers']);
+		!empty($data['MultiSelect_two_identifiers']) && $criteria->addNotInCondition('ophnuintraoperative_handoff_two_identifiers_id',$data['MultiSelect_two_identifiers']);
 
 		Element_OphNuIntraoperative_Identifiers_Idoptions_Assignment::model()->deleteAll($criteria);
 	}
@@ -77,12 +77,38 @@ class DefaultController extends BaseEventTypeController
 	{
 		$additional = array();
 
-		if (!empty($_POST['MultiSelect_additional'])) {
-			foreach ($_POST['MultiSelect_additional'] as $additional_id) {
+		if (!empty($data['MultiSelect_additional'])) {
+			foreach ($data['MultiSelect_additional'] as $additional_id) {
 				$additional[] = OphNuIntraoperative_OperationPrep_Additional::model()->findByPk($additional_id);
 			}
 		}
 
 		$element->additionals = $additional;
+	}
+
+	protected function saveComplexAttributes_Element_OphNuIntraoperative_OperationPrep($element, $data, $index)
+	{
+		if (!empty($data['MultiSelect_additional'])) {
+			foreach ($data['MultiSelect_additional'] as $additional_id) {
+				if (!Element_OphNuIntraoperative_OperationPrep_Additional_Assignment::model()->find('element_id=? and ophnuintraoperative_operationprep_additional_id=?',array($element->id,$additional_id))) {
+					$assignment = new Element_OphNuIntraoperative_OperationPrep_Additional_Assignment;
+					$assignment->element_id = $element->id;
+					$assignment->ophnuintraoperative_operationprep_additional_id = $additional_id;
+
+					if (!$assignment->save()) {
+						throw new Exception("Unable to save Element_OphNuIntraoperative_OperationPrep_Additional_Assignment: ".print_r($assignment->getErrors(),true));
+					}
+				}
+			}
+		} else {
+			$data['MultiSelect_additional'] = array();
+		}
+
+		$criteria = new CDbCriteria;
+		$criteria->addCondition('element_id = :element_id');
+		$criteria->params[':element_id'] = $element->id;
+		!empty($data['MultiSelect_additional']) && $criteria->addNotInCondition('ophnuintraoperative_operationprep_additional_id',$data['MultiSelect_additional']);
+
+		Element_OphNuIntraoperative_OperationPrep_Additional_Assignment::model()->deleteAll($criteria);
 	}
 }
