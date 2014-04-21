@@ -18,12 +18,12 @@
  */
 
 /**
- * This is the model class for table "et_ophnuintraoperative_surgicalcou".
+ * This is the model class for table "et_ophnuintraoperative_surgicalcounts".
  *
  * The followings are the available columns in table:
  * @property string $id
  * @property integer $event_id
- * @property integer $count_descrepancies
+ * @property integer $count_discrepancies
  * @property integer $surgeon_notified
  * @property string $comments
  *
@@ -38,8 +38,6 @@
 
 class Element_OphNuIntraoperative_SurgicalCounts  extends  BaseEventTypeElement
 {
-	public $service;
-
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return the static model class
@@ -54,7 +52,7 @@ class Element_OphNuIntraoperative_SurgicalCounts  extends  BaseEventTypeElement
 	 */
 	public function tableName()
 	{
-		return 'et_ophnuintraoperative_surgicalcou';
+		return 'et_ophnuintraoperative_surgicalcounts';
 	}
 
 	/**
@@ -63,9 +61,9 @@ class Element_OphNuIntraoperative_SurgicalCounts  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, count_descrepancies, surgeon_notified, comments, ', 'safe'),
-			array('count_descrepancies, surgeon_notified, comments, ', 'required'),
-			array('id, event_id, count_descrepancies, surgeon_notified, comments, ', 'safe', 'on' => 'search'),
+			array('event_id, count_discrepancies, surgeon_notified, comments, needles1, needles2, needles3, blades1, blades2, blades3, plugs1, plugs2, plugs3, trocars1, trocars2, trocars3, sponges_gauze1, sponges_gauze2, sponges_gauze3, pledgetts1, pledgetts2, pledgetts3', 'safe'),
+			array('count_discrepancies, surgeon_notified, needles1, needles2, needles3, blades1, blades2, blades3, plugs1, plugs2, plugs3, trocars1, trocars2, trocars3, sponges_gauze1, sponges_gauze2, sponges_gauze3, pledgetts1, pledgetts2, pledgetts3', 'required'),
+			array('id, event_id, count_discrepancies, surgeon_notified, comments, ', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -91,9 +89,9 @@ class Element_OphNuIntraoperative_SurgicalCounts  extends  BaseEventTypeElement
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'count_descrepancies' => 'Count Descrepancies',
-			'surgeon_notified' => 'Surgeon Notified',
-			'comments' => 'Comments',
+			'count_discrepancies' => 'Count discrepancies',
+			'surgeon_notified' => 'Surgeon notified',
+			'comments' => 'Discrepancy comments',
 		);
 	}
 
@@ -107,21 +105,13 @@ class Element_OphNuIntraoperative_SurgicalCounts  extends  BaseEventTypeElement
 
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('event_id', $this->event_id, true);
-		$criteria->compare('count_descrepancies', $this->count_descrepancies);
+		$criteria->compare('count_discrepancies', $this->count_discrepancies);
 		$criteria->compare('surgeon_notified', $this->surgeon_notified);
 		$criteria->compare('comments', $this->comments);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
 		));
-	}
-
-
-
-	protected function afterSave()
-	{
-
-		return parent::afterSave();
 	}
 }
 ?>

@@ -27,9 +27,14 @@
 		<h3 class="element-title"><?php echo $element->elementType->name; ?></h3>
 	</header>
 
-		<div class="element-fields">
-			<?php echo $form->checkBox($element, 'wrist_band')?>
-	<?php echo $form->multiSelectList($element, 'MultiSelect_idoptions', 'idoptionss', 'ophnuintraoperative_identifiers_idoptions_id', CHtml::listData(OphNuIntraoperative_Identifiers_Idoptions::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnuintraoperative_identifiers_idoptions_defaults, array('empty' => '- Please select -', 'label' => 'Select two identifiers'))?>
+	<div class="element-fields">
+		<div id="div_Element_OphNuIntraoperative_Identifiers_wrist_band" class="row field-row">
+			<div class="large-3 column">
+			</div>
+			<div class="large-9 column">
+				<?php echo $form->checkBox($element, 'wrist_band', array('nowrapper' => true))?>
+			</div>
+		</div>
+		<?php echo $form->multiSelectList($element, 'MultiSelect_idoptions', 'idoptionss', 'ophnuintraoperative_identifiers_idoptions_id', CHtml::listData(OphNuIntraoperative_Identifiers_Idoptions::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnuintraoperative_identifiers_idoptions_defaults, array('empty' => '- Please select -', 'label' => 'Select two identifiers'), false, false, null, false, false, array('label' => 3, 'field' => 4))?>
 	</div>
-	
 </section>

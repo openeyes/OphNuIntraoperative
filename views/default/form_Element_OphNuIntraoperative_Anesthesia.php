@@ -27,11 +27,16 @@
 		<h3 class="element-title"><?php echo $element->elementType->name; ?></h3>
 	</header>
 
-		<div class="element-fields">
-			<?php echo $form->checkBox($element, 'allergies_verfied')?>
-	<?php echo $form->dropDownList($element, 'hand_off_from_id', CHtml::listData(OphNuIntraoperative_Anesthesia_HandOffFrom::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'))?>
-	<?php echo $form->dropDownList($element, 'hand_off_to_id', CHtml::listData(OphNuIntraoperative_Anesthesia_HandOffTo::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'))?>
-	<?php echo $form->dropDownList($element, 'anesthesia_type_id', CHtml::listData(OphNuIntraoperative_Anesthesia_AnesthesiaType::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'))?>
+	<div class="element-fields">
+		<div id="div_Element_OphNuIntraoperative_Identifiers_allergies_verfied" class="row field-row">
+			<div class="large-3 column">
+			</div>
+			<div class="large-9 column">
+				<?php echo $form->checkBox($element, 'allergies_verfied', array('nowrapper' => true))?>
+			</div>
+		</div>
+		<?php echo $form->radioButtons($element, 'hand_off_from_id', CHtml::listData(OphNuIntraoperative_Anesthesia_HandOff_Person::model()->findAll(array('order'=> 'display_order asc')),'id','name'), null, false, false, false, false, array(), array('label' => 3, 'field' => 4))?>
+		<?php echo $form->radioButtons($element, 'hand_off_to_id', CHtml::listData(OphNuIntraoperative_Anesthesia_HandOff_Person::model()->findAll(array('order'=> 'display_order asc')),'id','name'), null, false, false, false, false, array(), array('label' => 3, 'field' => 4))?>
+		<?php echo $form->radioButtons($element, 'anesthesia_type_id', CHtml::listData(AnaestheticType::model()->findAll(array('order' => 'id asc')),'id','name'), null, false, false, false, false, array(), array('label' => 3, 'field' => 4))?>
 	</div>
-	
 </section>

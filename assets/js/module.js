@@ -1,9 +1,7 @@
 
-/* Module-specific javascript can be placed here */
-
 $(document).ready(function() {
-			handleButton($('#et_save'),function() {
-					});
+	handleButton($('#et_save'),function() {
+	});
 	
 	handleButton($('#et_cancel'),function(e) {
 		if (m = window.location.href.match(/\/update\/[0-9]+/)) {
@@ -36,6 +34,36 @@ $(document).ready(function() {
 			} else {
 				el.text(currentText+', '+newText);
 			}
+		}
+	});
+
+	$('.time-now').click(function(e) {
+		e.preventDefault();
+
+		var d = new Date;
+
+		var h = d.getHours();
+		var m = d.getMinutes();
+
+		if (h <10) {
+			h = '0'+h;
+		}
+		if (m <10) {
+			m = '0'+m;
+		}
+
+		$('#Element_OphNuIntraoperative_TimeTracking_'+$(this).data('target')).val(h+':'+m);
+	});
+
+	$('#Element_OphNuIntraoperative_SurgicalCounts_count_discrepancies').click(function() {
+		if ($(this).is(':checked')) {
+			$('#div_Element_OphNuIntraoperative_SurgicalCounts_surgeon_notified').show();
+			$('#div_Element_OphNuIntraoperative_SurgicalCounts_comments').show();
+		} else {
+			$('#div_Element_OphNuIntraoperative_SurgicalCounts_surgeon_notified').hide();
+			$('#div_Element_OphNuIntraoperative_SurgicalCounts_comments').hide();
+			$('#Element_OphNuIntraoperative_SurgicalCounts_surgeon_notified').removeAttr('checked');
+			$('#div_Element_OphNuIntraoperative_SurgicalCounts_comments').val('');
 		}
 	});
 });

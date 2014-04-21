@@ -17,7 +17,7 @@
  */
 
 /**
- * This is the model class for table "ophnuintraoperative_anasthesia_anesthesia_type".
+ * This is the model class for table "ophnuintraoperative_operationprep_post_skin_assessment".
  *
  * The followings are the available columns in table:
  * @property string $id
@@ -32,7 +32,7 @@
  * @property User $usermodified
  */
 
-class OphNuIntraoperative_Anesthesia_AnesthesiaType extends BaseActiveRecord
+class OphNuIntraoperative_OperationPrep_PostSkinAssessment extends BaseActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -48,7 +48,7 @@ class OphNuIntraoperative_Anesthesia_AnesthesiaType extends BaseActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'ophnuintraoperative_anasthesia_anesthesia_type';
+		return 'ophnuintraoperative_operationprep_post_skin_assessment';
 	}
 
 	/**

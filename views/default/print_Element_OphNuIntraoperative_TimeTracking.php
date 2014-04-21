@@ -22,36 +22,36 @@
 <table class="subtleWhite normalText">
 	<tbody>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('patient_enters_or'))?></td>
-			<td><span class="big"><?php echo CHtml::encode($element->patient_enters_or)?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('time_out'))?></td>
-			<td><span class="big"><?php echo CHtml::encode($element->time_out)?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('surgery_start'))?></td>
-			<td><span class="big"><?php echo CHtml::encode($element->surgery_start)?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('second_surgery_start'))?></td>
-			<td><span class="big"><?php echo CHtml::encode($element->second_surgery_start)?></span></td>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('enters_or'))?></td>
+			<td><span class="big"><?php echo CHtml::encode($element->enters_or)?></span></td>
 		</tr>
 		<tr>
 			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('surgery_stop'))?></td>
 			<td><span class="big"><?php echo CHtml::encode($element->surgery_stop)?></span></td>
 		</tr>
 		<tr>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('time_out'))?></td>
+			<td><span class="big"><?php echo CHtml::encode($element->time_out)?></span></td>
+		</tr>
+		<tr>
 			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('second_surgery_stop'))?></td>
 			<td><span class="big"><?php echo CHtml::encode($element->second_surgery_stop)?></span></td>
+		</tr>
+		<tr>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('surgery_start'))?></td>
+			<td><span class="big"><?php echo CHtml::encode($element->surgery_start)?></span></td>
 		</tr>
 		<tr>
 			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('sign_out'))?></td>
 			<td><span class="big"><?php echo CHtml::encode($element->sign_out)?></span></td>
 		</tr>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('patient_leaves_or'))?></td>
-			<td><span class="big"><?php echo CHtml::encode($element->patient_leaves_or)?></span></td>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('second_surgery_start'))?></td>
+			<td><span class="big"><?php echo CHtml::encode($element->second_surgery_start)?></span></td>
+		</tr>
+		<tr>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('leaves_or'))?></td>
+			<td><span class="big"><?php echo CHtml::encode($element->leaves_or)?></span></td>
 		</tr>
 	</tbody>
 </table>

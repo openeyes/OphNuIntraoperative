@@ -41,7 +41,7 @@ class OphNuIntraoperativeModule extends BaseEventTypeModule
 			'OphNuIntraoperative.components.*',
 		));
 
-		$this->moduleShortSuffix = "Intraoperative";
+		$this->moduleShortSuffix = "intraoperative";
 	}
 
 	public function beforeControllerAction($controller, $action)

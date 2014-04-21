@@ -25,8 +25,8 @@
 
 		<div class="element-data">
 				<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('count_descrepancies'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->count_descrepancies ? 'Yes' : 'No'?></div></div>
+			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('count_discrepancies'))?></div></div>
+			<div class="large-10 column end"><div class="data-value"><?php echo $element->count_discrepancies ? 'Yes' : 'No'?></div></div>
 		</div>
 		<div class="row data-row">
 			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('surgeon_notified'))?></div></div>

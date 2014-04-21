@@ -27,9 +27,8 @@
 		<h3 class="element-title"><?php echo $element->elementType->name; ?></h3>
 	</header>
 
-		<div class="element-fields">
-			<?php echo $form->multiSelectList($element, 'MultiSelect_incision', 'incisions', 'ophnuintraoperative_incisionsit_incision_id', CHtml::listData(OphNuIntraoperative_IncisionSite_Incision::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnuintraoperative_incisionsit_incision_defaults, array('empty' => '- Please select -', 'label' => 'Incision Site'))?>
-	<?php echo $form->radioBoolean($element, 'patient_position')?>
+	<div class="element-fields">
+		<?php echo $form->multiSelectList($element, 'MultiSelect_incision', 'incisions', 'ophnuintraoperative_incisionsit_incision_id', CHtml::listData(OphNuIntraoperative_IncisionSite_Incision::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnuintraoperative_incisionsit_incision_defaults, array('empty' => '- Please select -', 'label' => 'Incision Site'))?>
+		<?php echo $form->radioBoolean($element, 'patient_position')?>
 	</div>
-	
 </section>

@@ -98,10 +98,10 @@ class Element_OphNuIntraoperative_Anesthesia  extends  BaseEventTypeElement
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'allergies_verfied' => 'Allergies Verfied',
+			'allergies_verfied' => 'Allergies verfied',
 			'hand_off_from_id' => 'Hand off from',
 			'hand_off_to_id' => 'Hand off to',
-			'anesthesia_type_id' => 'Anesthesia Type',
+			'anesthesia_type_id' => 'Anesthesia type',
 		);
 	}
 
@@ -123,14 +123,6 @@ class Element_OphNuIntraoperative_Anesthesia  extends  BaseEventTypeElement
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
 		));
-	}
-
-
-
-	protected function afterSave()
-	{
-
-		return parent::afterSave();
 	}
 }
 ?>

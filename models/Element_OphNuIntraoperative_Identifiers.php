@@ -91,7 +91,7 @@ class Element_OphNuIntraoperative_Identifiers  extends  BaseEventTypeElement
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'wrist_band' => 'Patient ID Wrist Band with two identifiers',
+			'wrist_band' => 'Patient ID wrist band with two identifiers',
 			'idoptions' => 'Select two identifiers',
 		);
 	}

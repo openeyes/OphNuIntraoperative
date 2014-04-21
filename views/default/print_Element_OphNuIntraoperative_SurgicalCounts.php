@@ -22,8 +22,8 @@
 <table class="subtleWhite normalText">
 	<tbody>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('count_descrepancies'))?>:</td>
-			<td><span class="big"><?php echo $element->count_descrepancies ? 'Yes' : 'No'?></span></td>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('count_discrepancies'))?></td>
+			<td><span class="big"><?php echo $element->count_discrepancies ? 'Yes' : 'No'?></span></td>
 		</tr>
 		<tr>
 			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('surgeon_notified'))?></td>

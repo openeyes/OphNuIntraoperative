@@ -17,7 +17,7 @@
  */
 
 /**
- * This is the model class for table "ophnuintraoperative_anasthesia_hand_off_to".
+ * This is the model class for table "ophnuintraoperative_postop_specimin_collected".
  *
  * The followings are the available columns in table:
  * @property string $id
@@ -32,7 +32,7 @@
  * @property User $usermodified
  */
 
-class OphNuIntraoperative_Anesthesia_HandOffTo extends BaseActiveRecord
+class OphNuIntraoperative_PostOp_SpeciminCollected extends BaseActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -48,7 +48,7 @@ class OphNuIntraoperative_Anesthesia_HandOffTo extends BaseActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'ophnuintraoperative_anasthesia_hand_off_to';
+		return 'ophnuintraoperative_postop_specimin_collected';
 	}
 
 	/**

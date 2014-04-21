@@ -33,4 +33,17 @@ class DefaultController extends BaseEventTypeController
 		Yii::app()->assetManager->registerScriptFile('js/spliteventtype.js', null, null, AssetManager::OUTPUT_SCREEN);
 		return parent::beforeAction($action);
 	}
+
+	protected function setComplexAttributes_Element_OphNuIntraoperative_OperationPrep($element, $data, $index)
+	{
+		$additional = array();
+
+		if (!empty($_POST['MultiSelect_additional'])) {
+			foreach ($_POST['MultiSelect_additional'] as $additional_id) {
+				$additional[] = OphNuIntraoperative_OperationPrep_Additional::model()->findByPk($additional_id);
+			}
+		}
+
+		$element->additionals = $additional;
+	}
 }
