@@ -29,7 +29,7 @@
 
 	<div class="element-fields">
 		<?php echo $form->checkBox($element, 'wristband_verified', array('text-align' => 'right'), array('label' => 3, 'field' => 4))?>
-		<?php echo $form->multiSelectList($element, 'MultiSelect_two_identifiers', 'two_identifierss', 'ophnuintraoperative_handoff_two_identifiers_id', CHtml::listData(OphNuIntraoperative_Handoff_TwoIdentifiers::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnuintraoperative_handoff_two_identifiers_defaults, array('empty' => '- Please select -', 'label' => 'Two identifiers'), false, false, null, false, false, array('label' => 3, 'field' => 4), 2)?>
+		<?php echo $form->multiSelectList($element, 'MultiSelect_two_identifiers', 'two_identifierss', 'ophnuintraoperative_handoff_two_identifiers_id', CHtml::listData(OphNuIntraoperative_Handoff_TwoIdentifiers::model()->findAll(array('order'=>'display_order asc')),'id','name'), array(), array('empty' => '- Please select -', 'label' => 'Two identifiers'), false, false, null, false, false, array('label' => 3, 'field' => 4), 2)?>
 		<?php echo $form->checkBox($element, 'allergies_verified', array('text-align' => 'right'), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->radioButtons($element, 'hand_off_from_id', CHtml::listData(OphNuIntraoperative_Handoff_HandOffFrom::model()->findAll(array('order'=> 'display_order asc')),'id','name'),null,false,false,false,false,array(),array('label'=>3,'field'=>4))?>
 		<?php echo $form->radioButtons($element, 'hand_off_to_id', CHtml::listData(OphNuIntraoperative_Handoff_HandOffFrom::model()->findAll(array('order'=> 'display_order asc')),'id','name'),null,false,false,false,false,array(),array('label'=>3,'field'=>4))?>

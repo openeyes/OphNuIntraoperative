@@ -140,56 +140,16 @@ class Element_OphNuIntraoperative_Handoff  extends  BaseEventTypeElement
 		));
 	}
 
-
-	public function getophnuintraoperative_handoff_two_identifiers_defaults() {
-		$ids = array();
-		foreach (OphNuIntraoperative_Handoff_TwoIdentifiers::model()->findAll('`default` = ?',array(1)) as $item) {
-			$ids[] = $item->id;
-		}
-		return $ids;
-	}
-
-	protected function afterSave()
-	{
-		if (!empty($_POST['MultiSelect_two_identifiers'])) {
-
-			$existing_ids = array();
-
-			foreach (Element_OphNuIntraoperative_Handoff_TwoIdentifiers_Assignment::model()->findAll('element_id = :elementId', array(':elementId' => $this->id)) as $item) {
-				$existing_ids[] = $item->ophnuintraoperative_handoff_two_identifiers_id;
-			}
-
-			foreach ($_POST['MultiSelect_two_identifiers'] as $id) {
-				if (!in_array($id,$existing_ids)) {
-					$item = new Element_OphNuIntraoperative_Handoff_TwoIdentifiers_Assignment;
-					$item->element_id = $this->id;
-					$item->ophnuintraoperative_handoff_two_identifiers_id = $id;
-
-					if (!$item->save()) {
-						throw new Exception('Unable to save MultiSelect item: '.print_r($item->getErrors(),true));
-					}
-				}
-			}
-
-			foreach ($existing_ids as $id) {
-				if (!in_array($id,$_POST['MultiSelect_two_identifiers'])) {
-					$item = Element_OphNuIntraoperative_Handoff_TwoIdentifiers_Assignment::model()->find('element_id = :elementId and ophnuintraoperative_handoff_two_identifiers_id = :lookupfieldId',array(':elementId' => $this->id, ':lookupfieldId' => $id));
-					if (!$item->delete()) {
-						throw new Exception('Unable to delete MultiSelect item: '.print_r($item->getErrors(),true));
-					}
-				}
-			}
-		}
-
-		return parent::afterSave();
-	}
-
 	public function beforeValidate()
 	{
 		if ($this->nonoperative_eye_protected && $this->nonoperative_eye_protected->name == 'Yes') {
 			if (!$this->tape_or_shield) {
 				$this->addError('tape_or_shield_id',$this->getAttributeLabel('tape_or_shield_id').' cannot be blank.');
 			}
+		}
+
+		if (empty($this->two_identifierss) || count($this->two_identifierss) != 2) {
+			$this->addError('two_identifierss','You must select two patient identifiers from the list');
 		}
 
 		return parent::beforeValidate();
