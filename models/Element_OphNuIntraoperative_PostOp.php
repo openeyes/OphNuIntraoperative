@@ -70,7 +70,7 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 	{
 		return array(
 			array('event_id, specimin_collected_id, specimin_comments, dressing_used, dressing_other, circulating_nurse_id, scrub_nurse_id, ', 'safe'),
-			array('specimin_collected_id, specimin_comments, dressing_used, circulating_nurse_id, scrub_nurse_id, ', 'required'),
+			array('specimin_collected_id, dressing_used, circulating_nurse_id, scrub_nurse_id', 'required'),
 			array('id, event_id, specimin_collected_id, specimin_comments, dressing_used, circulating_nurse_id, scrub_nurse_id, ', 'safe', 'on' => 'search'),
 		);
 	}
@@ -88,7 +88,7 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 			'specimin_collected' => array(self::BELONGS_TO, 'OphNuIntraoperative_PostOp_SpeciminCollected', 'specimin_collected_id'),
 			'dressing_itemss' => array(self::HAS_MANY, 'Element_OphNuIntraoperative_PostOp_DressingItems_Assignment', 'element_id'),
-			'procedures_performeds' => array(self::HAS_MANY, 'OphnuintraoperativePostopProceduresPerformedProceduresPerformed', 'element_id'),
+			'procedures_performeds' => array(self::HAS_MANY, 'OphNuIntraoperative_PostOp_Procedures_Performed_Assignment', 'element_id'),
 			'circulating_nurse' => array(self::BELONGS_TO, 'User', 'circulating_nurse_id'),
 			'scrub_nurse' => array(self::BELONGS_TO, 'User', 'scrub_nurse_id'),
 		);
@@ -136,84 +136,31 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 		));
 	}
 
-
-	public function getophnuintraoperative_postop_dressing_items_defaults() {
-		$ids = array();
-		foreach (OphNuIntraoperative_PostOp_DressingItems::model()->findAll('`default` = ?',array(1)) as $item) {
-			$ids[] = $item->id;
-		}
-		return $ids;
-	}
-	public function getproc_defaults() {
-		$ids = array();
-		foreach (OphnuintraoperativePostopProcDefaults::model()->findAll() as $item) {
-			$ids[] = $item->value_id;
-		}
-		return $ids;
-	}
-
-	protected function afterSave()
+	protected function beforeValidate()
 	{
-		if (!empty($_POST['MultiSelect_dressing_items'])) {
-
-			$existing_ids = array();
-
-			foreach (Element_OphNuIntraoperative_PostOp_DressingItems_Assignment::model()->findAll('element_id = :elementId', array(':elementId' => $this->id)) as $item) {
-				$existing_ids[] = $item->ophnuintraoperative_postop_dressing_items_id;
-			}
-
-			foreach ($_POST['MultiSelect_dressing_items'] as $id) {
-				if (!in_array($id,$existing_ids)) {
-					$item = new Element_OphNuIntraoperative_PostOp_DressingItems_Assignment;
-					$item->element_id = $this->id;
-					$item->ophnuintraoperative_postop_dressing_items_id = $id;
-
-					if (!$item->save()) {
-						throw new Exception('Unable to save MultiSelect item: '.print_r($item->getErrors(),true));
-					}
-				}
-			}
-
-			foreach ($existing_ids as $id) {
-				if (!in_array($id,$_POST['MultiSelect_dressing_items'])) {
-					$item = Element_OphNuIntraoperative_PostOp_DressingItems_Assignment::model()->find('element_id = :elementId and ophnuintraoperative_postop_dressing_items_id = :lookupfieldId',array(':elementId' => $this->id, ':lookupfieldId' => $id));
-					if (!$item->delete()) {
-						throw new Exception('Unable to delete MultiSelect item: '.print_r($item->getErrors(),true));
-					}
-				}
+		if ($this->specimin_collected && $this->specimin_collected->name == 'Yes') {
+			if (!$this->specimin_comments) {
+				$this->addError('specimin_comments',$this->getAttributeLabel('specimin_comments').' cannot be blank');
 			}
 		}
-		if (!empty($_POST['MultiSelect_procedures_performed'])) {
 
-			$existing_ids = array();
-
-			foreach (OphnuintraoperativePostopProceduresPerformedProceduresPerformed::model()->findAll('element_id = :elementId', array(':elementId' => $this->id)) as $item) {
-				$existing_ids[] = $item->proc_id;
-			}
-
-			foreach ($_POST['MultiSelect_procedures_performed'] as $id) {
-				if (!in_array($id,$existing_ids)) {
-					$item = new OphnuintraoperativePostopProceduresPerformedProceduresPerformed;
-					$item->element_id = $this->id;
-					$item->proc_id = $id;
-
-					if (!$item->save()) {
-						throw new Exception('Unable to save MultiSelect item: '.print_r($item->getErrors(),true));
-					}
-				}
-			}
-
-			foreach ($existing_ids as $id) {
-				if (!in_array($id,$_POST['MultiSelect_procedures_performed'])) {
-					$item = OphnuintraoperativePostopProceduresPerformedProceduresPerformed::model()->find('element_id = :elementId and proc_id = :lookupfieldId',array(':elementId' => $this->id, ':lookupfieldId' => $id));
-					if (!$item->delete()) {
-						throw new Exception('Unable to delete MultiSelect item: '.print_r($item->getErrors(),true));
+		if ($this->dressing_used) {
+			if (empty($this->dressing_itemss)) {
+				$this->addError('dressing_itemss','Please specify at least one dressing item');
+			} else {
+				if ($this->hasMultiSelectValue('dressing_itemss','Other (please specify)')) {
+					if (!$this->dressing_other) {
+						$this->addError('dressing_other',$this->getAttributeLabel('dressing_other').' cannot be blank');
 					}
 				}
 			}
 		}
 
-		return parent::afterSave();
+		if (empty($this->procedures_performeds)) {
+			$this->addError('procedures_performeds','Please enter at least one procedure');
+		}
+
+		return parent::beforeValidate();
 	}
 }
 ?>
