@@ -163,8 +163,9 @@ class Element_OphNuIntraoperative_ImplantProsthesisScleral  extends  BaseEventTy
 
 		foreach (array('ocular_sphere_ball','glaucoma_valve','lid_weights','sutures','drains') as $field) {
 			if ($this->$field) {
-				if (!$this->{$field.'_comments'}) {
-					$this->addError($field.'_comments',$this->getAttributeLabel($field.'_comments').' cannot be blank');
+				$comments_field = preg_replace('/s$/','',$field).'_comments';
+				if (!$this->$comments_field) {
+					$this->addError($comments_field,$this->getAttributeLabel($comments_field).' cannot be blank');
 				}
 			}
 		}

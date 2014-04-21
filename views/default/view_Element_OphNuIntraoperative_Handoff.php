@@ -25,12 +25,12 @@
 
 		<div class="element-data">
 				<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('wristband_verified'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->wristband_verified ? 'Yes' : 'No'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('wristband_verified'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->wristband_verified ? 'Yes' : 'No'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('two_identifiers'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php if (!$element->two_identifierss) {?>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('two_identifiers'))?>:</div></div>
+			<div class="large-9 column end"><div class="data-value"><?php if (!$element->two_identifierss) {?>
 							None
 						<?php } else {?>
 								<?php foreach ($element->two_identifierss as $item) {
@@ -40,28 +40,30 @@
 			</div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('allergies_verified'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->allergies_verified ? 'Yes' : 'No'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('allergies_verified'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->allergies_verified ? 'Yes' : 'No'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('hand_off_from_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->hand_off_from ? $element->hand_off_from->name : 'None'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('hand_off_from_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->hand_off_from ? $element->hand_off_from->name : 'None'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('hand_off_to_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->hand_off_to ? $element->hand_off_to->address1 : 'None'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('hand_off_to_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->hand_off_to ? $element->hand_off_to->name : 'None'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('anesthesia_type_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->anesthesia_type ? $element->anesthesia_type->name : 'None'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('anesthesia_type_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->anesthesia_type ? $element->anesthesia_type->name : 'None'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('non-operative_eye_protected_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->non-operative_eye_protected ? $element->non-operative_eye_protected->name : 'None'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('nonoperative_eye_protected_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->nonoperative_eye_protected ? $element->nonoperative_eye_protected->name : 'None'?></div></div>
 		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('tape_or_shield_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->tape_or_shield ? $element->tape_or_shield->name : 'None'?></div></div>
-		</div>
+		<?php if ($element->nonoperative_eye_protected->name == 'Yes') {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('tape_or_shield_id'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo $element->tape_or_shield ? $element->tape_or_shield->name : 'None'?></div></div>
 			</div>
+		<?php }?>
+	</div>
 </section>

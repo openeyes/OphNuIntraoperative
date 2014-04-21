@@ -102,5 +102,10 @@ class Element_OphNuIntraoperative_PostOp_DressingItems_Assignment extends BaseAc
 			'criteria' => $criteria,
 		));
 	}
+
+	public function getName()
+	{
+		return $this->ophnuintraoperative_postop_dressing_items->name;
+	}
 }
 ?>

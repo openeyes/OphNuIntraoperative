@@ -89,6 +89,7 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 			'specimin_collected' => array(self::BELONGS_TO, 'OphNuIntraoperative_PostOp_SpeciminCollected', 'specimin_collected_id'),
 			'dressing_itemss' => array(self::HAS_MANY, 'Element_OphNuIntraoperative_PostOp_DressingItems_Assignment', 'element_id'),
 			'procedures_performeds' => array(self::HAS_MANY, 'OphNuIntraoperative_PostOp_Procedures_Performed_Assignment', 'element_id'),
+			'procedures' => array(self::MANY_MANY, 'Procedure', 'ophnuintraoperative_postop_procedures_performed_assignment(element_id, proc_id)'),
 			'circulating_nurse' => array(self::BELONGS_TO, 'User', 'circulating_nurse_id'),
 			'scrub_nurse' => array(self::BELONGS_TO, 'User', 'scrub_nurse_id'),
 		);

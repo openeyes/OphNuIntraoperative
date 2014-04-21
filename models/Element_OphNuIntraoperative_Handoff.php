@@ -90,7 +90,7 @@ class Element_OphNuIntraoperative_Handoff  extends  BaseEventTypeElement
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 			'two_identifierss' => array(self::HAS_MANY, 'Element_OphNuIntraoperative_Handoff_TwoIdentifiers_Assignment', 'element_id'),
 			'hand_off_from' => array(self::BELONGS_TO, 'OphNuIntraoperative_Handoff_HandOffFrom', 'hand_off_from_id'),
-			'hand_off_to' => array(self::BELONGS_TO, 'Address', 'hand_off_to_id'),
+			'hand_off_to' => array(self::BELONGS_TO, 'OphNuIntraoperative_Handoff_HandOffFrom', 'hand_off_to_id'),
 			'anesthesia_type' => array(self::BELONGS_TO, 'AnaestheticType', 'anesthesia_type_id'),
 			'nonoperative_eye_protected' => array(self::BELONGS_TO, 'OphNuIntraoperative_Handoff_NonoperativeEyeProtected', 'nonoperative_eye_protected_id'),
 			'tape_or_shield' => array(self::BELONGS_TO, 'OphNuIntraoperative_Handoff_TapeOrShield', 'tape_or_shield_id'),

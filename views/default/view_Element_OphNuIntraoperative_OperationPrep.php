@@ -23,70 +23,80 @@
 		<h3 class="element-title"><?php echo $element->elementType->name?></h3>
 	</header>
 
-		<div class="element-data">
-				<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('incision_site_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->incision_site ? $element->incision_site->name : 'None'?></div></div>
+	<div class="element-data">
+		<div class="row data-row">
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('incision_site_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->incision_site ? $element->incision_site->name : 'None'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('patient_in_sulpine_position'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->patient_in_sulpine_position ? 'Yes' : 'No'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('patient_in_sulpine_position'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->patient_in_sulpine_position ? 'Yes' : 'No'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('prep_solution_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->prep_solution ? $element->prep_solution->name : 'None'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('prep_solution_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->prep_solution ? $element->prep_solution->name : 'None'?></div></div>
 		</div>
+		<?php if ($element->prep_solution->name == 'Other (please specify)') {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('other_solution'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->other_solution)?></div></div>
+			</div>
+		<?php }?>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('other_solution'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->other_solution)?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('viscoelastic'))?>:</div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->viscoelastic ? 'Yes' : 'No'?></div></div>
 		</div>
+		<?php if ($element->viscoelastic) {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('viscoelastic_type_id'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo $element->viscoelastic_type ? $element->viscoelastic_type->name : 'None'?></div></div>
+			</div>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('viscoelastic_quantity_id'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo $element->viscoelastic_quantity ? $element->viscoelastic_quantity->name : 'None'?></div></div>
+			</div>
+		<?php }?>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('viscoelastic'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->viscoelastic ? 'Yes' : 'No'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('grounding_pad'))?>:</div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->grounding_pad ? 'Yes' : 'No'?></div></div>
 		</div>
+		<?php if ($element->grounding_pad) {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('grounding_pad_location_id'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo $element->grounding_pad_location ? $element->grounding_pad_location->name : 'None'?></div></div>
+			</div>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('grounding_pad_side_id'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo $element->grounding_pad_side ? $element->grounding_pad_side->name : 'None'?></div></div>
+			</div>
+		<?php }?>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('viscoelastic_type_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->viscoelastic_type ? $element->viscoelastic_type->name : 'None'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('post_skin_assessment_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->post_skin_assessment ? $element->post_skin_assessment->name : 'None'?></div></div>
 		</div>
+		<?php if ($element->post_skin_assessment->name == 'Other (please specify)') {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('post_skin_assessment_other'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->post_skin_assessment_other)?></div></div>
+			</div>
+		<?php }?>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('viscoelastic_quantity_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->viscoelastic_quantity ? $element->viscoelastic_quantity->name : 'None'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('nasal_throat_pack'))?>:</div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->nasal_throat_pack ? 'Yes' : 'No'?></div></div>
 		</div>
+		<?php if ($element->nasal_throat_pack) {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('nasal_insert_time'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->nasal_insert_time)?></div></div>
+			</div>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('nasal_remove_time'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->nasal_remove_time)?></div></div>
+			</div>
+		<?php }?>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('grounding_pad'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->grounding_pad ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('grounding_pad_location_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->grounding_pad_location ? $element->grounding_pad_location->name : 'None'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('grounding_pad_side_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->grounding_pad_side ? $element->grounding_pad_side->name : 'None'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('post_skin_assessment_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->post_skin_assessment ? $element->post_skin_assessment->name : 'None'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('post_skin_assessment_other'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->post_skin_assessment_other)?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('nasal_throat_pack'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->nasal_throat_pack ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('nasal_insert_time'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->nasal_insert_time)?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('nasal_remove_time'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->nasal_remove_time)?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('additional'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php if (!$element->additionals) {?>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('additional'))?>:</div></div>
+			<div class="large-9 column end"><div class="data-value"><?php if (!$element->additionals) {?>
 							None
 						<?php } else {?>
 								<?php foreach ($element->additionals as $item) {
@@ -95,9 +105,11 @@
 						<?php }?>
 			</div></div>
 		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('additional_other'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->additional_other)?></div></div>
-		</div>
+		<?php if ($element->hasMultiSelectValue('additionals','Other (please specify)')) {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('additional_other'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->additional_other)?></div></div>
 			</div>
+		<?php }?>
+	</div>
 </section>

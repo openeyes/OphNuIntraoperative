@@ -102,5 +102,10 @@ class Element_OphNuIntraoperative_OperationPrep_Additional_Assignment extends Ba
 			'criteria' => $criteria,
 		));
 	}
+
+	public function getName()
+	{
+		return $this->ophnuintraoperative_operationprep_additional->name;
+	}
 }
 ?>

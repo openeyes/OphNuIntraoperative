@@ -23,48 +23,52 @@
 		<h3 class="element-title"><?php echo $element->elementType->name?></h3>
 	</header>
 
-		<div class="element-data">
-				<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('specimin_collected_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->specimin_collected ? $element->specimin_collected->name : 'None'?></div></div>
-		</div>
+	<div class="element-data">
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('specimin_comments'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->specimin_comments)?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('specimin_collected_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->specimin_collected ? $element->specimin_collected->name : 'None'?></div></div>
 		</div>
+		<?php if ($element->specimin_collected->name == 'Yes') {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('specimin_comments'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->specimin_comments)?></div></div>
+			</div>
+		<?php }?>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('dressing_used'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->dressing_used ? 'Yes' : 'No'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('dressing_used'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->dressing_used ? 'Yes' : 'No'?></div></div>
 		</div>
+		<?php if ($element->dressing_used) {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('dressing_items'))?>:</div></div>
+				<div class="large-9 column end"><div class="data-value"><?php if (!$element->dressing_itemss) {?>
+								None
+							<?php } else {?>
+									<?php foreach ($element->dressing_itemss as $item) {
+										echo $item->ophnuintraoperative_postop_dressing_items->name?><br/>
+									<?php }?>
+							<?php }?>
+				</div></div>
+			</div>
+		<?php }?>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('dressing_items'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php if (!$element->dressing_itemss) {?>
-							None
-						<?php } else {?>
-								<?php foreach ($element->dressing_itemss as $item) {
-									echo $item->ophnuintraoperative_postop_dressing_items->name?><br/>
-								<?php }?>
-						<?php }?>
-			</div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('procedures_performed'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php if (!$element->procedures_performeds) {?>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('procedures_performed'))?>:</div></div>
+			<div class="large-9 column end"><div class="data-value"><?php if (!$element->procedures_performeds) {?>
 							None
 						<?php } else {?>
 								<?php foreach ($element->procedures_performeds as $item) {
-									echo $item->proc->name?><br/>
+									echo $item->proc->term?><br/>
 								<?php }?>
 						<?php }?>
 			</div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('circulating_nurse_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->circulating_nurse ? $element->circulating_nurse->first_name : 'None'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('circulating_nurse_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->circulating_nurse ? $element->circulating_nurse->first_name : 'None'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('scrub_nurse_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->scrub_nurse ? $element->scrub_nurse->first_name : 'None'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('scrub_nurse_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->scrub_nurse ? $element->scrub_nurse->first_name : 'None'?></div></div>
 		</div>
-			</div>
+	</div>
 </section>

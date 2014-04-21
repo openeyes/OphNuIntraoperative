@@ -36,7 +36,7 @@
 		<?php $form->widget('application.widgets.ProcedureSelection',array(
 			'element' => $element,
 			'durations' => false,
-			'relation' => 'procedures_performeds',
+			'relation' => 'procedures',
 			'procedureListPosition' => 'vertical',
 			'layoutColumns' => array(
 				'label' => 3,

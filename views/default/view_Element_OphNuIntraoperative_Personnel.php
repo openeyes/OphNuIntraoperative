@@ -23,54 +23,62 @@
 		<h3 class="element-title"><?php echo $element->elementType->name?></h3>
 	</header>
 
-		<div class="element-data">
-				<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('surgeon_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->surgeon ? $element->surgeon->first_name : 'None'?></div></div>
+	<div class="element-data">
+		<div class="row data-row">
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('surgeon_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->surgeon ? $element->surgeon->fullName : 'None'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('scrub_nurse_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->scrub_nurse ? $element->scrub_nurse->first_name : 'None'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('scrub_nurse_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->scrub_nurse ? $element->scrub_nurse->fullName : 'None'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('surgical_assistant_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->surgical_assistant ? $element->surgical_assistant->first_name : 'None'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('surgical_assistant_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->surgical_assistant ? $element->surgical_assistant->fullName : 'None'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('trainee_scrub_nurse_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->trainee_scrub_nurse ? $element->trainee_scrub_nurse-> : 'None'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('trainee_scrub_nurse_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->trainee_scrub_nurse ? $element->trainee_scrub_nurse->fullName : 'None'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('anesthesiologist_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->anesthesiologist ? $element->anesthesiologist-> : 'None'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('anesthesiologist_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->anesthesiologist ? $element->anesthesiologist->fullName : 'None'?></div></div>
 		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('trainee_circulating_nurse_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->trainee_circulating_nurse ? $element->trainee_circulating_nurse-> : 'None'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('anesthetic_assistant_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->anesthetic_assistant ? $element->anesthetic_assistant-> : 'None'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('translator'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->translator)?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('anesthetic_trainee_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->anesthetic_trainee ? $element->anesthetic_trainee->first_name : 'None'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('other'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->other)?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('who_timeout_completed'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->who_timeout_completed ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('time_out_lead_by_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->time_out_lead_by ? $element->time_out_lead_by->first_name : 'None'?></div></div>
-		</div>
+		<?php if ($element->trainee_circulating_nurse) {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('trainee_circulating_nurse_id'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo $element->trainee_circulating_nurse ? $element->trainee_circulating_nurse->fullName : 'None'?></div></div>
 			</div>
+		<?php }?>
+		<div class="row data-row">
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('anesthetic_assistant_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->anesthetic_assistant ? $element->anesthetic_assistant->fullName : 'None'?></div></div>
+		</div>
+		<?php if ($element->translator) {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('translator'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->translator)?></div></div>
+			</div>
+		<?php }?>
+		<?php if ($element->anesthetic_trainee) {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('anesthetic_trainee_id'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo $element->anesthetic_trainee ? $element->anesthetic_trainee->fullName : 'None'?></div></div>
+			</div>
+		<?php }?>
+		<?php if ($element->other) {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('other'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->other)?></div></div>
+			</div>
+		<?php }?>
+		<div class="row data-row">
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('who_timeout_completed'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->who_timeout_completed ? 'Yes' : 'No'?></div></div>
+		</div>
+		<div class="row data-row">
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('time_out_lead_by_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->time_out_lead_by ? $element->time_out_lead_by->fullName : 'None'?></div></div>
+		</div>
+	</div>
 </section>

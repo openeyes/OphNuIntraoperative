@@ -23,62 +23,74 @@
 		<h3 class="element-title"><?php echo $element->elementType->name?></h3>
 	</header>
 
-		<div class="element-data">
-				<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('intraocular_lens'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->intraocular_lens ? 'Yes' : 'No'?></div></div>
-		</div>
+	<div class="element-data">
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('iol_type_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->iol_type ? $element->iol_type->name : 'None'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('intraocular_lens'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->intraocular_lens ? 'Yes' : 'No'?></div></div>
 		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('iol_size_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->iol_size ? $element->iol_size->name : 'None'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('iol_comments'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->iol_comments)?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('ocular_sphere_ball'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->ocular_sphere_ball ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('ocular_sphere_ball_comments'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->ocular_sphere_ball_comments)?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('glaucoma_valve'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->glaucoma_valve ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('glaucoma_valve_comments'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->glaucoma_valve_comments)?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('lid_weights'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->lid_weights ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('lid_weight_comments'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->lid_weight_comments)?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('sutures'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->sutures ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('suture_comments'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->suture_comments)?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('drains'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->drains ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('drain_comments'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->drain_comments)?></div></div>
-		</div>
+		<?php if ($element->intraocular_lens) {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('iol_type_id'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo $element->iol_type ? $element->iol_type->name : 'None'?></div></div>
 			</div>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('iol_size_id'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo $element->iol_size ? $element->iol_size->name : 'None'?></div></div>
+			</div>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('iol_comments'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->iol_comments)?></div></div>
+			</div>
+		<?php }?>
+		<div class="row data-row">
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('ocular_sphere_ball'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->ocular_sphere_ball ? 'Yes' : 'No'?></div></div>
+		</div>
+		<?php if ($element->ocular_sphere_ball) {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('ocular_sphere_ball_comments'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->ocular_sphere_ball_comments)?></div></div>
+			</div>
+		<?php }?>
+		<div class="row data-row">
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('glaucoma_valve'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->glaucoma_valve ? 'Yes' : 'No'?></div></div>
+		</div>
+		<?php if ($element->glaucoma_valve) {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('glaucoma_valve_comments'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->glaucoma_valve_comments)?></div></div>
+			</div>
+		<?php }?>
+		<div class="row data-row">
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('lid_weights'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->lid_weights ? 'Yes' : 'No'?></div></div>
+		</div>
+		<?php if ($element->lid_weights) {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('lid_weight_comments'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->lid_weight_comments)?></div></div>
+			</div>
+		<?php }?>
+		<div class="row data-row">
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('sutures'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->sutures ? 'Yes' : 'No'?></div></div>
+		</div>
+		<?php if ($element->sutures) {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('suture_comments'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->suture_comments)?></div></div>
+			</div>
+		<?php }?>
+		<div class="row data-row">
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('drains'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->drains ? 'Yes' : 'No'?></div></div>
+		</div>
+		<?php if ($element->drains) {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('drain_comments'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->drain_comments)?></div></div>
+			</div>
+		<?php }?>
+	</div>
 </section>
