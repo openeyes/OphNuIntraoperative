@@ -75,7 +75,7 @@ class Element_OphNuIntraoperative_ImplantProsthesisScleral  extends  BaseEventTy
 	{
 		return array(
 			array('event_id, intraocular_lens, iol_type_id, iol_size_id, iol_comments, ocular_sphere_ball, ocular_sphere_ball_comments, glaucoma_valve, glaucoma_valve_comments, lid_weights, lid_weight_comments, sutures, suture_comments, drains, drain_comments, ', 'safe'),
-			array('intraocular_lens, iol_type_id, iol_size_id, iol_comments, ocular_sphere_ball, ocular_sphere_ball_comments, glaucoma_valve, glaucoma_valve_comments, lid_weights, lid_weight_comments, sutures, suture_comments, drains, drain_comments, ', 'required'),
+			array('intraocular_lens, ocular_sphere_ball, glaucoma_valve, lid_weights, sutures, drains', 'required'),
 			array('id, event_id, intraocular_lens, iol_type_id, iol_size_id, iol_comments, ocular_sphere_ball, ocular_sphere_ball_comments, glaucoma_valve, glaucoma_valve_comments, lid_weights, lid_weight_comments, sutures, suture_comments, drains, drain_comments, ', 'safe', 'on' => 'search'),
 		);
 	}
@@ -151,12 +151,25 @@ class Element_OphNuIntraoperative_ImplantProsthesisScleral  extends  BaseEventTy
 		));
 	}
 
-
-
-	protected function afterSave()
+	protected function beforeValidate()
 	{
+		if ($this->intraocular_lens) {
+			foreach (array('iol_type_id','iol_size_id','iol_comments') as $field) {
+				if (!$this->$field) {
+					$this->addError($field,$this->getAttributeLabel($field).' cannot be blank');
+				}
+			}
+		}
 
-		return parent::afterSave();
+		foreach (array('ocular_sphere_ball','glaucoma_valve','lid_weights','sutures','drains') as $field) {
+			if ($this->$field) {
+				if (!$this->{$field.'_comments'}) {
+					$this->addError($field.'_comments',$this->getAttributeLabel($field.'_comments').' cannot be blank');
+				}
+			}
+		}
+
+		return parent::beforeValidate();
 	}
 }
 ?>
