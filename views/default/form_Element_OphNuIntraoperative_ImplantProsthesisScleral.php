@@ -27,19 +27,19 @@
 	</header>
 
 	<div class="element-fields">
-		<?php echo $form->radioBoolean($element, 'intraocular_lens', array('class' => 'linked-fields', 'data-linked-fields' => 'iol_type_id,iol_size_id,iol_comments', 'data-linked-value' => 'Yes'), array('label' => 3, 'field' => 4))?>
+		<?php echo $form->radioBoolean($element, 'intraocular_lens', array('class' => 'linked-fields', 'data-linked-fields' => 'iol_type_id,iol_size_id,iol_comments', 'data-linked-values' => 'Yes'), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->dropDownList($element, 'iol_type_id', CHtml::listData(OphNuIntraoperative_ImplantProsthesisScleral_IolType::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'), !$element->intraocular_lens, array('label' => 3, 'field' => 4))?>
 		<?php echo $form->dropDownList($element, 'iol_size_id', CHtml::listData(OphNuIntraoperative_ImplantProsthesisScleral_IolSize::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'), !$element->intraocular_lens, array('label' => 3, 'field' => 4))?>
 		<?php echo $form->textArea($element, 'iol_comments', array(), !$element->intraocular_lens, array(), array('label' => 3, 'field' => 4))?>
-		<?php echo $form->radioBoolean($element, 'ocular_sphere_ball', array('class' => 'linked-fields', 'data-linked-fields' => 'ocular_sphere_ball_comments', 'data-linked-value' => 'Yes'), array('label' => 3, 'field' => 4))?>
+		<?php echo $form->radioBoolean($element, 'ocular_sphere_ball', array('class' => 'linked-fields', 'data-linked-fields' => 'ocular_sphere_ball_comments', 'data-linked-values' => 'Yes'), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->textArea($element, 'ocular_sphere_ball_comments', array(), !$element->ocular_sphere_ball, array(), array('label' => 3, 'field' => 4))?>
-		<?php echo $form->radioBoolean($element, 'glaucoma_valve', array('class' => 'linked-fields', 'data-linked-fields' => 'glaucoma_valve_comments', 'data-linked-value' => 'Yes'), array('label' => 3, 'field' => 4))?>
+		<?php echo $form->radioBoolean($element, 'glaucoma_valve', array('class' => 'linked-fields', 'data-linked-fields' => 'glaucoma_valve_comments', 'data-linked-values' => 'Yes'), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->textArea($element, 'glaucoma_valve_comments', array(), !$element->glaucoma_valve, array(), array('label' => 3, 'field' => 4))?>
-		<?php echo $form->radioBoolean($element, 'lid_weights', array('class' => 'linked-fields', 'data-linked-fields' => 'lid_weight_comments', 'data-linked-value' => 'Yes'), array('label' => 3, 'field' => 4))?>
+		<?php echo $form->radioBoolean($element, 'lid_weights', array('class' => 'linked-fields', 'data-linked-fields' => 'lid_weight_comments', 'data-linked-values' => 'Yes'), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->textArea($element, 'lid_weight_comments', array(), !$element->lid_weights, array(), array('label' => 3, 'field' => 4))?>
-		<?php echo $form->radioBoolean($element, 'sutures', array('class' => 'linked-fields', 'data-linked-fields' => 'suture_comments', 'data-linked-value' => 'Yes'), array('label' => 3, 'field' => 4))?>
+		<?php echo $form->radioBoolean($element, 'sutures', array('class' => 'linked-fields', 'data-linked-fields' => 'suture_comments', 'data-linked-values' => 'Yes'), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->textArea($element, 'suture_comments', array(), !$element->sutures, array(), array('label' => 3, 'field' => 4))?>
-		<?php echo $form->radioBoolean($element, 'drains', array('class' => 'linked-fields', 'data-linked-fields' => 'drain_comments', 'data-linked-value' => 'Yes'), array('label' => 3, 'field' => 4))?>
+		<?php echo $form->radioBoolean($element, 'drains', array('class' => 'linked-fields', 'data-linked-fields' => 'drain_comments', 'data-linked-values' => 'Yes'), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->textArea($element, 'drain_comments', array(), !$element->drains, array(), array('label' => 3, 'field' => 4))?>
 	</div>
 </section>
