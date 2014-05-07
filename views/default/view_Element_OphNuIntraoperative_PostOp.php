@@ -38,19 +38,17 @@
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('dressing_used'))?></div></div>
 			<div class="large-9 column end"><div class="data-value"><?php echo $element->dressing_used ? 'Yes' : 'No'?></div></div>
 		</div>
-		<?php if ($element->dressing_used) {?>
-			<div class="row data-row">
-				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('dressing_items'))?>:</div></div>
-				<div class="large-9 column end"><div class="data-value"><?php if (!$element->dressing_itemss) {?>
-								None
-							<?php } else {?>
-									<?php foreach ($element->dressing_itemss as $item) {
-										echo $item->ophnuintraoperative_postop_dressing_items->name?><br/>
-									<?php }?>
-							<?php }?>
-				</div></div>
-			</div>
-		<?php }?>
+		<div class="row data-row">
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('dressing_items'))?>:</div></div>
+			<div class="large-9 column end"><div class="data-value"><?php if (!$element->dressing_itemss) {?>
+							No dressing used
+						<?php } else {?>
+								<?php foreach ($element->dressing_itemss as $item) {
+									echo $item->ophnuintraoperative_postop_dressing_items->name?><br/>
+								<?php }?>
+						<?php }?>
+			</div></div>
+		</div>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('procedures_performed'))?>:</div></div>
 			<div class="large-9 column end"><div class="data-value"><?php if (!$element->procedures_performeds) {?>
