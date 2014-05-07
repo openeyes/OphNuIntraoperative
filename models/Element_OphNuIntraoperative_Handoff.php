@@ -105,7 +105,7 @@ class Element_OphNuIntraoperative_Handoff  extends  BaseEventTypeElement
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'wristband_verified' => 'Patient ID verified with two identifiers',
+			'wristband_verified' => 'Patient ID/wristband verified with two identifiers',
 			'two_identifiers' => 'Two identifiers',
 			'allergies_verified' => 'Allergies verified',
 			'hand_off_from_id' => 'Hand off from',
