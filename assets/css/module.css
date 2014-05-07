@@ -33,3 +33,13 @@
 .Element_OphNuIntraoperative_TimeTracking input {
   width: 4em;
 }
+
+/* line 33, ../sass/components/_event.scss */
+#Element_OphNuIntraoperative_OperationPrep_nasal_insert_time {
+  width: 4.7em;
+}
+
+/* line 37, ../sass/components/_event.scss */
+#Element_OphNuIntraoperative_OperationPrep_nasal_remove_time {
+  width: 4.7em;
+}

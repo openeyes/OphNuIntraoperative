@@ -41,8 +41,36 @@
 		<?php echo $form->dropDownList($element, 'post_skin_assessment_id', CHtml::listData(OphNuIntraoperative_OperationPrep_PostSkinAssessment::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -','class' => 'linked-fields', 'data-linked-fields' => 'post_skin_assessment_other', 'data-linked-values' => 'Other (please specify)'),false,array('label'=>3,'field'=>4))?>
 		<?php echo $form->textArea($element, 'post_skin_assessment_other', array(), !$element->post_skin_assessment || $element->post_skin_assessment->name != 'Other (please specify)', array(), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->radioBoolean($element, 'nasal_throat_pack', array('class' => 'linked-fields', 'data-linked-fields' => 'nasal_insert_time,nasal_remove_time', 'data-linked-values' => 'Yes'), array('label' => 3, 'field' => 4))?>
-		<?php echo $form->textField($element, 'nasal_insert_time', array('hide' => !$element->nasal_throat_pack), array(), array('label' => 3, 'field' => 1))?>
-		<?php echo $form->textField($element, 'nasal_remove_time', array('hide' => !$element->nasal_throat_pack), array(), array('label' => 3, 'field' => 1))?>
+		<div id="div_Element_OphNuIntraoperative_OperationPrep_nasal_insert_time" class="row field-row"<?php if (!$element->nasal_throat_pack) {?> style="display: none"<?php }?>>
+			<div class="large-3 column">
+				<label for="Element_OphNuIntraoperative_OperationPrep_nasal_insert_time"><?php echo $element->getAttributeLabel('nasal_throat_pack')?>:</label>
+			</div>
+			<div class="large-9 column">
+				<div class="row field-row">
+					<div class="large-1 column">
+						<?php echo $form->textField($element, 'nasal_insert_time', array('nowrapper' => true), array(), array('label' => 3, 'field' => 1))?>
+					</div>
+					<div class="large-2 column end">
+						<button type="submit" class="secondary small time-now" data-target="nasal_insert_time">Now</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="div_Element_OphNuIntraoperative_OperationPrep_nasal_remove_time" class="row field-row"<?php if (!$element->nasal_throat_pack) {?> style="display: none"<?php }?>>
+			<div class="large-3 column">
+				<label for="Element_OphNuIntraoperative_OperationPrep_nasal_remove_time"><?php echo $element->getAttributeLabel('nasal_throat_pack')?>:</label>
+			</div>
+			<div class="large-9 column">
+				<div class="row field-row">
+					<div class="large-1 column">
+						<?php echo $form->textField($element, 'nasal_remove_time', array('nowrapper' => true), array(), array('label' => 3, 'field' => 1))?>
+					</div>
+					<div class="large-2 column end">
+						<button type="submit" class="secondary small time-now" data-target="nasal_remove_time">Now</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<?php echo $form->multiSelectList($element, 'MultiSelect_additional', 'additionals', 'ophnuintraoperative_operationprep_additional_id', CHtml::listData(OphNuIntraoperative_OperationPrep_Additional::model()->findAll(array('order'=>'display_order asc')),'id','name'), array(), array('empty' => '- Please select -', 'label' => 'Additional','class' => 'linked-fields', 'data-linked-fields' => 'additional_other', 'data-linked-values' => 'Other (please specify)'), false,false,null,false,false,array('label' => 3, 'field' => 4))?>
 		<?php echo $form->textArea($element, 'additional_other', array(), !$element->hasMultiSelectValue('additionals','Other (please specify)'), array(), array('label' => 3, 'field' => 4))?>
 	</div>

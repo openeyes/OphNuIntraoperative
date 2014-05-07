@@ -52,7 +52,7 @@ $(document).ready(function() {
 			m = '0'+m;
 		}
 
-		$('#Element_OphNuIntraoperative_TimeTracking_'+$(this).data('target')).val(h+':'+m);
+		$('input[type="text"][id$="'+$(this).data('target')+'"]').val(h+':'+m);
 	});
 
 	$('#Element_OphNuIntraoperative_SurgicalCounts_count_discrepancies').click(function() {
