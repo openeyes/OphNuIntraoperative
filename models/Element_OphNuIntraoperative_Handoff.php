@@ -105,7 +105,7 @@ class Element_OphNuIntraoperative_Handoff  extends  BaseEventTypeElement
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'wristband_verified' => 'Wristband verified',
+			'wristband_verified' => 'Patient ID verified with two identifiers',
 			'two_identifiers' => 'Two identifiers',
 			'allergies_verified' => 'Allergies verified',
 			'hand_off_from_id' => 'Hand off from',
@@ -148,8 +148,10 @@ class Element_OphNuIntraoperative_Handoff  extends  BaseEventTypeElement
 			}
 		}
 
-		if (empty($this->two_identifierss) || count($this->two_identifierss) != 2) {
-			$this->addError('two_identifierss','You must select two patient identifiers from the list');
+		if ($this->wristband_verified) {
+			if (count($this->two_identifierss) != 2) {
+				$this->addError('two_identifierss','Please select exactly two patient identifiers');
+			}
 		}
 
 		return parent::beforeValidate();
