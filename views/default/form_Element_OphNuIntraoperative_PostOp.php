@@ -41,7 +41,8 @@
 				'label' => 3,
 				'field' => 4,
 				'procedures' => 6,
-			)
+			),
+			'label' => 'Actual procedures performed',
 		))?>
 		<?php echo $form->dropDownList($element, 'circulating_nurse_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc,last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false,array('label'=>3,'field'=>4))?>
 		<?php echo $form->dropDownList($element, 'scrub_nurse_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc,last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false,array('label'=>3,'field'=>4))?>

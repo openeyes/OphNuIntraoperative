@@ -107,7 +107,7 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 			'specimin_comments' => 'Specimin comments',
 			'dressing_items' => 'Dressing items',
 			'dressing_other' => 'Other dressing',
-			'procedures_performed' => 'Procedures performed',
+			'procedures_performed' => 'Actual procedures performed',
 			'circulating_nurse_id' => 'Circulating nurse',
 			'scrub_nurse_id' => 'Scrub nurse',
 		);
