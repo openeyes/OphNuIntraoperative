@@ -28,7 +28,7 @@
 	</header>
 
 	<div class="element-fields">
-		<?php echo $form->radioButtons($element, 'incision_site_id', CHtml::listData(OphNuIntraoperative_OperationPrep_IncisionSite::model()->findAll(array('order'=>'display_order asc')),'id','name'), null, false, false, false, false, array(), array('label' => 3,'field' => 9))?>
+		<?php echo $form->dropDownList($element, 'incision_site_id', CHtml::listData(OphNuIntraoperative_OperationPrep_IncisionSite::model()->findAll(array('order'=>'display_order asc')),'id','name'), array('empty'=>'- Please select -'), false,array('label'=>3,'field'=>4))?>
 		<?php echo $form->checkBox($element, 'patient_in_sulpine_position', array('text-align'=>'right'), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->dropDownList($element, 'prep_solution_id', CHtml::listData(OphNuIntraoperative_OperationPrep_PrepSolution::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -','class' => 'linked-fields', 'data-linked-fields' => 'other_solution','data-linked-values' => 'Other (please specify)'),false,array('label'=>3,'field'=>4))?>
 		<?php echo $form->textArea($element, 'other_solution', array(), !$element->prep_solution || $element->prep_solution->name != 'Other (please specify)', array(), array('label' => 3, 'field' => 4))?>
