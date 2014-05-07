@@ -62,7 +62,6 @@ class Element_OphNuIntraoperative_SurgicalCounts  extends  BaseEventTypeElement
 	{
 		return array(
 			array('event_id, count_discrepancies, surgeon_notified, comments, needles1, needles2, needles3, blades1, blades2, blades3, plugs1, plugs2, plugs3, trocars1, trocars2, trocars3, sponges_gauze1, sponges_gauze2, sponges_gauze3, pledgetts1, pledgetts2, pledgetts3', 'safe'),
-			array('count_discrepancies, surgeon_notified, needles1, needles2, needles3, blades1, blades2, blades3, plugs1, plugs2, plugs3, trocars1, trocars2, trocars3, sponges_gauze1, sponges_gauze2, sponges_gauze3, pledgetts1, pledgetts2, pledgetts3', 'required'),
 			array('id, event_id, count_discrepancies, surgeon_notified, comments, ', 'safe', 'on' => 'search'),
 		);
 	}

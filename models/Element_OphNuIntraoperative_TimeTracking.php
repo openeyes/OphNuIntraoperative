@@ -67,7 +67,6 @@ class Element_OphNuIntraoperative_TimeTracking  extends  BaseEventTypeElement
 	{
 		return array(
 			array('event_id, enters_or, surgery_stop, time_out, second_surgery_stop, surgery_start, sign_out, second_surgery_start, leaves_or, ', 'safe'),
-			array('enters_or, surgery_stop, time_out, second_surgery_stop, surgery_start, sign_out, second_surgery_start, leaves_or, ', 'required'),
 			array('id, event_id, enters_or, surgery_stop, time_out, second_surgery_stop, surgery_start, sign_out, second_surgery_start, leaves_or, ', 'safe', 'on' => 'search'),
 		);
 	}

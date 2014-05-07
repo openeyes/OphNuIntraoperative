@@ -23,38 +23,38 @@
 		<h3 class="element-title"><?php echo $element->elementType->name?></h3>
 	</header>
 
-		<div class="element-data">
-				<div class="row data-row">
+	<div class="element-data">
+		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('enters_or'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->enters_or)?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->enters_or ? $element->enters_or : 'Not recorded')?></div></div>
 		</div>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('surgery_stop'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->surgery_stop)?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->surgery_stop ? $element->surgery_stop : 'Not recorded')?></div></div>
 		</div>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('time_out'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->time_out)?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->time_out ? $element->time_out : 'Not recorded')?></div></div>
 		</div>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('second_surgery_stop'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->second_surgery_stop)?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->second_surgery_stop ? $element->second_surgery_stop : 'Not recorded')?></div></div>
 		</div>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('surgery_start'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->surgery_start)?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->surgery_start ? $element->surgery_start : 'Not recorded')?></div></div>
 		</div>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('sign_out'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->sign_out)?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->sign_out ? $element->sign_out : 'Not recorded')?></div></div>
 		</div>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('second_surgery_start'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->second_surgery_start)?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->second_surgery_start ? $element->second_surgery_start : 'Not recorded')?></div></div>
 		</div>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('leaves_or'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->leaves_or)?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->leaves_or ? $element->leaves_or : 'Not recorded')?></div></div>
 		</div>
-			</div>
+	</div>
 </section>

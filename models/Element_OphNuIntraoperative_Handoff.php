@@ -72,7 +72,6 @@ class Element_OphNuIntraoperative_Handoff  extends  BaseEventTypeElement
 	{
 		return array(
 			array('event_id, wristband_verified, allergies_verified, hand_off_from_id, hand_off_to_id, anesthesia_type_id, nonoperative_eye_protected_id, tape_or_shield_id, ', 'safe'),
-			array('wristband_verified, allergies_verified, hand_off_from_id, hand_off_to_id, anesthesia_type_id, nonoperative_eye_protected_id', 'required'),
 			array('id, event_id, wristband_verified, allergies_verified, hand_off_from_id, hand_off_to_id, anesthesia_type_id, nonoperative_eye_protected_id, tape_or_shield_id, ', 'safe', 'on' => 'search'),
 		);
 	}

@@ -70,7 +70,6 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 	{
 		return array(
 			array('event_id, specimin_collected_id, specimin_comments, dressing_other, circulating_nurse_id, scrub_nurse_id, ', 'safe'),
-			array('specimin_collected_id, circulating_nurse_id, scrub_nurse_id', 'required'),
 			array('id, event_id, specimin_collected_id, specimin_comments, circulating_nurse_id, scrub_nurse_id, ', 'safe', 'on' => 'search'),
 		);
 	}
@@ -147,10 +146,6 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 			if (!$this->dressing_other) {
 				$this->addError('dressing_other',$this->getAttributeLabel('dressing_other').' cannot be blank');
 			}
-		}
-
-		if (empty($this->procedures_performeds)) {
-			$this->addError('procedures_performeds','Please enter at least one procedure');
 		}
 
 		return parent::beforeValidate();

@@ -61,7 +61,7 @@
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('nonoperative_eye_protected_id'))?></div></div>
 			<div class="large-9 column end"><div class="data-value"><?php echo $element->nonoperative_eye_protected ? $element->nonoperative_eye_protected->name : 'None'?></div></div>
 		</div>
-		<?php if ($element->nonoperative_eye_protected->name == 'Yes') {?>
+		<?php if ($element->nonoperative_eye_protected && $element->nonoperative_eye_protected->name == 'Yes') {?>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('tape_or_shield_id'))?></div></div>
 				<div class="large-9 column end"><div class="data-value"><?php echo $element->tape_or_shield ? $element->tape_or_shield->name : 'None'?></div></div>

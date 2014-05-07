@@ -83,7 +83,6 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 	{
 		return array(
 			array('event_id, incision_site_id, patient_in_sulpine_position, prep_solution_id, other_solution, viscoelastic, viscoelastic_type_id, viscoelastic_quantity_id, grounding_pad, grounding_pad_location_id, grounding_pad_side_id, post_skin_assessment_id, post_skin_assessment_other, nasal_throat_pack, nasal_insert_time, nasal_remove_time, additional_other, ', 'safe'),
-			array('incision_site_id, patient_in_sulpine_position, prep_solution_id, viscoelastic, grounding_pad, nasal_throat_pack', 'required'),
 			array('id, event_id, incision_site_id, patient_in_sulpine_position, prep_solution_id, other_solution, viscoelastic, viscoelastic_type_id, viscoelastic_quantity_id, grounding_pad, grounding_pad_location_id, grounding_pad_side_id, post_skin_assessment_id, post_skin_assessment_other, nasal_throat_pack, nasal_insert_time, nasal_remove_time, additional_other, ', 'safe', 'on' => 'search'),
 		);
 	}
