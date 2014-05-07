@@ -24,6 +24,50 @@
 	</header>
 
 	<div class="element-data">
+		<table class="eventDetail preoperativeChecklist">
+			<tr>
+				<th>COUNTABLE ITEMS</th>
+				<th>First count</th>
+				<th>Second count / sign out</th>
+				<th>Final count</th>
+			</tr>
+			<tr>
+				<th>Needles</th>
+				<td><?php echo $element->needles1?></td>
+				<td><?php echo $element->needles2?></td>
+				<td><?php echo $element->needles3?></td>
+			</tr>
+			<tr>
+				<th>Blades</th>
+				<td><?php echo $element->blades1?></td>
+				<td><?php echo $element->blades2?></td>
+				<td><?php echo $element->blades3?></td>
+			</tr>
+			<tr>
+				<th>Plugs</th>
+				<td><?php echo $element->plugs1?></td>
+				<td><?php echo $element->plugs2?></td>
+				<td><?php echo $element->plugs3?></td>
+			</tr>
+			<tr>
+				<th>Trocars</th>
+				<td><?php echo $element->trocars1?></td>
+				<td><?php echo $element->trocars2?></td>
+				<td><?php echo $element->trocars3?></td>
+			</tr>
+			<tr>
+				<th>Sponges/Gauze</th>
+				<td><?php echo $element->sponges_gauze1?></td>
+				<td><?php echo $element->sponges_gauze2?></td>
+				<td><?php echo $element->sponges_gauze3?></td>
+			</tr>
+			<tr>
+				<th>Pledgetts</th>
+				<td><?php echo $element->pledgetts1?></td>
+				<td><?php echo $element->pledgetts2?></td>
+				<td><?php echo $element->pledgetts3?></td>
+			</tr>
+		</table>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('count_discrepancies'))?></div></div>
 			<div class="large-9 column end"><div class="data-value"><?php echo $element->count_discrepancies ? 'Yes' : 'No'?></div></div>
