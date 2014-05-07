@@ -41,5 +41,7 @@
 		<?php echo $form->textArea($element, 'suture_comments', array(), !$element->sutures, array(), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->radioBoolean($element, 'drains', array('class' => 'linked-fields', 'data-linked-fields' => 'drain_comments', 'data-linked-values' => 'Yes'), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->textArea($element, 'drain_comments', array(), !$element->drains, array(), array('label' => 3, 'field' => 4))?>
+		<?php echo $form->radioBoolean($element, 'other', array('class' => 'linked-fields', 'data-linked-fields' => 'other_comments', 'data-linked-values' => 'Yes'), array('label' => 3, 'field' => 4))?>
+		<?php echo $form->textArea($element, 'other_comments', array(), !$element->other, array(), array('label' => 3, 'field' => 4))?>
 	</div>
 </section>

@@ -92,5 +92,15 @@
 				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->drain_comments)?></div></div>
 			</div>
 		<?php }?>
+		<div class="row data-row">
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('other'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->other ? 'Yes' : 'No'?></div></div>
+		</div>
+		<?php if ($element->other) {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('other_comments'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->other_comments)?></div></div>
+			</div>
+		<?php }?>
 	</div>
 </section>

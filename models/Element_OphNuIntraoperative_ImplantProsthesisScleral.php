@@ -74,8 +74,8 @@ class Element_OphNuIntraoperative_ImplantProsthesisScleral  extends  BaseEventTy
 	public function rules()
 	{
 		return array(
-			array('event_id, intraocular_lens, iol_type_id, iol_size_id, iol_comments, ocular_sphere_ball, ocular_sphere_ball_comments, glaucoma_valve, glaucoma_valve_comments, lid_weights, lid_weight_comments, sutures, suture_comments, drains, drain_comments, ', 'safe'),
-			array('intraocular_lens, ocular_sphere_ball, glaucoma_valve, lid_weights, sutures, drains', 'required'),
+			array('event_id, intraocular_lens, iol_type_id, iol_size_id, iol_comments, ocular_sphere_ball, ocular_sphere_ball_comments, glaucoma_valve, glaucoma_valve_comments, lid_weights, lid_weight_comments, sutures, suture_comments, drains, drain_comments, other, other_comments', 'safe'),
+			array('intraocular_lens, ocular_sphere_ball, glaucoma_valve, lid_weights, sutures, drains, other', 'required'),
 			array('id, event_id, intraocular_lens, iol_type_id, iol_size_id, iol_comments, ocular_sphere_ball, ocular_sphere_ball_comments, glaucoma_valve, glaucoma_valve_comments, lid_weights, lid_weight_comments, sutures, suture_comments, drains, drain_comments, ', 'safe', 'on' => 'search'),
 		);
 	}
@@ -118,6 +118,7 @@ class Element_OphNuIntraoperative_ImplantProsthesisScleral  extends  BaseEventTy
 			'suture_comments' => 'Suture comments',
 			'drains' => 'Drains',
 			'drain_comments' => 'Drain comments',
+			'other_comments' => 'Other comments',
 		);
 	}
 
