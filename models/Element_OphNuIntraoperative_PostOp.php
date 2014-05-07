@@ -69,9 +69,9 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, specimin_collected_id, specimin_comments, dressing_used, dressing_other, circulating_nurse_id, scrub_nurse_id, ', 'safe'),
-			array('specimin_collected_id, dressing_used, circulating_nurse_id, scrub_nurse_id', 'required'),
-			array('id, event_id, specimin_collected_id, specimin_comments, dressing_used, circulating_nurse_id, scrub_nurse_id, ', 'safe', 'on' => 'search'),
+			array('event_id, specimin_collected_id, specimin_comments, dressing_other, circulating_nurse_id, scrub_nurse_id, ', 'safe'),
+			array('specimin_collected_id, circulating_nurse_id, scrub_nurse_id', 'required'),
+			array('id, event_id, specimin_collected_id, specimin_comments, circulating_nurse_id, scrub_nurse_id, ', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -105,7 +105,6 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 			'event_id' => 'Event',
 			'specimin_collected_id' => 'Specimin collected',
 			'specimin_comments' => 'Specimin comments',
-			'dressing_used' => 'Dressing used',
 			'dressing_items' => 'Dressing items',
 			'dressing_other' => 'Other dressing',
 			'procedures_performed' => 'Procedures performed',
@@ -126,7 +125,6 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 		$criteria->compare('event_id', $this->event_id, true);
 		$criteria->compare('specimin_collected_id', $this->specimin_collected_id);
 		$criteria->compare('specimin_comments', $this->specimin_comments);
-		$criteria->compare('dressing_used', $this->dressing_used);
 		$criteria->compare('dressing_items', $this->dressing_items);
 		$criteria->compare('procedures_performed', $this->procedures_performed);
 		$criteria->compare('circulating_nurse_id', $this->circulating_nurse_id);
@@ -145,15 +143,9 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 			}
 		}
 
-		if ($this->dressing_used) {
-			if (empty($this->dressing_itemss)) {
-				$this->addError('dressing_itemss','Please specify at least one dressing item');
-			} else {
-				if ($this->hasMultiSelectValue('dressing_itemss','Other (please specify)')) {
-					if (!$this->dressing_other) {
-						$this->addError('dressing_other',$this->getAttributeLabel('dressing_other').' cannot be blank');
-					}
-				}
+		if ($this->hasMultiSelectValue('dressing_itemss','Other (please specify)')) {
+			if (!$this->dressing_other) {
+				$this->addError('dressing_other',$this->getAttributeLabel('dressing_other').' cannot be blank');
 			}
 		}
 

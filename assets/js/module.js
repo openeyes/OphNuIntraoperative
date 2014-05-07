@@ -54,18 +54,6 @@ $(document).ready(function() {
 
 		$('input[type="text"][id$="'+$(this).data('target')+'"]').val(h+':'+m);
 	});
-
-	$('#Element_OphNuIntraoperative_SurgicalCounts_count_discrepancies').click(function() {
-		if ($(this).is(':checked')) {
-			$('#div_Element_OphNuIntraoperative_SurgicalCounts_surgeon_notified').show();
-			$('#div_Element_OphNuIntraoperative_SurgicalCounts_comments').show();
-		} else {
-			$('#div_Element_OphNuIntraoperative_SurgicalCounts_surgeon_notified').hide();
-			$('#div_Element_OphNuIntraoperative_SurgicalCounts_comments').hide();
-			$('#Element_OphNuIntraoperative_SurgicalCounts_surgeon_notified').removeAttr('checked');
-			$('#div_Element_OphNuIntraoperative_SurgicalCounts_comments').val('');
-		}
-	});
 });
 
 function ucfirst(str) { str += ''; var f = str.charAt(0).toUpperCase(); return f + str.substr(1); }

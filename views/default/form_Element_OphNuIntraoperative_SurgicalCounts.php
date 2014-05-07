@@ -73,7 +73,7 @@
 			</tr>
 		</table>
 
-		<?php echo $form->checkBox($element, 'count_discrepancies', array('text-align' => 'right'), array('label' => 3, 'field' => 4))?>
+		<?php echo $form->radioBoolean($element, 'count_discrepancies', array('class'=>'linked-fields','data-linked-fields'=>'surgeon_notified,comments','data-linked-values'=>'Yes'), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->checkBox($element, 'surgeon_notified', array('text-align' => 'right', 'hide' => !$element->count_discrepancies), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->textArea($element, 'comments', array(), !$element->count_discrepancies, array(), array('label' => 3, 'field' => 4))?>
 	</div>
