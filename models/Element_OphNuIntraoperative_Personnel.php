@@ -79,7 +79,7 @@ class Element_OphNuIntraoperative_Personnel  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, surgeon_id, scrub_nurse_id, surgical_assistant_id, trainee_scrub_nurse_id, anesthesiologist_id, trainee_circulating_nurse_id, anesthetic_assistant_id, translator, anesthetic_trainee_id, other, who_timeout_completed, time_out_lead_by_id, ', 'safe'),
+			array('event_id, surgeon_id, scrub_nurse_id, surgical_assistant_id, trainee_scrub_nurse_id, anesthesiologist_id, trainee_circulating_nurse_id, anesthetic_assistant_id, translator, anesthetic_trainee_id, other, who_timeout_completed, time_out_lead_by_id, second_surgical_assistant_id, circulating_nurse_id', 'safe'),
 			array('surgeon_id, scrub_nurse_id, surgical_assistant_id, anesthesiologist_id, anesthetic_assistant_id, who_timeout_completed, time_out_lead_by_id, ', 'required'),
 			array('id, event_id, surgeon_id, scrub_nurse_id, surgical_assistant_id, trainee_scrub_nurse_id, anesthesiologist_id, trainee_circulating_nurse_id, anesthetic_assistant_id, translator, anesthetic_trainee_id, other, who_timeout_completed, time_out_lead_by_id, ', 'safe', 'on' => 'search'),
 		);
@@ -105,6 +105,8 @@ class Element_OphNuIntraoperative_Personnel  extends  BaseEventTypeElement
 			'anesthetic_assistant' => array(self::BELONGS_TO, 'User', 'anesthetic_assistant_id'),
 			'anesthetic_trainee' => array(self::BELONGS_TO, 'User', 'anesthetic_trainee_id'),
 			'time_out_lead_by' => array(self::BELONGS_TO, 'User', 'time_out_lead_by_id'),
+			'second_surgical_assistant' => array(self::BELONGS_TO, 'User', 'second_surgical_assistant_id'),
+			'circulating_nurse_id' => array(self::BELONGS_TO, 'User', 'circulating_nurse_id'),
 		);
 	}
 
@@ -128,6 +130,8 @@ class Element_OphNuIntraoperative_Personnel  extends  BaseEventTypeElement
 			'other' => 'Other',
 			'who_timeout_completed' => 'WHO timeout completed',
 			'time_out_lead_by_id' => 'Time out lead by',
+			'second_surgical_assistant_id' => 'Second surgical assistant',
+			'circulating_nurse_id' => 'Circulating nurse',
 		);
 	}
 

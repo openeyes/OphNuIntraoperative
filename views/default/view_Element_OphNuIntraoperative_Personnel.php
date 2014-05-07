@@ -37,6 +37,14 @@
 			<div class="large-9 column end"><div class="data-value"><?php echo $element->surgical_assistant ? $element->surgical_assistant->fullName : 'None'?></div></div>
 		</div>
 		<div class="row data-row">
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('second_surgical_assistant_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->second_surgical_assistant ? $element->second_surgical_assistant->fullName : 'None'?></div></div>
+		</div>
+		<div class="row data-row">
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('circulating_nurse_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->circulating_nurse ? $element->circulating_nurse->fullName : 'None'?></div></div>
+		</div>
+		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('trainee_scrub_nurse_id'))?></div></div>
 			<div class="large-9 column end"><div class="data-value"><?php echo $element->trainee_scrub_nurse ? $element->trainee_scrub_nurse->fullName : 'None'?></div></div>
 		</div>

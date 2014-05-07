@@ -56,6 +56,24 @@
 				<?php echo $form->dropDownList($element, 'surgical_assistant_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('nowrapper'=>true,'empty'=>'- Please select -'))?>
 			</div>
 			<div class="large-3 column">
+				<label for="Element_OphNuIntraoperative_Personnel_circulating_nurse_id">
+					<?php echo $element->getAttributeLabel('circulating_nurse_id')?>
+				</label>
+			</div>
+			<div class="large-3 column end">
+				<?php echo $form->dropDownList($element, 'circulating_nurse_id', CHtml::listData(User::model()->findAll(array('order'=> ' first_name asc,last_name asc')),'id','fullName'),array('nowrapper'=>true,'empty'=>'- Please select -'))?>
+			</div>
+		</div>
+		<div id="div_Element_OphNuIntraoperative_Personnel_second_surgical_assistant_id" class="row field-row">
+			<div class="large-3 column">
+				<label for="Element_OphNuIntraoperative_Personnel_second_surgical_assistant_id">
+					<?php echo $element->getAttributeLabel('second_surgical_assistant_id')?>:
+				</label>
+			</div>
+			<div class="large-3 column">
+				<?php echo $form->dropDownList($element, 'second_surgical_assistant_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('nowrapper'=>true,'empty'=>'- Please select -'))?>
+			</div>
+			<div class="large-3 column">
 				<label for="Element_OphNuIntraoperative_Personnel_trainee_scrub_nurse_id">
 					<?php echo $element->getAttributeLabel('trainee_scrub_nurse_id')?>
 				</label>
