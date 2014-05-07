@@ -69,11 +69,11 @@
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('grounding_pad_side_id'))?></div></div>
 				<div class="large-9 column end"><div class="data-value"><?php echo $element->grounding_pad_side ? $element->grounding_pad_side->name : 'None'?></div></div>
 			</div>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('post_skin_assessment_id'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo $element->post_skin_assessment ? $element->post_skin_assessment->name : 'None'?></div></div>
+			</div>
 		<?php }?>
-		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('post_skin_assessment_id'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->post_skin_assessment ? $element->post_skin_assessment->name : 'None'?></div></div>
-		</div>
 		<?php if ($element->post_skin_assessment->name == 'Other (please specify)') {?>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('post_skin_assessment_other'))?></div></div>
