@@ -129,7 +129,7 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 			'grounding_pad_side_id' => 'Grounding pad side',
 			'post_skin_assessment_id' => 'Post skin assessment',
 			'post_skin_assessment_other' => 'Post skin assessment other',
-			'nasal_throat_pack' => 'Nasal throat pack',
+			'nasal_throat_pack' => 'Nasal pack / throat pack',
 			'nasal_insert_time' => 'Inserted time',
 			'nasal_remove_time' => 'Removal time',
 			'additional' => 'Additional',
