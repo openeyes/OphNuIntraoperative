@@ -43,7 +43,7 @@
 		<?php echo $form->radioBoolean($element, 'nasal_throat_pack', array('class' => 'linked-fields', 'data-linked-fields' => 'nasal_insert_time,nasal_remove_time', 'data-linked-values' => 'Yes'), array('label' => 3, 'field' => 4))?>
 		<div id="div_Element_OphNuIntraoperative_OperationPrep_nasal_insert_time" class="row field-row"<?php if (!$element->nasal_throat_pack) {?> style="display: none"<?php }?>>
 			<div class="large-3 column">
-				<label for="Element_OphNuIntraoperative_OperationPrep_nasal_insert_time"><?php echo $element->getAttributeLabel('nasal_throat_pack')?>:</label>
+				<label for="Element_OphNuIntraoperative_OperationPrep_nasal_insert_time"><?php echo $element->getAttributeLabel('nasal_insert_time')?>:</label>
 			</div>
 			<div class="large-9 column">
 				<div class="row field-row">
@@ -58,7 +58,7 @@
 		</div>
 		<div id="div_Element_OphNuIntraoperative_OperationPrep_nasal_remove_time" class="row field-row"<?php if (!$element->nasal_throat_pack) {?> style="display: none"<?php }?>>
 			<div class="large-3 column">
-				<label for="Element_OphNuIntraoperative_OperationPrep_nasal_remove_time"><?php echo $element->getAttributeLabel('nasal_throat_pack')?>:</label>
+				<label for="Element_OphNuIntraoperative_OperationPrep_nasal_remove_time"><?php echo $element->getAttributeLabel('nasal_remove_time')?>:</label>
 			</div>
 			<div class="large-9 column">
 				<div class="row field-row">

@@ -130,8 +130,8 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 			'post_skin_assessment_id' => 'Post skin assessment',
 			'post_skin_assessment_other' => 'Post skin assessment other',
 			'nasal_throat_pack' => 'Nasal throat pack',
-			'nasal_insert_time' => 'Nasal insert time',
-			'nasal_remove_time' => 'Nasal remove time',
+			'nasal_insert_time' => 'Inserted time',
+			'nasal_remove_time' => 'Removal time',
 			'additional' => 'Additional',
 			'additional_other' => 'Additional other',
 		);
