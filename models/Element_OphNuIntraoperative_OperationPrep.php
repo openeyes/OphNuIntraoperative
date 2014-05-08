@@ -119,7 +119,7 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 			'event_id' => 'Event',
 			'incision_site_id' => 'Incision site',
 			'patient_in_sulpine_position' => 'Patient in sulpine position',
-			'prep_solution_id' => 'Prep solution',
+			'prep_solution_id' => 'Prep done',
 			'other_solution' => 'Other solution',
 			'viscoelastic' => 'Viscoelastic',
 			'viscoelastic_type_id' => 'Viscoelastic type',

@@ -102,9 +102,9 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'specimin_collected_id' => 'Specimen collected',
+			'specimin_collected_id' => 'Specimen collected and documented',
 			'specimin_comments' => 'Specimen comments',
-			'dressing_items' => 'Dressing items',
+			'dressing_items' => 'Dressing',
 			'dressing_other' => 'Other dressing',
 			'procedures_performed' => 'Actual procedures performed',
 			'circulating_nurse_id' => 'Circulating nurse',
