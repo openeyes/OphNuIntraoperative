@@ -26,16 +26,16 @@
 	<div class="element-data">
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('intraocular_lens'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->intraocular_lens ? 'Yes' : 'No'?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo is_null($element->intraocular_lens) ? 'Not recorded' : ($element->intraocular_lens ? 'Yes' : 'No')?></div></div>
 		</div>
 		<?php if ($element->intraocular_lens) {?>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('iol_type_id'))?></div></div>
-				<div class="large-9 column end"><div class="data-value"><?php echo $element->iol_type ? $element->iol_type->name : 'None'?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo is_null($element->iol_type) ? 'Not recorded' : ($element->iol_type ? $element->iol_type->name : 'None')?></div></div>
 			</div>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('iol_size_id'))?></div></div>
-				<div class="large-9 column end"><div class="data-value"><?php echo $element->iol_size ? $element->iol_size->name : 'None'?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo is_null($element->iol_size) ? 'Not recorded' : ($element->iol_size ? $element->iol_size->name : 'None')?></div></div>
 			</div>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('iol_comments'))?></div></div>
@@ -44,7 +44,7 @@
 		<?php }?>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('ocular_sphere_ball'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->ocular_sphere_ball ? 'Yes' : 'No'?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo is_null($element->ocular_sphere_ball) ? 'Not recorded' : ($element->ocular_sphere_ball ? 'Yes' : 'No')?></div></div>
 		</div>
 		<?php if ($element->ocular_sphere_ball) {?>
 			<div class="row data-row">
@@ -54,7 +54,7 @@
 		<?php }?>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('glaucoma_valve'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->glaucoma_valve ? 'Yes' : 'No'?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo is_null($element->glaucoma_valve) ? 'Not recorded' : ($element->glaucoma_valve ? 'Yes' : 'No')?></div></div>
 		</div>
 		<?php if ($element->glaucoma_valve) {?>
 			<div class="row data-row">
@@ -64,7 +64,7 @@
 		<?php }?>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('lid_weights'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->lid_weights ? 'Yes' : 'No'?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo is_null($element->lid_weights) ? 'Not recorded' : ($element->lid_weights ? 'Yes' : 'No')?></div></div>
 		</div>
 		<?php if ($element->lid_weights) {?>
 			<div class="row data-row">
@@ -74,7 +74,7 @@
 		<?php }?>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('sutures'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->sutures ? 'Yes' : 'No'?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo is_null($element->sutures) ? 'Not recorded' : ($element->sutures ? 'Yes' : 'No')?></div></div>
 		</div>
 		<?php if ($element->sutures) {?>
 			<div class="row data-row">
@@ -84,7 +84,7 @@
 		<?php }?>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('drains'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->drains ? 'Yes' : 'No'?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo is_null($element->drains) ? 'Not recorded' : ($element->drains ? 'Yes' : 'No')?></div></div>
 		</div>
 		<?php if ($element->drains) {?>
 			<div class="row data-row">
@@ -94,7 +94,7 @@
 		<?php }?>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('other'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->other ? 'Yes' : 'No'?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo is_null($element->other) ? 'Not recorded' : ($element->other ? 'Yes' : 'No')?></div></div>
 		</div>
 		<?php if ($element->other) {?>
 			<div class="row data-row">

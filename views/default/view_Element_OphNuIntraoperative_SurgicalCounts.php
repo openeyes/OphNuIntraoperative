@@ -70,12 +70,12 @@
 		</table>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('count_discrepancies'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->count_discrepancies ? 'Yes' : 'No'?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo is_null($element->count_discrepancies) ? 'Not recorded' : ($element->count_discrepancies ? 'Yes' : 'No')?></div></div>
 		</div>
 		<?php if ($element->count_discrepancies) {?>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('surgeon_notified'))?></div></div>
-				<div class="large-9 column end"><div class="data-value"><?php echo $element->surgeon_notified ? 'Yes' : 'No'?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo is_null($element->surgeon_notified) ? 'Not recorded' : ($element->surgeon_notified ? 'Yes' : 'No')?></div></div>
 			</div>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('comments'))?></div></div>
