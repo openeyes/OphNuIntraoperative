@@ -39,7 +39,7 @@
 		<?php if ($element->prep_solution && $element->prep_solution->name == 'Other (please specify)') {?>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('other_solution'))?></div></div>
-				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->other_solution)?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo $element->textWithLineBreaks('other_solution')?></div></div>
 			</div>
 		<?php }?>
 		<div class="row data-row">
@@ -108,7 +108,7 @@
 		<?php if ($element->hasMultiSelectValue('additionals','Other (please specify)')) {?>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('additional_other'))?></div></div>
-				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->additional_other)?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo $element->textWithLineBreaks('additional_other')?></div></div>
 			</div>
 		<?php }?>
 	</div>

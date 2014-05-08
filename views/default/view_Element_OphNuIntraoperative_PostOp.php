@@ -31,7 +31,7 @@
 		<?php if ($element->specimin_collected && $element->specimin_collected->name == 'Yes') {?>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('specimin_comments'))?></div></div>
-				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->specimin_comments)?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo $element->textWithLineBreaks('specimin_comments')?></div></div>
 			</div>
 		<?php }?>
 		<div class="row data-row">
@@ -45,6 +45,12 @@
 						<?php }?>
 			</div></div>
 		</div>
+		<?php if ($element->hasMultiSelectValue('dressing_itemss','Other (please specify)')) {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('dressing_other'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo $element->textWithLineBreaks('dressing_other')?></div></div>
+			</div>
+		<?php }?>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('procedures_performed'))?>:</div></div>
 			<div class="large-9 column end"><div class="data-value"><?php if (!$element->procedures_performeds) {?>
