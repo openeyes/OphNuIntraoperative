@@ -39,7 +39,7 @@
 			</div>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('iol_comments'))?></div></div>
-				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->iol_comments)?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo $element->textWithLineBreaks('iol_comments')?></div></div>
 			</div>
 		<?php }?>
 		<div class="row data-row">
@@ -49,7 +49,7 @@
 		<?php if ($element->ocular_sphere_ball) {?>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('ocular_sphere_ball_comments'))?></div></div>
-				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->ocular_sphere_ball_comments)?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo $element->textWithLineBreaks('ocular_sphere_ball_comments')?></div></div>
 			</div>
 		<?php }?>
 		<div class="row data-row">
@@ -59,7 +59,7 @@
 		<?php if ($element->glaucoma_valve) {?>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('glaucoma_valve_comments'))?></div></div>
-				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->glaucoma_valve_comments)?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo $element->textWithLineBreaks('glaucoma_valve_comments')?></div></div>
 			</div>
 		<?php }?>
 		<div class="row data-row">
@@ -79,7 +79,7 @@
 		<?php if ($element->sutures) {?>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('suture_comments'))?></div></div>
-				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->suture_comments)?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo $element->textWithLineBreaks('suture_comments')?></div></div>
 			</div>
 		<?php }?>
 		<div class="row data-row">
@@ -89,7 +89,7 @@
 		<?php if ($element->drains) {?>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('drain_comments'))?></div></div>
-				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->drain_comments)?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo $element->textWithLineBreaks('drain_comments')?></div></div>
 			</div>
 		<?php }?>
 		<div class="row data-row">
@@ -99,7 +99,7 @@
 		<?php if ($element->other) {?>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('other_comments'))?></div></div>
-				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->other_comments)?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo$element->textWithLineBreaks('other_comments')?></div></div>
 			</div>
 		<?php }?>
 	</div>
