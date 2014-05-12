@@ -52,7 +52,9 @@ $(document).ready(function() {
 			m = '0'+m;
 		}
 
-		$('input[type="text"][id$="'+$(this).data('target')+'"]').val(h+':'+m);
+		var element = $(this).closest('section').data('element-type-class');
+
+		$('#'+element+'_'+$(this).data('target')).val(h+':'+m);
 	});
 });
 
