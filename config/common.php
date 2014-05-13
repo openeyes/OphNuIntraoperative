@@ -20,6 +20,7 @@
 return array(
 	'params' => array(
 		'admin_menu' => array(
+			'Intra-op patient identifiers' => '/OphNuIntraoperative/admin/editPatientIdentifiers',
 			'Anesthesia type' => '/OphNuIntraoperative/admin/editAnesthesiaType',
 			'Incision site' => '/OphNuIntraoperative/admin/editIncisionSite',
 			'Operation prep done' => '/OphNuIntraoperative/admin/editPrepDone',

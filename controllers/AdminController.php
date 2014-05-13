@@ -19,6 +19,14 @@
 
 class AdminController extends ModuleAdminController
 {
+	public function actionEditPatientIdentifiers()
+	{
+		$this->render('//admin/generic_admin',array(
+			'title' => 'Patient identifiers',
+			'model' => 'OphNuIntraoperative_Handoff_TwoIdentifiers',
+		));
+	}
+
 	public function actionEditAnesthesiaType()
 	{
 		$this->render('//admin/generic_admin',array(
