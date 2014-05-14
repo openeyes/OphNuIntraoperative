@@ -208,6 +208,12 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 					$this->addError($field,'Invalid time format for '.$this->getAttributeLabel($field));
 				}
 			}
+
+			if (preg_match('/^([0-9]{1,2}):([0-9]{2})$/',$this->nasal_insert_time,$i) && preg_match('/^([0-9]{1,2}):([0-9]{2})$/',$this->nasal_remove_time,$r)) {
+				if (mktime($i[1],$i[2],0,1,1,2012) > mktime($r[1],$r[2],0,1,1,2012)) {
+					$this->addError('nasal_remove_time',$this->getAttributeLabel('nasal_remove_time').' cannot be before '.$this->getAttributeLabel('nasal_insert_time'));
+				}
+			}
 		}
 
 		if ($this->hasMultiSelectValue('additionals','Other (please specify)')) {
