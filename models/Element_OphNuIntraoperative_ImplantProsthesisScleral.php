@@ -170,6 +170,10 @@ class Element_OphNuIntraoperative_ImplantProsthesisScleral  extends  BaseEventTy
 			}
 		}
 
+		if ($this->other && !$this->other_comments) {
+			$this->addError('other_comments',$this->getAttributeLabel('other_comments').' cannot be blank.');
+		}
+
 		return parent::beforeValidate();
 	}
 }
