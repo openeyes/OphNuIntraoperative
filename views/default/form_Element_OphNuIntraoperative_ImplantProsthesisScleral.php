@@ -17,15 +17,6 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
 ?>
-<section class="element <?php echo $element->elementType->class_name?>"
-	data-element-type-id="<?php echo $element->elementType->id?>"
-	data-element-type-class="<?php echo $element->elementType->class_name?>"
-	data-element-type-name="<?php echo $element->elementType->name?>"
-	data-element-display-order="<?php echo $element->elementType->display_order?>">
-	<header class="element-header">
-		<h3 class="element-title"><?php echo $element->elementType->name; ?></h3>
-	</header>
-
 	<div class="element-fields">
 		<?php echo $form->radioBoolean($element, 'intraocular_lens', array('class' => 'linked-fields', 'data-linked-fields' => 'iol_type_id,iol_size_id,iol_comments', 'data-linked-values' => 'Yes'), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->dropDownList($element, 'iol_type_id', CHtml::listData(OphNuIntraoperative_ImplantProsthesisScleral_IolType::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'), !$element->intraocular_lens, array('label' => 3, 'field' => 4))?>
@@ -44,4 +35,3 @@
 		<?php echo $form->radioBoolean($element, 'other', array('class' => 'linked-fields', 'data-linked-fields' => 'other_comments', 'data-linked-values' => 'Yes'), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->textArea($element, 'other_comments', array(), !$element->other, array(), array('label' => 3, 'field' => 4))?>
 	</div>
-</section>

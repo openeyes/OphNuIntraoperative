@@ -32,7 +32,7 @@
  * @property User $usermodified
  */
 
-class OphNuIntraoperative_ImplantProsthesisScleral_IolSize extends BaseActiveRecord
+class OphNuIntraoperative_ImplantProsthesisScleral_IolSize extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.

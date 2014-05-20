@@ -17,16 +17,6 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
 ?>
-
-<section class="element <?php echo $element->elementType->class_name?>"
-	data-element-type-id="<?php echo $element->elementType->id?>"
-	data-element-type-class="<?php echo $element->elementType->class_name?>"
-	data-element-type-name="<?php echo $element->elementType->name?>"
-	data-element-display-order="<?php echo $element->elementType->display_order?>">
-	<header class="element-header">
-		<h3 class="element-title"><?php echo $element->elementType->name; ?></h3>
-	</header>
-
 	<div class="element-fields">
 		<?php echo $form->dropDownList($element, 'incision_site_id', CHtml::listData(OphNuIntraoperative_OperationPrep_IncisionSite::model()->findAll(array('order'=>'display_order asc')),'id','name'), array('empty'=>'- Please select -'), false,array('label'=>3,'field'=>4))?>
 		<?php echo $form->checkBox($element, 'patient_in_sulpine_position', array('text-align'=>'right'), array('label' => 3, 'field' => 4))?>
@@ -74,4 +64,3 @@
 		<?php echo $form->multiSelectList($element, 'MultiSelect_additional', 'additionals', 'ophnuintraoperative_operationprep_additional_id', CHtml::listData(OphNuIntraoperative_OperationPrep_Additional::model()->findAll(array('order'=>'display_order asc')),'id','name'), array(), array('empty' => '- Please select -', 'label' => 'Additional','class' => 'linked-fields', 'data-linked-fields' => 'additional_other', 'data-linked-values' => 'Other (please specify)'), false,false,null,false,false,array('label' => 3, 'field' => 4))?>
 		<?php echo $form->textArea($element, 'additional_other', array(), !$element->hasMultiSelectValue('additionals','Other (please specify)'), array(), array('label' => 3, 'field' => 4))?>
 	</div>
-</section>

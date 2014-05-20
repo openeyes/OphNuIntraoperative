@@ -32,7 +32,7 @@
  * @property User $usermodified
  */
 
-class OphNuIntraoperative_OperationPrep_GroundingPadSide extends BaseActiveRecord
+class OphNuIntraoperative_OperationPrep_GroundingPadSide extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.

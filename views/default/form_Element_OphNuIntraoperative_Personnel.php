@@ -17,16 +17,6 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
 ?>
-
-<section class="element <?php echo $element->elementType->class_name?>"
-	data-element-type-id="<?php echo $element->elementType->id?>"
-	data-element-type-class="<?php echo $element->elementType->class_name?>"
-	data-element-type-name="<?php echo $element->elementType->name?>"
-	data-element-display-order="<?php echo $element->elementType->display_order?>">
-	<header class="element-header">
-		<h3 class="element-title"><?php echo $element->elementType->name; ?></h3>
-	</header>
-
 	<div class="element-fields">
 		<div id="div_Element_OphNuIntraoperative_Personnel_surgeon_id" class="row field-row">
 			<div class="large-3 column">
@@ -139,4 +129,3 @@
 		<?php echo $form->checkBox($element, 'who_timeout_completed', array('text-align' => 'right'), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->dropDownList($element, 'time_out_lead_by_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false,array('label'=>3,'field'=>3))?>
 	</div>
-</section>

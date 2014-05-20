@@ -32,7 +32,7 @@
  * @property User $usermodified
  */
 
-class OphNuIntraoperative_Handoff_TwoIdentifiers extends BaseActiveRecord
+class OphNuIntraoperative_Handoff_TwoIdentifiers extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.

@@ -17,7 +17,7 @@
  */
 
 /**
- * This is the model class for table "et_ophnuintraoperative_handoff_two_identifiers_assignment".
+ * This is the model class for table "et_ophnuintraoperative_handoff_twoident_assignment".
  *
  * The followings are the available columns in table:
  * @property string $id
@@ -32,7 +32,7 @@
  * @property User $usermodified
  */
 
-class Element_OphNuIntraoperative_Handoff_TwoIdentifiers_Assignment extends BaseActiveRecord
+class Element_OphNuIntraoperative_Handoff_TwoIdentifiers_Assignment extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -48,7 +48,7 @@ class Element_OphNuIntraoperative_Handoff_TwoIdentifiers_Assignment extends Base
 	 */
 	public function tableName()
 	{
-		return 'et_ophnuintraoperative_handoff_two_identifiers_assignment';
+		return 'et_ophnuintraoperative_handoff_twoident_assignment';
 	}
 
 	/**

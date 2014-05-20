@@ -17,7 +17,7 @@
  */
 
 /**
- * This is the model class for table "ophnuintraoperative_postop_procedures_performed_assignment".
+ * This is the model class for table "ophnuintraoperative_ppppp_assignment".
  *
  * The followings are the available columns in table:
  * @property string $id
@@ -32,7 +32,7 @@
  * @property User $usermodified
  */
 
-class OphNuIntraoperative_PostOp_Procedures_Performed_Assignment extends BaseActiveRecord
+class OphNuIntraoperative_PostOp_Procedures_Performed_Assignment extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -48,7 +48,7 @@ class OphNuIntraoperative_PostOp_Procedures_Performed_Assignment extends BaseAct
 	 */
 	public function tableName()
 	{
-		return 'ophnuintraoperative_postop_procedures_performed_assignment';
+		return 'ophnuintraoperative_ppppp_assignment';
 	}
 
 	/**

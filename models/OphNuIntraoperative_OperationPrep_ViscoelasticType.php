@@ -32,7 +32,7 @@
  * @property User $usermodified
  */
 
-class OphNuIntraoperative_OperationPrep_ViscoelasticType extends BaseActiveRecord
+class OphNuIntraoperative_OperationPrep_ViscoelasticType extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.

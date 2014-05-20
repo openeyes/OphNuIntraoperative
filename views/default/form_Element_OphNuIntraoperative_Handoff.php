@@ -17,16 +17,6 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
 ?>
-
-<section class="element <?php echo $element->elementType->class_name?>"
-	data-element-type-id="<?php echo $element->elementType->id?>"
-	data-element-type-class="<?php echo $element->elementType->class_name?>"
-	data-element-type-name="<?php echo $element->elementType->name?>"
-	data-element-display-order="<?php echo $element->elementType->display_order?>">
-	<header class="element-header">
-		<h3 class="element-title"><?php echo $element->elementType->name; ?></h3>
-	</header>
-
 	<div class="element-fields">
 		<?php echo $form->checkBox($element, 'wristband_verified', array('text-align' => 'right','class' => 'linked-fields', 'data-linked-fields' => 'MultiSelect_two_identifiers', 'data-linked-values' => '1'), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->multiSelectList($element, 'MultiSelect_two_identifiers', 'two_identifierss', 'ophnuintraoperative_handoff_two_identifiers_id', CHtml::listData(OphNuIntraoperative_Handoff_TwoIdentifiers::model()->findAll(array('order'=>'display_order asc')),'id','name'), array(), array('empty' => '- Please select -', 'label' => 'Two identifiers'), !$element->wristband_verified, false, null, false, false, array('label' => 3, 'field' => 4))?>
@@ -38,4 +28,3 @@
 		<?php echo $form->radioButtons($element, 'nonoperative_eye_protected_id', CHtml::listData(OphNuIntraoperative_Handoff_NonoperativeEyeProtected::model()->findAll(array('order' => 'display_order asc')),'id','name'),null,false,false,false,false,array('class' => 'linked-fields', 'data-linked-fields' => 'tape_or_shield_id', 'data-linked-values' => 'Yes'),array('label'=>3,'field'=>4))?>
 		<?php echo $form->radioButtons($element, 'tape_or_shield_id', CHtml::listData(OphNuIntraoperative_Handoff_TapeOrShield::model()->findAll(array('order' => 'display_order asc')),'id','name'),null,false,!$element->nonoperative_eye_protected || $element->nonoperative_eye_protected->name != 'Yes',false,false,array(),array('label'=>3,'field'=>4))?>
 	</div>
-</section>

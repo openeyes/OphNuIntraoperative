@@ -32,7 +32,7 @@
  * @property User $usermodified
  */
 
-class OphNuIntraoperative_Handoff_NonoperativeEyeProtected extends BaseActiveRecord
+class OphNuIntraoperative_Handoff_NonoperativeEyeProtected extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.
