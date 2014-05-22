@@ -36,14 +36,6 @@ class DefaultController extends BaseEventTypeController
 
 	protected function setComplexAttributes_Element_OphNuIntraoperative_PostOp($element, $data, $index)
 	{
-		$dressing_items = array();
-
-		if (!empty($data['MultiSelect_dressing_items'])) {
-			foreach ($data['MultiSelect_dressing_items'] as $item_id) {
-				$dressing_items[] = OphNuIntraoperative_PostOp_DressingItem::model()->findByPk($item_id);
-			}
-		}
-
 		$procedures = array();
 
 		if (!empty($data['Procedures_procs'])) {
@@ -52,33 +44,11 @@ class DefaultController extends BaseEventTypeController
 			}
 		}
 
-		$element->dressing_itemss = $dressing_items;
 		$element->procedures_performeds = $procedures;
 	}
 
 	protected function saveComplexAttributes_Element_OphNuIntraoperative_PostOp($element, $data, $index)
 	{
-		if (!empty($data['MultiSelect_dressing_items'])) {
-			foreach ($data['MultiSelect_dressing_items'] as $item_id) {
-				if (!OphNuIntraoperative_PostOp_DressingItems::model()->find('element_id=? and dressing_item_id=?',array($element->id,$item_id))) {
-					$assignment = new OphNuIntraoperative_PostOp_DressingItems;
-					$assignment->element_id = $element->id;
-					$assignment->dressing_item_id = $item_id;
-
-					if (!$assignment->save()) {
-						throw new Exception("Unable to save OphNuIntraoperative_PostOp_DressingItems: ".print_r($assignment->getErrors(),true));
-					}
-				}
-			}
-		}
-
-		$criteria = new CDbCriteria;
-		$criteria->addCondition('element_id = :element_id');
-		$criteria->params[':element_id'] = $element->id;
-		!empty($data['MultiSelect_dressing_items']) && $criteria->addNotInCondition('dressing_item_id',$data['MultiSelect_dressing_items']);
-
-		OphNuIntraoperative_PostOp_DressingItems::model()->deleteAll($criteria);
-
 		if (!empty($data['Procedures_procs'])) {
 			foreach ($data['Procedures_procs'] as $proc_id) {
 				if (!OphNuIntraoperative_PostOp_Procedures_Performed_Assignment::model()->find('element_id=? and proc_id=?',array($element->id,$proc_id))) {

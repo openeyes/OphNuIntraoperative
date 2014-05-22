@@ -30,16 +30,16 @@
 		<?php }?>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('dressing_items'))?>:</div></div>
-			<div class="large-9 column end"><div class="data-value"><?php if (!$element->dressing_itemss) {?>
+			<div class="large-9 column end"><div class="data-value"><?php if (!$element->dressing_items) {?>
 							No dressing used
 						<?php } else {?>
-								<?php foreach ($element->dressing_itemss as $item) {
-									echo $item->ophnuintraoperative_postop_dressing_item->name?><br/>
+								<?php foreach ($element->dressing_items as $item) {
+									echo $item->name?><br/>
 								<?php }?>
 						<?php }?>
 			</div></div>
 		</div>
-		<?php if ($element->hasMultiSelectValue('dressing_itemss','Other (please specify)')) {?>
+		<?php if ($element->hasMultiSelectValue('dressing_items','Other (please specify)')) {?>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('dressing_other'))?></div></div>
 				<div class="large-9 column end"><div class="data-value"><?php echo $element->textWithLineBreaks('dressing_other')?></div></div>

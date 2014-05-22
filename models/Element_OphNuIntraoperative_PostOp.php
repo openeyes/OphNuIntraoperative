@@ -46,6 +46,8 @@
 
 class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 {
+	public $auto_update_relations = true;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return the static model class
@@ -69,7 +71,7 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, specimin_collected_id, specimin_comments, dressing_other, circulating_nurse_id, scrub_nurse_id, ', 'safe'),
+			array('event_id, specimin_collected_id, specimin_comments, dressing_other, circulating_nurse_id, scrub_nurse_id, dressing_items', 'safe'),
 			array('id, event_id, specimin_collected_id, specimin_comments, circulating_nurse_id, scrub_nurse_id, ', 'safe', 'on' => 'search'),
 		);
 	}
@@ -86,7 +88,8 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 			'specimin_collected' => array(self::BELONGS_TO, 'OphNuIntraoperative_PostOp_SpeciminCollected', 'specimin_collected_id'),
-			'dressing_itemss' => array(self::HAS_MANY, 'OphNuIntraoperative_PostOp_DressingItems', 'element_id'),
+			'dressing_items' => array(self::HAS_MANY, 'OphNuIntraoperative_PostOp_DressingItem', 'dressing_item_id', 'through' => 'dressing_items_assignment'),
+			'dressing_items_assignment' => array(self::HAS_MANY, 'OphNuIntraoperative_PostOp_DressingItems', 'element_id'),
 			'procedures_performeds' => array(self::HAS_MANY, 'OphNuIntraoperative_PostOp_Procedures_Performed_Assignment', 'element_id'),
 			'procedures' => array(self::MANY_MANY, 'Procedure', 'ophnuintraoperative_ppppp_assignment(element_id, proc_id)'),
 			'circulating_nurse' => array(self::BELONGS_TO, 'User', 'circulating_nurse_id'),
@@ -142,7 +145,7 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 			}
 		}
 
-		if ($this->hasMultiSelectValue('dressing_itemss','Other (please specify)')) {
+		if ($this->hasMultiSelectValue('dressing_items','Other (please specify)')) {
 			if (!$this->dressing_other) {
 				$this->addError('dressing_other',$this->getAttributeLabel('dressing_other').' cannot be blank');
 			}

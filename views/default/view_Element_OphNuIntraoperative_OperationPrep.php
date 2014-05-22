@@ -94,7 +94,7 @@
 							None
 						<?php } else {?>
 								<?php foreach ($element->additionals as $item) {
-									echo $item->ophnuintraoperative_operationprep_additional->name?><br/>
+									echo $item->name?><br/>
 								<?php }?>
 						<?php }?>
 			</div></div>

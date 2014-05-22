@@ -48,7 +48,7 @@ class OphNuIntraoperative_Handoff_Identifiers extends BaseActiveRecordVersioned
 	 */
 	public function tableName()
 	{
-		return 'ophnuintraoperative_handoff_twoidents';
+		return 'ophnuintraoperative_handoff_identifiers';
 	}
 
 	/**
