@@ -54,11 +54,13 @@
  * @property OphNuIntraoperative_OperationPrep_GroundingPadLocation $grounding_pad_location
  * @property OphNuIntraoperative_OperationPrep_GroundingPadSide $grounding_pad_side
  * @property OphNuIntraoperative_OperationPrep_PostSkinAssessment $post_skin_assessment
- * @property Element_OphNuIntraoperative_OperationPrep_Additional_Assignment $additionals
+ * @property Element_OphNuIntraoperative_OperationPrep_Additionals $additionals
  */
 
 class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 {
+	public $auto_update_relations = true;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return the static model class
@@ -82,7 +84,7 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, incision_site_id, patient_in_sulpine_position, prep_solution_id, other_solution, viscoelastic, viscoelastic_type_id, viscoelastic_quantity_id, grounding_pad, grounding_pad_location_id, grounding_pad_side_id, post_skin_assessment_id, post_skin_assessment_other, nasal_throat_pack, nasal_insert_time, nasal_remove_time, additional_other, ', 'safe'),
+			array('event_id, incision_site_id, patient_in_sulpine_position, prep_solution_id, other_solution, viscoelastic, viscoelastic_type_id, viscoelastic_quantity_id, grounding_pad, grounding_pad_location_id, grounding_pad_side_id, post_skin_assessment_id, post_skin_assessment_other, nasal_throat_pack, nasal_insert_time, nasal_remove_time, additional_other, additionals', 'safe'),
 			array('id, event_id, incision_site_id, patient_in_sulpine_position, prep_solution_id, other_solution, viscoelastic, viscoelastic_type_id, viscoelastic_quantity_id, grounding_pad, grounding_pad_location_id, grounding_pad_side_id, post_skin_assessment_id, post_skin_assessment_other, nasal_throat_pack, nasal_insert_time, nasal_remove_time, additional_other, ', 'safe', 'on' => 'search'),
 		);
 	}
@@ -105,7 +107,8 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 			'grounding_pad_location' => array(self::BELONGS_TO, 'OphNuIntraoperative_OperationPrep_GroundingPadLocation', 'grounding_pad_location_id'),
 			'grounding_pad_side' => array(self::BELONGS_TO, 'OphNuIntraoperative_OperationPrep_GroundingPadSide', 'grounding_pad_side_id'),
 			'post_skin_assessment' => array(self::BELONGS_TO, 'OphNuIntraoperative_OperationPrep_PostSkinAssessment', 'post_skin_assessment_id'),
-			'additionals' => array(self::HAS_MANY, 'Element_OphNuIntraoperative_OperationPrep_Additional_Assignment', 'element_id'),
+			'additionals' => array(self::HAS_MANY, 'OphNuIntraoperative_OperationPrep_PrepSolution', 'additional_id', 'through' => 'additionals_assignment'),
+			'additionals_assignment' => array(self::HAS_MANY, 'OphNuIntraoperative_OperationPrep_Additionals', 'element_id'),
 		);
 	}
 

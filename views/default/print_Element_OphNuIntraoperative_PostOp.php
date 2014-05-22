@@ -43,7 +43,7 @@
 						<?php } else {?>
 							<h4>
 								<?php foreach ($element->dressing_itemss as $item) {
-									echo $item->ophnuintraoperative_postop_dressing_items->name?><br/>
+									echo $item->ophnuintraoperative_postop_dressing_item->name?><br/>
 								<?php }?>
 							</h4>
 						<?php }?>

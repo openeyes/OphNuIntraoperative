@@ -34,7 +34,7 @@
 							No dressing used
 						<?php } else {?>
 								<?php foreach ($element->dressing_itemss as $item) {
-									echo $item->ophnuintraoperative_postop_dressing_items->name?><br/>
+									echo $item->ophnuintraoperative_postop_dressing_item->name?><br/>
 								<?php }?>
 						<?php }?>
 			</div></div>

@@ -61,6 +61,6 @@
 				</div>
 			</div>
 		</div>
-		<?php echo $form->multiSelectList($element, 'MultiSelect_additional', 'additionals', 'ophnuintraoperative_operationprep_additional_id', CHtml::listData(OphNuIntraoperative_OperationPrep_Additional::model()->findAll(array('order'=>'display_order asc')),'id','name'), array(), array('empty' => '- Please select -', 'label' => 'Additional','class' => 'linked-fields', 'data-linked-fields' => 'additional_other', 'data-linked-values' => 'Other (please specify)'), false,false,null,false,false,array('label' => 3, 'field' => 4))?>
+		<?php echo $form->multiSelectList($element, 'additionals', 'additionals', 'additional_id', CHtml::listData(OphNuIntraoperative_OperationPrep_Additional::model()->findAll(array('order'=>'display_order asc')),'id','name'), array(), array('empty' => '- Please select -', 'label' => 'Additional','class' => 'linked-fields', 'data-linked-fields' => 'additional_other', 'data-linked-values' => 'Other (please specify)'), false,false,null,false,false,array('label' => 3, 'field' => 4))?>
 		<?php echo $form->textArea($element, 'additional_other', array(), !$element->hasMultiSelectValue('additionals','Other (please specify)'), array(), array('label' => 3, 'field' => 4))?>
 	</div>

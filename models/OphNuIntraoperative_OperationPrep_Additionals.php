@@ -17,12 +17,12 @@
  */
 
 /**
- * This is the model class for table "et_ophnuintraoperative_opprepadd_assignment".
+ * This is the model class for table "ophnuintraoperative_operationprep_additionals".
  *
  * The followings are the available columns in table:
  * @property string $id
  * @property integer $element_id
- * @property integer $ophnuintraoperative_operationprep_additional_id
+ * @property integer $additional_id
  *
  * The followings are the available model relations:
  *
@@ -32,7 +32,7 @@
  * @property User $usermodified
  */
 
-class Element_OphNuIntraoperative_OperationPrep_Additional_Assignment extends BaseActiveRecordVersioned
+class OphNuIntraoperative_OperationPrep_Additionals extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -48,7 +48,7 @@ class Element_OphNuIntraoperative_OperationPrep_Additional_Assignment extends Ba
 	 */
 	public function tableName()
 	{
-		return 'et_ophnuintraoperative_opprepadd_assignment';
+		return 'ophnuintraoperative_operationprep_additionals';
 	}
 
 	/**
@@ -57,9 +57,9 @@ class Element_OphNuIntraoperative_OperationPrep_Additional_Assignment extends Ba
 	public function rules()
 	{
 		return array(
-			array('element_id, ophnuintraoperative_operationprep_additional_id', 'safe'),
-			array('element_id, ophnuintraoperative_operationprep_additional_id', 'required'),
-			array('id, element_id, ophnuintraoperative_operationprep_additional_id', 'safe', 'on' => 'search'),
+			array('element_id, additional_id', 'safe'),
+			array('element_id, additional_id', 'required'),
+			array('id, element_id, additional_id', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -70,7 +70,7 @@ class Element_OphNuIntraoperative_OperationPrep_Additional_Assignment extends Ba
 	{
 		return array(
 			'element' => array(self::BELONGS_TO, 'Element_OphNuIntraoperative_OperationPrep', 'element_id'),
-			'ophnuintraoperative_operationprep_additional' => array(self::BELONGS_TO, 'OphNuIntraoperative_OperationPrep_Additional', 'ophnuintraoperative_operationprep_additional_id'),
+			'ophnuintraoperative_operationprep_additional' => array(self::BELONGS_TO, 'OphNuIntraoperative_OperationPrep_Additional', 'additional_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 		);

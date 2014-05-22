@@ -35,7 +35,7 @@
 						<?php } else {?>
 							<h4>
 								<?php foreach ($element->two_identifierss as $item) {
-									echo $item->ophnuintraoperative_handoff_two_identifiers->name?><br/>
+									echo $item->ophnuintraoperative_handoff_identifier->name?><br/>
 								<?php }?>
 							</h4>
 						<?php }?>

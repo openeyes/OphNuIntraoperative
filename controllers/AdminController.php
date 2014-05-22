@@ -79,7 +79,7 @@ class AdminController extends ModuleAdminController
 	{
 		$this->render('//admin/generic_admin',array(
 			'title' => 'Post-op dressing',
-			'model' => 'OphNuIntraoperative_PostOp_DressingItems',
+			'model' => 'OphNuIntraoperative_PostOp_DressingItem',
 		));
 	}
 }

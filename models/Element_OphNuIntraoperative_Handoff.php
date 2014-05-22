@@ -38,7 +38,7 @@
  * @property Event $event
  * @property User $user
  * @property User $usermodified
- * @property Element_OphNuIntraoperative_Handoff_TwoIdentifiers_Assignment $two_identifierss
+ * @property OphNuIntraoperative_Handoff_Identifiers $two_identifierss
  * @property OphNuIntraoperative_Handoff_HandOffFrom $hand_off_from
  * @property Address $hand_off_to
  * @property AnaestheticType $anesthesia_type
@@ -48,6 +48,8 @@
 
 class Element_OphNuIntraoperative_Handoff  extends  BaseEventTypeElement
 {
+	public $auto_update_relations = true;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return the static model class
@@ -71,7 +73,7 @@ class Element_OphNuIntraoperative_Handoff  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, wristband_verified, allergies_verified, hand_off_from_id, hand_off_to_id, anesthesia_type_id, nonoperative_eye_protected_id, tape_or_shield_id, ', 'safe'),
+			array('event_id, wristband_verified, allergies_verified, hand_off_from_id, hand_off_to_id, anesthesia_type_id, nonoperative_eye_protected_id, tape_or_shield_id, two_identifiers', 'safe'),
 			array('id, event_id, wristband_verified, allergies_verified, hand_off_from_id, hand_off_to_id, anesthesia_type_id, nonoperative_eye_protected_id, tape_or_shield_id, ', 'safe', 'on' => 'search'),
 		);
 	}
@@ -87,7 +89,8 @@ class Element_OphNuIntraoperative_Handoff  extends  BaseEventTypeElement
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-			'two_identifierss' => array(self::HAS_MANY, 'Element_OphNuIntraoperative_Handoff_TwoIdentifiers_Assignment', 'element_id'),
+			'two_identifiers' => array(self::HAS_MANY, 'OphNuIntraoperative_Handoff_Identifier', 'identifier_id', 'through' => 'two_identifiers_assignment'),
+			'two_identifiers_assignment' => array(self::HAS_MANY, 'OphNuIntraoperative_Handoff_Identifiers', 'element_id'),
 			'hand_off_from' => array(self::BELONGS_TO, 'User', 'hand_off_from_id'),
 			'hand_off_to' => array(self::BELONGS_TO, 'User', 'hand_off_to_id'),
 			'anesthesia_type' => array(self::BELONGS_TO, 'OphNuIntraoperative_Handoff_Anaesthesia_Type', 'anesthesia_type_id'),
@@ -148,8 +151,8 @@ class Element_OphNuIntraoperative_Handoff  extends  BaseEventTypeElement
 		}
 
 		if ($this->wristband_verified) {
-			if (count($this->two_identifierss) != 2) {
-				$this->addError('two_identifierss','Please select exactly two patient identifiers');
+			if (count($this->two_identifiers) != 2) {
+				$this->addError('two_identifiers','Please select exactly two patient identifiers');
 			}
 		}
 

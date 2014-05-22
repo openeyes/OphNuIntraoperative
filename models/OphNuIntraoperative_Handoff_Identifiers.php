@@ -17,22 +17,22 @@
  */
 
 /**
- * This is the model class for table "ophnuintraoperative_handoff_two_identifiers".
+ * This is the model class for table "ophnuintraoperative_handoff_twoidents".
  *
  * The followings are the available columns in table:
  * @property string $id
- * @property string $name
+ * @property integer $element_id
+ * @property integer $identifier_id
  *
  * The followings are the available model relations:
  *
- * @property ElementType $element_type
- * @property EventType $eventType
- * @property Event $event
+ * @property Element_OphNuIntraoperative_Handoff $element
+ * @property OphNuIntraoperative_Handoff_Identifier $ophnuintraoperative_handoff_identifier
  * @property User $user
  * @property User $usermodified
  */
 
-class OphNuIntraoperative_Handoff_TwoIdentifiers extends BaseActiveRecordVersioned
+class OphNuIntraoperative_Handoff_Identifiers extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -48,7 +48,7 @@ class OphNuIntraoperative_Handoff_TwoIdentifiers extends BaseActiveRecordVersion
 	 */
 	public function tableName()
 	{
-		return 'ophnuintraoperative_handoff_two_identifiers';
+		return 'ophnuintraoperative_handoff_twoidents';
 	}
 
 	/**
@@ -57,9 +57,9 @@ class OphNuIntraoperative_Handoff_TwoIdentifiers extends BaseActiveRecordVersion
 	public function rules()
 	{
 		return array(
-			array('name', 'safe'),
-			array('name', 'required'),
-			array('id, name', 'safe', 'on' => 'search'),
+			array('element_id, identifier_id', 'safe'),
+			array('element_id, identifier_id', 'required'),
+			array('id, element_id, identifier_id', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -69,9 +69,8 @@ class OphNuIntraoperative_Handoff_TwoIdentifiers extends BaseActiveRecordVersion
 	public function relations()
 	{
 		return array(
-			'element_type' => array(self::HAS_ONE, 'ElementType', 'id','on' => "element_type.class_name='".get_class($this)."'"),
-			'eventType' => array(self::BELONGS_TO, 'EventType', 'event_type_id'),
-			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
+			'element' => array(self::BELONGS_TO, 'Element_OphNuIntraoperative_Handoff', 'element_id'),
+			'ophnuintraoperative_handoff_identifier' => array(self::BELONGS_TO, 'OphNuIntraoperative_Handoff_Identifier', 'identifier_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 		);

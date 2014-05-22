@@ -25,11 +25,11 @@
 		<?php if ($element->wristband_verified) {?>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('two_identifiers'))?>:</div></div>
-				<div class="large-9 column end"><div class="data-value"><?php if (!$element->two_identifierss) {?>
+				<div class="large-9 column end"><div class="data-value"><?php if (!$element->two_identifiers) {?>
 								None
 							<?php } else {?>
-									<?php foreach ($element->two_identifierss as $item) {
-										echo $item->ophnuintraoperative_handoff_two_identifiers->name?><br/>
+									<?php foreach ($element->two_identifiers as $item) {
+										echo $item->name?><br/>
 									<?php }?>
 							<?php }?>
 				</div></div>

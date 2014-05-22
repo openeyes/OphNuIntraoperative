@@ -21,13 +21,13 @@
  *
  * The followings are the available columns in table:
  * @property string $id
- * @property string $name
+ * @property integer $element_id
+ * @property integer $dressing_item_id
  *
  * The followings are the available model relations:
  *
- * @property ElementType $element_type
- * @property EventType $eventType
- * @property Event $event
+ * @property Element_OphNuIntraoperative_PostOp $element
+ * @property OphNuIntraoperative_PostOp_DressingItem $ophnuintraoperative_postop_dressing_item
  * @property User $user
  * @property User $usermodified
  */
@@ -57,9 +57,9 @@ class OphNuIntraoperative_PostOp_DressingItems extends BaseActiveRecordVersioned
 	public function rules()
 	{
 		return array(
-			array('name', 'safe'),
-			array('name', 'required'),
-			array('id, name', 'safe', 'on' => 'search'),
+			array('element_id, dressing_item_id', 'safe'),
+			array('element_id, dressing_item_id', 'required'),
+			array('id, element_id, dressing_item_id', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -69,9 +69,8 @@ class OphNuIntraoperative_PostOp_DressingItems extends BaseActiveRecordVersioned
 	public function relations()
 	{
 		return array(
-			'element_type' => array(self::HAS_ONE, 'ElementType', 'id','on' => "element_type.class_name='".get_class($this)."'"),
-			'eventType' => array(self::BELONGS_TO, 'EventType', 'event_type_id'),
-			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
+			'element' => array(self::BELONGS_TO, 'Element_OphNuIntraoperative_PostOp', 'element_id'),
+			'ophnuintraoperative_postop_dressing_item' => array(self::BELONGS_TO, 'OphNuIntraoperative_PostOp_DressingItem', 'dressing_item_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 		);
@@ -102,6 +101,11 @@ class OphNuIntraoperative_PostOp_DressingItems extends BaseActiveRecordVersioned
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
 		));
+	}
+
+	public function getName()
+	{
+		return $this->ophnuintraoperative_postop_dressing_item->name;
 	}
 }
 ?>

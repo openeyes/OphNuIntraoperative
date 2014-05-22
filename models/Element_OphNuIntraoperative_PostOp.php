@@ -38,7 +38,7 @@
  * @property User $user
  * @property User $usermodified
  * @property OphNuIntraoperative_PostOp_SpeciminCollected $specimin_collected
- * @property Element_OphNuIntraoperative_PostOp_DressingItems_Assignment $dressing_itemss
+ * @property OphNuIntraoperative_PostOp_DressingItems $dressing_itemss
  * @property OphnuintraoperativePostopProceduresPerformedProceduresPerformed $procedures_performeds
  * @property User $circulating_nurse
  * @property User $scrub_nurse
@@ -86,7 +86,7 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 			'specimin_collected' => array(self::BELONGS_TO, 'OphNuIntraoperative_PostOp_SpeciminCollected', 'specimin_collected_id'),
-			'dressing_itemss' => array(self::HAS_MANY, 'Element_OphNuIntraoperative_PostOp_DressingItems_Assignment', 'element_id'),
+			'dressing_itemss' => array(self::HAS_MANY, 'OphNuIntraoperative_PostOp_DressingItems', 'element_id'),
 			'procedures_performeds' => array(self::HAS_MANY, 'OphNuIntraoperative_PostOp_Procedures_Performed_Assignment', 'element_id'),
 			'procedures' => array(self::MANY_MANY, 'Procedure', 'ophnuintraoperative_ppppp_assignment(element_id, proc_id)'),
 			'circulating_nurse' => array(self::BELONGS_TO, 'User', 'circulating_nurse_id'),

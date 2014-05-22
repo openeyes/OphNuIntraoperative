@@ -18,8 +18,8 @@
  */
 ?>
 	<div class="element-fields">
-		<?php echo $form->checkBox($element, 'wristband_verified', array('text-align' => 'right','class' => 'linked-fields', 'data-linked-fields' => 'MultiSelect_two_identifiers', 'data-linked-values' => '1'), array('label' => 3, 'field' => 4))?>
-		<?php echo $form->multiSelectList($element, 'MultiSelect_two_identifiers', 'two_identifierss', 'ophnuintraoperative_handoff_two_identifiers_id', CHtml::listData(OphNuIntraoperative_Handoff_TwoIdentifiers::model()->findAll(array('order'=>'display_order asc')),'id','name'), array(), array('empty' => '- Please select -', 'label' => 'Two identifiers'), !$element->wristband_verified, false, null, false, false, array('label' => 3, 'field' => 4))?>
+		<?php echo $form->checkBox($element, 'wristband_verified', array('text-align' => 'right','class' => 'linked-fields', 'data-linked-fields' => 'two_identifiers', 'data-linked-values' => '1'), array('label' => 3, 'field' => 4))?>
+		<?php echo $form->multiSelectList($element, 'two_identifiers', 'two_identifiers', 'identifier_id', CHtml::listData(OphNuIntraoperative_Handoff_Identifier::model()->findAll(array('order'=>'display_order asc')),'id','name'), array(), array('empty' => '- Please select -', 'label' => 'Two identifiers'), !$element->wristband_verified, false, null, false, false, array('label' => 3, 'field' => 4))?>
 		<?php echo $form->checkBox($element, 'allergies_verified', array('text-align' => 'right'), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->dropDownList($element, 'hand_off_from_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty' => '- Select -'),false,array('label' => 3, 'field' => 4))?>
 		<?php echo $form->dropDownList($element, 'hand_off_to_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty' => '- Select -'),false,array('label' => 3, 'field' =>
