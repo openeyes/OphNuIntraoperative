@@ -24,8 +24,8 @@
 		<?php echo $form->textArea($element, 'dressing_other', array(), !$element->hasMultiSelectValue('dressing_items','Other (please specify)'), array(), array('label' => 3, 'field' => 4))?>
 		<?php $form->widget('application.widgets.ProcedureSelection',array(
 			'element' => $element,
+			'field' => 'procedures',
 			'durations' => false,
-			'relation' => 'procedures',
 			'procedureListPosition' => 'vertical',
 			'layoutColumns' => array(
 				'label' => 3,

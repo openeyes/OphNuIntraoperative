@@ -46,12 +46,12 @@
 			</div>
 		<?php }?>
 		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('procedures_performed'))?>:</div></div>
-			<div class="large-9 column end"><div class="data-value"><?php if (!$element->procedures_performeds) {?>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('procedures'))?>:</div></div>
+			<div class="large-9 column end"><div class="data-value"><?php if (!$element->procedures) {?>
 							None
 						<?php } else {?>
-								<?php foreach ($element->procedures_performeds as $item) {
-									echo $item->proc->term?><br/>
+								<?php foreach ($element->procedures as $item) {
+									echo $item->term?><br/>
 								<?php }?>
 						<?php }?>
 			</div></div>

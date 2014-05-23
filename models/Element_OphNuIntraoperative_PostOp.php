@@ -71,7 +71,7 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, specimin_collected_id, specimin_comments, dressing_other, circulating_nurse_id, scrub_nurse_id, dressing_items', 'safe'),
+			array('event_id, specimin_collected_id, specimin_comments, dressing_other, circulating_nurse_id, scrub_nurse_id, dressing_items, procedures', 'safe'),
 			array('id, event_id, specimin_collected_id, specimin_comments, circulating_nurse_id, scrub_nurse_id, ', 'safe', 'on' => 'search'),
 		);
 	}
@@ -90,8 +90,8 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 			'specimin_collected' => array(self::BELONGS_TO, 'OphNuIntraoperative_PostOp_SpeciminCollected', 'specimin_collected_id'),
 			'dressing_items' => array(self::HAS_MANY, 'OphNuIntraoperative_PostOp_DressingItem', 'dressing_item_id', 'through' => 'dressing_items_assignment'),
 			'dressing_items_assignment' => array(self::HAS_MANY, 'OphNuIntraoperative_PostOp_DressingItems', 'element_id'),
-			'procedures_performeds' => array(self::HAS_MANY, 'OphNuIntraoperative_PostOp_Procedures_Performed_Assignment', 'element_id'),
-			'procedures' => array(self::MANY_MANY, 'Procedure', 'ophnuintraoperative_ppppp_assignment(element_id, proc_id)'),
+			'procedures' => array(self::HAS_MANY, 'Procedure', 'proc_id', 'through' => 'procedure_assignment'),
+			'procedure_assignment' => array(self::HAS_MANY, 'OphNuIntraoperative_PostOp_Procedures_Performed_Assignment', 'element_id'),
 			'circulating_nurse' => array(self::BELONGS_TO, 'User', 'circulating_nurse_id'),
 			'scrub_nurse' => array(self::BELONGS_TO, 'User', 'scrub_nurse_id'),
 		);
@@ -109,7 +109,7 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 			'specimin_comments' => 'Specimen comments',
 			'dressing_items' => 'Dressing',
 			'dressing_other' => 'Other dressing',
-			'procedures_performed' => 'Actual procedures performed',
+			'procedures' => 'Actual procedures performed',
 			'circulating_nurse_id' => 'Circulating nurse',
 			'scrub_nurse_id' => 'Scrub nurse',
 		);
