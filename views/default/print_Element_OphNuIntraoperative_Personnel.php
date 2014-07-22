@@ -59,7 +59,7 @@
 		</tr>
 		<tr>
 			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('other'))?></td>
-			<td><span class="big"><?php echo CHtml::encode($element->other)?></span></td>
+			<td><span class="big"><?php echo $element->textWithLineBreaks('other')?></span></td>
 		</tr>
 		<tr>
 			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('who_timeout_completed'))?></td>
