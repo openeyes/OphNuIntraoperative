@@ -46,10 +46,8 @@
  * @property OphNuIntraoperative_Handoff_TapeOrShield $tape_or_shield
  */
 
-class Element_OphNuIntraoperative_Handoff  extends  BaseEventTypeElement
+class Element_OphNuIntraoperative_PatientId extends  BaseEventTypeElement
 {
-	public $auto_update_relations = true;
-
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return the static model class
@@ -64,7 +62,7 @@ class Element_OphNuIntraoperative_Handoff  extends  BaseEventTypeElement
 	 */
 	public function tableName()
 	{
-		return 'et_ophnuintraoperative_handoff';
+		return 'et_ophnuintraoperative_patientid';
 	}
 
 	/**
@@ -73,8 +71,8 @@ class Element_OphNuIntraoperative_Handoff  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, hand_off_from_id, hand_off_to_id, anesthesia_type_id, nonoperative_eye_protected_id, tape_or_shield_id', 'safe'),
-			array('id, event_id, hand_off_from_id, hand_off_to_id, anesthesia_type_id, nonoperative_eye_protected_id, tape_or_shield_id, ', 'safe', 'on' => 'search'),
+			array('event_id, wristband_verified, allergies_verified', 'safe'),
+			array('id, event_id, wristband_verified, allergies_verified', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -89,11 +87,6 @@ class Element_OphNuIntraoperative_Handoff  extends  BaseEventTypeElement
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-			'hand_off_from' => array(self::BELONGS_TO, 'User', 'hand_off_from_id'),
-			'hand_off_to' => array(self::BELONGS_TO, 'User', 'hand_off_to_id'),
-			'anesthesia_type' => array(self::BELONGS_TO, 'OphNuIntraoperative_Handoff_Anaesthesia_Type', 'anesthesia_type_id'),
-			'nonoperative_eye_protected' => array(self::BELONGS_TO, 'OphNuIntraoperative_Handoff_NonoperativeEyeProtected', 'nonoperative_eye_protected_id'),
-			'tape_or_shield' => array(self::BELONGS_TO, 'OphNuIntraoperative_Handoff_TapeOrShield', 'tape_or_shield_id'),
 		);
 	}
 
@@ -105,11 +98,8 @@ class Element_OphNuIntraoperative_Handoff  extends  BaseEventTypeElement
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'hand_off_from_id' => 'Hand off from',
-			'hand_off_to_id' => 'Hand off to',
-			'anesthesia_type_id' => 'Anesthesia type',
-			'nonoperative_eye_protected_id' => 'Non-operative eye protected',
-			'tape_or_shield_id' => 'Tape or shield',
+			'wristband_verified' => 'Patient ID/wristband verified with two identifiers',
+			'allergies_verified' => 'Allergies verified',
 		);
 	}
 
@@ -123,26 +113,10 @@ class Element_OphNuIntraoperative_Handoff  extends  BaseEventTypeElement
 
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('event_id', $this->event_id, true);
-		$criteria->compare('hand_off_from_id', $this->hand_off_from_id);
-		$criteria->compare('hand_off_to_id', $this->hand_off_to_id);
-		$criteria->compare('anesthesia_type_id', $this->anesthesia_type_id);
-		$criteria->compare('nonoperative_eye_protected_id', $this->nonoperative_eye_protected_id);
-		$criteria->compare('tape_or_shield_id', $this->tape_or_shield_id);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
 		));
-	}
-
-	public function beforeValidate()
-	{
-		if ($this->nonoperative_eye_protected && $this->nonoperative_eye_protected->name == 'Yes') {
-			if (!$this->tape_or_shield) {
-				$this->addError('tape_or_shield_id',$this->getAttributeLabel('tape_or_shield_id').' cannot be blank.');
-			}
-		}
-
-		return parent::beforeValidate();
 	}
 }
 ?>

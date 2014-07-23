@@ -19,27 +19,6 @@
 ?>
 	<div class="element-data">
 		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('wristband_verified'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->wristband_verified ? 'Yes' : 'No'?></div></div>
-		</div>
-		<?php if ($element->wristband_verified) {?>
-			<div class="row data-row">
-				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('two_identifiers'))?>:</div></div>
-				<div class="large-9 column end"><div class="data-value"><?php if (!$element->two_identifiers) {?>
-								None
-							<?php } else {?>
-									<?php foreach ($element->two_identifiers as $item) {
-										echo $item->name?><br/>
-									<?php }?>
-							<?php }?>
-				</div></div>
-			</div>
-		<?php }?>
-		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('allergies_verified'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->allergies_verified ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('hand_off_from_id'))?></div></div>
 			<div class="large-9 column end"><div class="data-value"><?php echo $element->hand_off_from ? $element->hand_off_from->fullName : 'None'?></div></div>
 		</div>
