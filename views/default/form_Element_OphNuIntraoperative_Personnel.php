@@ -123,7 +123,7 @@
 				</label>
 			</div>
 			<div class="large-3 column end">
-				<?php echo $form->textField($element, 'other', array('nowrapper' => true))?>
+				<?php echo $form->textArea($element, 'other', array('nowrapper' => true))?>
 			</div>
 		</div>
 		<?php echo $form->checkBox($element, 'who_timeout_completed', array('text-align' => 'right'), array('label' => 3, 'field' => 4))?>
