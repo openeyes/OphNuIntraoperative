@@ -24,7 +24,6 @@
  * @property string $id
  * @property integer $event_id
  * @property integer $specimin_collected_id
- * @property string $specimin_comments
  * @property integer $dressing_used
  * @property string $dressing_other
  * @property integer $circulating_nurse_id
@@ -71,8 +70,8 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, specimin_collected_id, specimin_comments, dressing_other, circulating_nurse_id, scrub_nurse_id, dressing_items, procedures', 'safe'),
-			array('id, event_id, specimin_collected_id, specimin_comments, circulating_nurse_id, scrub_nurse_id, ', 'safe', 'on' => 'search'),
+			array('event_id, specimin_collected_id, dressing_other, circulating_nurse_id, scrub_nurse_id, dressing_items, procedures', 'safe'),
+			array('id, event_id, specimin_collected_id, circulating_nurse_id, scrub_nurse_id, ', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -94,6 +93,7 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 			'procedure_assignment' => array(self::HAS_MANY, 'OphNuIntraoperative_PostOp_Procedures_Performed_Assignment', 'element_id'),
 			'circulating_nurse' => array(self::BELONGS_TO, 'User', 'circulating_nurse_id'),
 			'scrub_nurse' => array(self::BELONGS_TO, 'User', 'scrub_nurse_id'),
+			'specimens' => array(self::HAS_MANY, 'OphNuIntraoperative_PostOp_Specimen', 'element_id'),
 		);
 	}
 
@@ -106,7 +106,6 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 			'id' => 'ID',
 			'event_id' => 'Event',
 			'specimin_collected_id' => 'Specimen collected and documented',
-			'specimin_comments' => 'Specimen comments',
 			'dressing_items' => 'Dressing',
 			'dressing_other' => 'Other dressing',
 			'procedures' => 'Actual procedures performed',
@@ -126,7 +125,6 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('event_id', $this->event_id, true);
 		$criteria->compare('specimin_collected_id', $this->specimin_collected_id);
-		$criteria->compare('specimin_comments', $this->specimin_comments);
 		$criteria->compare('dressing_items', $this->dressing_items);
 		$criteria->compare('procedures_performed', $this->procedures_performed);
 		$criteria->compare('circulating_nurse_id', $this->circulating_nurse_id);
@@ -140,8 +138,8 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 	protected function beforeValidate()
 	{
 		if ($this->specimin_collected && $this->specimin_collected->name == 'Yes') {
-			if (!$this->specimin_comments) {
-				$this->addError('specimin_comments',$this->getAttributeLabel('specimin_comments').' cannot be blank');
+			if (empty($this->specimens)) {
+				$this->addError('specimens','Please enter at least one specimen.');
 			}
 		}
 

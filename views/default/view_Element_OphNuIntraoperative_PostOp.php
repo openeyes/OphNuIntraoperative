@@ -18,6 +18,16 @@
  */
 ?>
 	<div class="element-data">
+		<?php $this->widget('application.widgets.Records', array(
+			'form' => $form,
+			'element' => $element,
+			'model' => new OphNuIntraoperative_PostOp_Specimen,
+			'field' => 'specimens',
+			'edit' => false,
+			'row_view' => 'protected/modules/OphNuIntraoperative/views/default/_specimen_row.php',
+			'no_items_text' => 'No specimens have been recorded.',
+			'headings' => array('Label','Date/time','Type','Description','Results received'),
+		))?>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('specimin_collected_id'))?></div></div>
 			<div class="large-9 column end"><div class="data-value"><?php echo $element->specimin_collected ? $element->specimin_collected->name : 'None'?></div></div>
