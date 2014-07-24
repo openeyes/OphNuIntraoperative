@@ -2,7 +2,7 @@
 $(document).ready(function() {
 	handleButton($('#et_save'),function() {
 	});
-	
+
 	handleButton($('#et_cancel'),function(e) {
 		if (m = window.location.href.match(/\/update\/[0-9]+/)) {
 			window.location.href = window.location.href.replace('/update/','/view/');
@@ -35,26 +35,6 @@ $(document).ready(function() {
 				el.text(currentText+', '+newText);
 			}
 		}
-	});
-
-	$('.time-now').click(function(e) {
-		e.preventDefault();
-
-		var d = new Date;
-
-		var h = d.getHours();
-		var m = d.getMinutes();
-
-		if (h <10) {
-			h = '0'+h;
-		}
-		if (m <10) {
-			m = '0'+m;
-		}
-
-		var element = $(this).closest('section').data('element-type-class');
-
-		$('#'+element+'_'+$(this).data('target')).val(h+':'+m);
 	});
 });
 

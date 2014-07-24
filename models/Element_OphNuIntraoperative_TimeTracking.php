@@ -26,10 +26,8 @@
  * @property string $enters_or
  * @property string $surgery_stop
  * @property string $time_out
- * @property string $second_surgery_stop
  * @property string $surgery_start
  * @property string $sign_out
- * @property string $second_surgery_start
  * @property string $leaves_or
  *
  * The followings are the available model relations:
@@ -66,8 +64,8 @@ class Element_OphNuIntraoperative_TimeTracking  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, enters_or, surgery_stop, time_out, second_surgery_stop, surgery_start, sign_out, second_surgery_start, leaves_or, ', 'safe'),
-			array('id, event_id, enters_or, surgery_stop, time_out, second_surgery_stop, surgery_start, sign_out, second_surgery_start, leaves_or, ', 'safe', 'on' => 'search'),
+			array('event_id, enters_or, surgery_stop, time_out, surgery_start, sign_out, leaves_or, ', 'safe'),
+			array('id, event_id, enters_or, surgery_stop, time_out, surgery_start, sign_out, leaves_or, ', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -96,10 +94,8 @@ class Element_OphNuIntraoperative_TimeTracking  extends  BaseEventTypeElement
 			'enters_or' => 'Patient enters OR',
 			'surgery_stop' => 'Surgery stop',
 			'time_out' => 'Time out',
-			'second_surgery_stop' => 'Second surgery stop',
 			'surgery_start' => 'Surgery start',
 			'sign_out' => 'Sign out',
-			'second_surgery_start' => 'Second surgery start',
 			'leaves_or' => 'Patient leaves OR',
 		);
 	}
@@ -117,10 +113,8 @@ class Element_OphNuIntraoperative_TimeTracking  extends  BaseEventTypeElement
 		$criteria->compare('enters_or', $this->enters_or);
 		$criteria->compare('surgery_stop', $this->surgery_stop);
 		$criteria->compare('time_out', $this->time_out);
-		$criteria->compare('second_surgery_stop', $this->second_surgery_stop);
 		$criteria->compare('surgery_start', $this->surgery_start);
 		$criteria->compare('sign_out', $this->sign_out);
-		$criteria->compare('second_surgery_start', $this->second_surgery_start);
 		$criteria->compare('leaves_or', $this->leaves_or);
 
 		return new CActiveDataProvider(get_class($this), array(
@@ -130,7 +124,7 @@ class Element_OphNuIntraoperative_TimeTracking  extends  BaseEventTypeElement
 
 	protected function afterValidate()
 	{
-		foreach (array('enters_or','surgery_stop','time_out','second_surgery_stop','surgery_start','sign_out','second_surgery_start','leaves_or') as $field) {
+		foreach (array('enters_or','surgery_stop','time_out','surgery_start','sign_out','leaves_or') as $field) {
 			if ($this->$field) {
 				if (!preg_match('/^([0-9]{1,2}):([0-9]{2})$/',$this->{$field},$m) || $m[1] > 23 || $m[2] > 59) {
 					$this->addError($field,'Invalid time format for '.$this->getAttributeLabel($field));
