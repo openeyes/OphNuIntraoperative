@@ -18,6 +18,9 @@
  */
 ?>
 <?php
+$widgetOptions = array(
+	'showTimeNowButton' => true
+);
 $htmlOptions = array();
 $layoutColumns = array(
 	'label' => 6,
@@ -28,28 +31,28 @@ $layoutColumns = array(
 
 	<div class="row field-row">
 		<div class="large-6 column">
-			<?php echo $form->timePicker($element, 'enters_or', $htmlOptions, $layoutColumns);?>
+			<?php echo $form->timePicker($element, 'enters_or', $widgetOptions, $htmlOptions, $layoutColumns);?>
 		</div>
 		<div class="large-6 column">
-			<?php echo $form->timePicker($element, 'surgery_stop', $htmlOptions, $layoutColumns);?>
-		</div>
-	</div>
-
-	<div class="row field-row">
-		<div class="large-6 column">
-			<?php echo $form->timePicker($element, 'time_out', $htmlOptions, $layoutColumns);?>
-		</div>
-		<div class="large-6 column">
-			<?php echo $form->timePicker($element, 'surgery_start', $htmlOptions, $layoutColumns);?>
+			<?php echo $form->timePicker($element, 'surgery_stop', $widgetOptions, $htmlOptions, $layoutColumns);?>
 		</div>
 	</div>
 
 	<div class="row field-row">
 		<div class="large-6 column">
-			<?php echo $form->timePicker($element, 'sign_out', $htmlOptions, $layoutColumns);?>
+			<?php echo $form->timePicker($element, 'time_out', $widgetOptions, $htmlOptions, $layoutColumns);?>
 		</div>
 		<div class="large-6 column">
-			<?php echo $form->timePicker($element, 'leaves_or', $htmlOptions, $layoutColumns);?>
+			<?php echo $form->timePicker($element, 'surgery_start', $widgetOptions, $htmlOptions, $layoutColumns);?>
+		</div>
+	</div>
+
+	<div class="row field-row">
+		<div class="large-6 column">
+			<?php echo $form->timePicker($element, 'sign_out', $widgetOptions, $htmlOptions, $layoutColumns);?>
+		</div>
+		<div class="large-6 column">
+			<?php echo $form->timePicker($element, 'leaves_or', $widgetOptions, $htmlOptions, $layoutColumns);?>
 		</div>
 	</div>
 
