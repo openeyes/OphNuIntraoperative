@@ -38,7 +38,7 @@
 			<div class="large-9 column">
 				<div class="row field-row">
 					<div class="large-1 column">
-						<?php echo $form->textField($element, 'nasal_insert_time', array('nowrapper' => true), array(), array('label' => 3, 'field' => 1))?>
+						<?php echo $form->timePicker($element, 'nasal_insert_time', array(), array('nowrapper' => true), array('label' => 3, 'field' => 1))?>
 					</div>
 					<div class="large-2 column end">
 						<button type="submit" class="secondary small time-now" data-target="nasal_insert_time">Now</button>
@@ -53,7 +53,7 @@
 			<div class="large-9 column">
 				<div class="row field-row">
 					<div class="large-1 column">
-						<?php echo $form->textField($element, 'nasal_remove_time', array('nowrapper' => true), array(), array('label' => 3, 'field' => 1))?>
+						<?php echo $form->timePicker($element, 'nasal_remove_time', array(), array('nowrapper' => true), array('label' => 3, 'field' => 1))?>
 					</div>
 					<div class="large-2 column end">
 						<button type="submit" class="secondary small time-now" data-target="nasal_remove_time">Now</button>
