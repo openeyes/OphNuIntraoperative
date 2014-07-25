@@ -26,16 +26,16 @@
 			<td><span class="big"><?php echo CHtml::encode($element->enters_or)?></span></td>
 		</tr>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('surgery_stop'))?></td>
-			<td><span class="big"><?php echo CHtml::encode($element->surgery_stop)?></span></td>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('surgery_start'))?></td>
+			<td><span class="big"><?php echo CHtml::encode($element->surgery_start)?></span></td>
 		</tr>
 		<tr>
 			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('time_out'))?></td>
 			<td><span class="big"><?php echo CHtml::encode($element->time_out)?></span></td>
 		</tr>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('surgery_start'))?></td>
-			<td><span class="big"><?php echo CHtml::encode($element->surgery_start)?></span></td>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('surgery_stop'))?></td>
+			<td><span class="big"><?php echo CHtml::encode($element->surgery_stop)?></span></td>
 		</tr>
 		<tr>
 			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('sign_out'))?></td>
