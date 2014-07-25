@@ -69,11 +69,12 @@ class DefaultController extends BaseEventTypeController
 				$specimen->element_id = $element->id;
 				$specimen->label = $label;
 
-				foreach (array('type_id','location','centre_name','doctor_name','timestamp') as $field) {
+				foreach (array('type_id','location','centre_name','doctor_name','timestamp','results_received','results_received_timestamp') as $field) {
 					$specimen->$field = $data['OphNuIntraoperative_PostOp_Specimen'][$field][$i];
 				}
 
 				$specimen->time = date('H:i',strtotime($specimen->timestamp));
+				$specimen->results_received_time = date('H:i',strtotime($specimen->results_received_timestamp));
 
 				$specimens[] = $specimen;
 			}

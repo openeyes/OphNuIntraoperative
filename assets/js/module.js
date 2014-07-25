@@ -36,6 +36,21 @@ $(document).ready(function() {
 			}
 		}
 	});
+
+	$('.specimenResultReceived').die('click').live('click',function(e) {
+		e.preventDefault();
+
+		var d = new Date;
+
+		var h = withLeadingZero(d.getHours());
+		var m = withLeadingZero(d.getMinutes());
+		var s = withLeadingZero(d.getSeconds());
+
+		$(this).closest('td').next('td').children('.resultsReceived').val(1);
+		$(this).closest('td').next('td').children('.resultsReceivedTimestamp').val($.datepicker.formatDate('yy-mm-dd',d)+' '+h+':'+m+':'+s);
+		$(this).closest('td').next('td').children('.editRecordItemDiv').remove();
+		$(this).closest('td').html($.datepicker.formatDate('d M yy',d)+' '+h+':'+m);
+	});
 });
 
 function ucfirst(str) { str += ''; var f = str.charAt(0).toUpperCase(); return f + str.substr(1); }
@@ -44,4 +59,13 @@ function eDparameterListener(_drawing) {
 	if (_drawing.selectedDoodle != null) {
 		// handle event
 	}
+}
+
+function withLeadingZero(value)
+{
+	value = value.toString();
+	if (value.length <2) {
+		return '0'+value;
+	}
+	return value;
 }

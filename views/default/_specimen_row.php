@@ -32,19 +32,38 @@
 		<?php echo $item->description?>
 	</td>
 	<td>
+		<?php if ($item->results_received) {?>
+			<?php echo $item->NHSDate('results_received_timestamp')?>
+			<?php echo date('H:i',strtotime($item->results_received_timestamp))?>
+		<?php }else{?>
+			<?php if ($edit) {?>
+				<div class="specimenReceived">
+					<input type="checkbox" class="specimenResultReceived" name="specimenResultReceived<?php echo $i?>" id="specimenResultReceived<?php echo $i?>" />
+					<label for="specimenResultReceived<?php echo $i?>">
+						Received
+					</label>
+				</div>
+			<?php }else{?>
+				Not received
+			<?php }?>
+		<?php }?>
 	</td>
 	<?php if ($edit) {?>
 		<td>
-			<a class="editRecordItem">edit</a>
-			&nbsp;&nbsp;
+			<?php if (!$item->results_received) {?>
+				<div class="editRecordItemDiv">
+					<a class="editRecordItem">edit</a>
+					&nbsp;&nbsp;
+				</div>
+			<?php }?>
 			<a class="deleteRecordItem">delete</a>
 			<input type="hidden" name="<?php echo CHtml::modelName($item)?>[label][]" value="<?php echo CHtml::encode($item->label)?>" />
 			<input type="hidden" name="<?php echo CHtml::modelName($item)?>[type_id][]" value="<?php echo CHtml::encode($item->type_id)?>" />
 			<input type="hidden" name="<?php echo CHtml::modelName($item)?>[location][]" value="<?php echo CHtml::encode($item->location)?>" />
 			<input type="hidden" name="<?php echo CHtml::modelName($item)?>[centre_name][]" value="<?php echo CHtml::encode($item->centre_name)?>" />
 			<input type="hidden" name="<?php echo CHtml::modelName($item)?>[doctor_name][]" value="<?php echo CHtml::encode($item->doctor_name)?>" />
-			<input type="hidden" name="<?php echo CHtml::modelName($item)?>[results_received][]" value="<?php echo CHtml::encode($item->results_received)?>" />
-			<input type="hidden" name="<?php echo CHtml::modelName($item)?>[results_received_timestamp][]" value="<?php echo CHtml::encode($item->results_received_timestamp)?>" />
+			<input type="hidden" class="resultsReceived" name="<?php echo CHtml::modelName($item)?>[results_received][]" value="<?php echo CHtml::encode($item->results_received)?>" />
+			<input type="hidden" class="resultsReceivedTimestamp" name="<?php echo CHtml::modelName($item)?>[results_received_timestamp][]" value="<?php echo CHtml::encode($item->results_received_timestamp)?>" />
 			<input type="hidden" name="<?php echo CHtml::modelName($item)?>[timestamp][]" value="<?php echo CHtml::encode($item->timestamp)?>" />
 		</td>
 	<?php }?>

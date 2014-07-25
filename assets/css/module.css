@@ -78,3 +78,8 @@
   width: 35%;
   margin: 0 auto;
 }
+
+/* line 74, ../sass/components/_event.scss */
+.specimenReceived label {
+  display: inline-block;
+}
