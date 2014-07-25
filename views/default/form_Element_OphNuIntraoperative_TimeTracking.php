@@ -34,7 +34,7 @@ $layoutColumns = array(
 			<?php echo $form->timePicker($element, 'enters_or', $widgetOptions, $htmlOptions, $layoutColumns);?>
 		</div>
 		<div class="large-6 column">
-			<?php echo $form->timePicker($element, 'surgery_stop', $widgetOptions, $htmlOptions, $layoutColumns);?>
+			<?php echo $form->timePicker($element, 'surgery_start', $widgetOptions, $htmlOptions, $layoutColumns);?>
 		</div>
 	</div>
 
@@ -43,7 +43,7 @@ $layoutColumns = array(
 			<?php echo $form->timePicker($element, 'time_out', $widgetOptions, $htmlOptions, $layoutColumns);?>
 		</div>
 		<div class="large-6 column">
-			<?php echo $form->timePicker($element, 'surgery_start', $widgetOptions, $htmlOptions, $layoutColumns);?>
+			<?php echo $form->timePicker($element, 'surgery_stop', $widgetOptions, $htmlOptions, $layoutColumns);?>
 		</div>
 	</div>
 
