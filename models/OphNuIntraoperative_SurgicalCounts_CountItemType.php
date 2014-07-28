@@ -1,5 +1,4 @@
-<?php
-/**
+<?php /**
  * OpenEyes
  *
  * (C) Moorfields Eye Hospital NHS Foundation Trust, 2008-2011
@@ -18,14 +17,11 @@
  */
 
 /**
- * This is the model class for table "et_ophnuintraoperative_surgicalcounts".
+ * This is the model class for table "ophnuintraoperative_operationprep_prep_solution".
  *
  * The followings are the available columns in table:
  * @property string $id
- * @property integer $event_id
- * @property integer $count_discrepancies
- * @property integer $surgeon_notified
- * @property string $comments
+ * @property string $name
  *
  * The followings are the available model relations:
  *
@@ -36,7 +32,7 @@
  * @property User $usermodified
  */
 
-class Element_OphNuIntraoperative_SurgicalCounts  extends  BaseEventTypeElement
+class OphNuIntraoperative_SurgicalCounts_CountItemType extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -52,7 +48,7 @@ class Element_OphNuIntraoperative_SurgicalCounts  extends  BaseEventTypeElement
 	 */
 	public function tableName()
 	{
-		return 'et_ophnuintraoperative_surgicalcounts';
+		return 'ophtrintraoperative_count_item_type';
 	}
 
 	/**
@@ -61,8 +57,9 @@ class Element_OphNuIntraoperative_SurgicalCounts  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, count_discrepancies, surgeon_notified, comments', 'safe'),
-			array('id, event_id, count_discrepancies, surgeon_notified, comments, ', 'safe', 'on' => 'search'),
+			array('name, display_order', 'safe'),
+			array('name', 'required'),
+			array('id, name', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -77,7 +74,6 @@ class Element_OphNuIntraoperative_SurgicalCounts  extends  BaseEventTypeElement
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-			'counts' => array(self::HAS_MANY, 'OphNuIntraoperative_SurgicalCounts_Count', 'element_id', 'order' => 'count_type_id asc'),
 		);
 	}
 
@@ -88,10 +84,7 @@ class Element_OphNuIntraoperative_SurgicalCounts  extends  BaseEventTypeElement
 	{
 		return array(
 			'id' => 'ID',
-			'event_id' => 'Event',
-			'count_discrepancies' => 'Count discrepancies',
-			'surgeon_notified' => 'Surgeon notified',
-			'comments' => 'Discrepancy comments',
+			'name' => 'Name',
 		);
 	}
 
@@ -104,10 +97,7 @@ class Element_OphNuIntraoperative_SurgicalCounts  extends  BaseEventTypeElement
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('id', $this->id, true);
-		$criteria->compare('event_id', $this->event_id, true);
-		$criteria->compare('count_discrepancies', $this->count_discrepancies);
-		$criteria->compare('surgeon_notified', $this->surgeon_notified);
-		$criteria->compare('comments', $this->comments);
+		$criteria->compare('name', $this->name, true);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,

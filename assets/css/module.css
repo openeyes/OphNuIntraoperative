@@ -83,3 +83,39 @@
 .specimenReceived label {
   display: inline-block;
 }
+
+/* line 80, ../sass/components/_event.scss */
+.Element_OphNuIntraoperative_SurgicalCounts #count_type_id {
+  margin-left: 1.65em;
+}
+/* line 83, ../sass/components/_event.scss */
+.Element_OphNuIntraoperative_SurgicalCounts .multi-select-list {
+  margin-left: 1.37em;
+  width: 14.6em;
+}
+/* line 89, ../sass/components/_event.scss */
+.Element_OphNuIntraoperative_SurgicalCounts .MultiSelectList li span {
+  display: inline-block;
+  width: 11em;
+}
+/* line 93, ../sass/components/_event.scss */
+.Element_OphNuIntraoperative_SurgicalCounts .MultiSelectList li input[type="text"] {
+  display: inline-block;
+  width: 5em;
+}
+/* line 102, ../sass/components/_event.scss */
+.Element_OphNuIntraoperative_SurgicalCounts .recordsTable tr th:nth-child(1) {
+  width: 12em;
+}
+/* line 105, ../sass/components/_event.scss */
+.Element_OphNuIntraoperative_SurgicalCounts .recordsTable tr th:nth-child(2) {
+  width: 10em;
+}
+/* line 108, ../sass/components/_event.scss */
+.Element_OphNuIntraoperative_SurgicalCounts .recordsTable tr th:nth-child(4) {
+  width: 9em;
+}
+/* line 113, ../sass/components/_event.scss */
+.Element_OphNuIntraoperative_SurgicalCounts .recordsTable .editRecordItemDiv {
+  display: inline;
+}

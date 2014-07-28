@@ -19,7 +19,6 @@
 ?>
 	<div class="element-data">
 		<?php $this->widget('application.widgets.Records', array(
-			'form' => $form,
 			'element' => $element,
 			'model' => new OphNuIntraoperative_PostOp_Specimen,
 			'field' => 'specimens',

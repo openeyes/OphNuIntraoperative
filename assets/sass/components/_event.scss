@@ -75,3 +75,43 @@
 		display: inline-block;
 	}
 }
+
+.Element_OphNuIntraoperative_SurgicalCounts {
+	#count_type_id {
+		margin-left: 1.65em;
+	}
+	.multi-select-list {
+		margin-left: 1.37em;
+		width: 14.6em;
+	}
+	.MultiSelectList {
+		li {
+			span {
+				display: inline-block;
+				width: 11em;
+			}
+			input[type="text"] {
+				display: inline-block;
+				width: 5em;
+			}
+		}
+	}
+	.recordsTable {
+		tr {
+			th {
+				&:nth-child(1) {
+					width: 12em;
+				}
+				&:nth-child(2) {
+					width: 10em;
+				}
+				&:nth-child(4) {
+					width: 9em;
+				}
+			}
+		}
+		.editRecordItemDiv {
+			display: inline;
+		}
+	}
+}

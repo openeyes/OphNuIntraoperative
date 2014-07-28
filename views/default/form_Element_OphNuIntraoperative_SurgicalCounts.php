@@ -18,51 +18,40 @@
  */
 ?>
 	<div class="element-fields">
-		<table class="eventDetail preoperativeChecklist">
-			<tr>
-				<th>COUNTABLE ITEMS</th>
-				<th>First count</th>
-				<th>Second count / sign out</th>
-				<th>Final count</th>
-			</tr>
-			<tr>
-				<th>Needles</th>
-				<td><?php echo $form->textField($element, 'needles1', array('size'=>10,'nowrapper'=>true))?></td>
-				<td><?php echo $form->textField($element, 'needles2', array('size'=>10,'nowrapper'=>true))?></td>
-				<td><?php echo $form->textField($element, 'needles3', array('size'=>10,'nowrapper'=>true))?></td>
-			</tr>
-			<tr>
-				<th>Blades</th>
-				<td><?php echo $form->textField($element, 'blades1', array('size'=>10,'nowrapper'=>true))?></td>
-				<td><?php echo $form->textField($element, 'blades2', array('size'=>10,'nowrapper'=>true))?></td>
-				<td><?php echo $form->textField($element, 'blades3', array('size'=>10,'nowrapper'=>true))?></td>
-			</tr>
-			<tr>
-				<th>Plugs</th>
-				<td><?php echo $form->textField($element, 'plugs1', array('size'=>10,'nowrapper'=>true))?></td>
-				<td><?php echo $form->textField($element, 'plugs2', array('size'=>10,'nowrapper'=>true))?></td>
-				<td><?php echo $form->textField($element, 'plugs3', array('size'=>10,'nowrapper'=>true))?></td>
-			</tr>
-			<tr>
-				<th>Trocars</th>
-				<td><?php echo $form->textField($element, 'trocars1', array('size'=>10,'nowrapper'=>true))?></td>
-				<td><?php echo $form->textField($element, 'trocars2', array('size'=>10,'nowrapper'=>true))?></td>
-				<td><?php echo $form->textField($element, 'trocars3', array('size'=>10,'nowrapper'=>true))?></td>
-			</tr>
-			<tr>
-				<th>Sponges/Gauze</th>
-				<td><?php echo $form->textField($element, 'sponges_gauze1', array('size'=>10,'nowrapper'=>true))?></td>
-				<td><?php echo $form->textField($element, 'sponges_gauze2', array('size'=>10,'nowrapper'=>true))?></td>
-				<td><?php echo $form->textField($element, 'sponges_gauze3', array('size'=>10,'nowrapper'=>true))?></td>
-			</tr>
-			<tr>
-				<th>Pledgetts</th>
-				<td><?php echo $form->textField($element, 'pledgetts1', array('size'=>10,'nowrapper'=>true))?></td>
-				<td><?php echo $form->textField($element, 'pledgetts2', array('size'=>10,'nowrapper'=>true))?></td>
-				<td><?php echo $form->textField($element, 'pledgetts3', array('size'=>10,'nowrapper'=>true))?></td>
-			</tr>
-		</table>
-
+		<?php $form->widget('application.widgets.Records', array(
+			'form' => $form,
+			'element' => $element,
+			'model' => new OphNuIntraoperative_SurgicalCounts_Count,
+			'field' => 'counts',
+			'validate_method' => '/OphNuIntraoperative/default/validateCount',
+			'row_view' => 'protected/modules/OphNuIntraoperative/views/default/_count_row.php',
+			'columns' => array(
+				array(
+					'width' => 8,
+					'fields' => array(
+						array(
+							'field' => 'count_type_id',
+							'type' => 'dropdown',
+							'options' => CHtml::listData(OphNuIntraoperative_SurgicalCounts_CountType::model()->findAll(array('order'=>'display_order asc')),'id','name'),
+							'cycle_on_add' => true,
+						),
+						array(
+							'field' => 'items',
+							'type' => 'multiselect',
+							'options' => CHtml::listData(OphNuIntraoperative_SurgicalCounts_CountItemType::model()->findAll(array('order'=>'display_order asc')),'id','name'),
+							'extra_fields' => array(
+								'value',
+							),
+							'width' => 7,
+						),
+					),
+				),
+			),
+			'no_items_text' => 'No counts have been recorded.',
+			'add_button_text' => 'Add count',
+			'use_last_button_text' => false,
+			'headings' => array('Date/time','Count','Description'),
+		))?>
 		<?php echo $form->radioBoolean($element, 'count_discrepancies', array('class'=>'linked-fields','data-linked-fields'=>'surgeon_notified,comments','data-linked-values'=>'Yes'), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->checkBox($element, 'surgeon_notified', array('text-align' => 'right', 'hide' => !$element->count_discrepancies), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->textArea($element, 'comments', array(), !$element->count_discrepancies, array(), array('label' => 3, 'field' => 4))?>

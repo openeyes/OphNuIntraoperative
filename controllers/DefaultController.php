@@ -4,6 +4,7 @@ class DefaultController extends BaseEventTypeController
 {
 	static protected $action_types = array(
 		'validateSpecimen' => self::ACTION_TYPE_FORM,
+		'validateCount' => self::ACTION_TYPE_FORM,
 	);
 
 	public function actionCreate()
@@ -106,5 +107,121 @@ class DefaultController extends BaseEventTypeController
 		}
 
 		OphNuIntraoperative_PostOp_Specimen::model()->deleteAll($criteria);
+	}
+
+	public function actionValidateCount()
+	{
+		$count = new OphNuIntraoperative_SurgicalCounts_Count;
+		$count->attributes = $_POST;
+
+		$errors = array();
+
+		if (!$count->validate()) {
+			foreach ($count->errors as $error) {
+				$errors[] = $error[0];
+			}
+		}
+
+		if (empty($_POST['value']) || empty($_POST['items'])) {
+			$errors[] = 'You must enter at least one count item';
+		} else {
+			$items = array();
+
+			foreach ($_POST['value'] as $i => $value) {
+				$item = new OphNuIntraoperative_SurgicalCounts_CountItem;
+				$item->item_type_id = $_POST['items'][$i];
+				$item->value = $value;
+
+				if (!$item->validate()) {
+					foreach ($item->errors as $error) {
+						$errors[] = $error[0];
+					}
+				}
+
+				$items[] = $item;
+			}
+
+			$count->items = $items;
+		}
+
+		if (count($errors) == 0) {
+			$count->timestamp = date('Y-m-d',strtotime($count->timestamp)).' '.$count->time.':00';
+			$errors['row'] = $this->renderPartial('_count_row',array('item' => $count, 'edit' => true, 'i' => (integer)$_POST['i']),true);
+		}
+
+		echo json_encode($errors);
+	}
+
+	protected function setComplexAttributes_Element_OphNuIntraoperative_SurgicalCounts($element, $data, $index)
+	{
+		$counts = array();
+
+		if (!empty($data['OphNuIntraoperative_SurgicalCounts_Count']['count_type_id'])) {
+			foreach ($data['OphNuIntraoperative_SurgicalCounts_Count']['count_type_id'] as $i => $count_type_id) {
+				$count = new OphNuIntraoperative_SurgicalCounts_Count;
+				$count->count_type_id = $count_type_id;
+				$count->timestamp = $data['OphNuIntraoperative_SurgicalCounts_Count']['timestamp'][$i];
+				$count->time = date('H:s',strtotime($count->timestamp));
+
+				$items = array();
+
+				foreach ($data['OphNuIntraoperative_SurgicalCounts_Count']['items_'.$data['OphNuIntraoperative_SurgicalCounts_Count']['i'][$i]] as $j => $item_type_id) {
+					$item = new OphNuIntraoperative_SurgicalCounts_CountItem;
+					$item->item_type_id = $item_type_id;
+					$item->value = $data['OphNuIntraoperative_SurgicalCounts_Count']['values_'.$data['OphNuIntraoperative_SurgicalCounts_Count']['i'][$i]][$j];
+
+					$items[] = $item;
+				}
+
+				$count->items = $items;
+
+				$counts[] = $count;
+			}
+		}
+
+		$element->counts = $counts;
+	}
+
+	protected function saveComplexAttributes_Element_OphNuIntraoperative_SurgicalCounts($element, $data, $index)
+	{
+		$ids = array();
+
+		foreach ($element->counts as $count) {
+			$count->element_id = $element->id;
+
+			if (!$count->save()) {
+				throw new Exception("Unable to save count: ".print_r($count->errors,true));
+			}
+
+			$ids[] = $count->id;
+
+			foreach ($count->items as $item) {
+				$item->count_id = $count->id;
+
+				if (!$item->save()) {
+					throw new Exception("Unable to save count item: ".print_r($item->errors,true));
+				}
+			}
+		}
+
+		$criteria = new CDbCriteria;
+		$criteria->addCondition('element_id = :element_id');
+		$criteria->params[':element_id'] = $element->id;
+
+		if (!empty($ids)) {
+			$criteria->addNotInCondition('id',$ids);
+		}
+
+		foreach (OphNuIntraoperative_SurgicalCounts_Count::model()->findAll($criteria) as $count) {
+			foreach ($count->items as $item) {
+				if (!$item->delete()) {
+					throw new Exception("Unable to delete count item: ".print_r($item->errors,true));
+				}
+			}
+
+			if (!$count->delete()) {
+				throw new Exception("Unable to delete count: ".print_r($count->errors,true));
+			}
+		}
 	}
 }

@@ -36,8 +36,10 @@
  * @property User $usermodified
  */
 
-class Element_OphNuIntraoperative_SurgicalCounts  extends  BaseEventTypeElement
+class OphNuIntraoperative_SurgicalCounts_Count	extends  BaseEventTypeElement
 {
+	public $time;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return the static model class
@@ -52,7 +54,7 @@ class Element_OphNuIntraoperative_SurgicalCounts  extends  BaseEventTypeElement
 	 */
 	public function tableName()
 	{
-		return 'et_ophnuintraoperative_surgicalcounts';
+		return 'ophtrintraoperative_count';
 	}
 
 	/**
@@ -61,8 +63,8 @@ class Element_OphNuIntraoperative_SurgicalCounts  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, count_discrepancies, surgeon_notified, comments', 'safe'),
-			array('id, event_id, count_discrepancies, surgeon_notified, comments, ', 'safe', 'on' => 'search'),
+			array('count_type_id, timestamp, time', 'safe'),
+			array('count_type_id, timestamp, time', 'required'),
 		);
 	}
 
@@ -72,12 +74,11 @@ class Element_OphNuIntraoperative_SurgicalCounts  extends  BaseEventTypeElement
 	public function relations()
 	{
 		return array(
-			'element_type' => array(self::HAS_ONE, 'ElementType', 'id','on' => "element_type.class_name='".get_class($this)."'"),
-			'eventType' => array(self::BELONGS_TO, 'EventType', 'event_type_id'),
-			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-			'counts' => array(self::HAS_MANY, 'OphNuIntraoperative_SurgicalCounts_Count', 'element_id', 'order' => 'count_type_id asc'),
+			'element' => array(self::BELONGS_TO, 'Element_OphNuIntraoperative_SurgicalCounts', 'element_id'),
+			'count_type' => array(self::BELONGS_TO, 'OphNuIntraoperative_SurgicalCounts_CountType', 'count_type_id'),
+			'items' => array(self::HAS_MANY, 'OphNuIntraoperative_SurgicalCounts_CountItem', 'count_id', 'order' => 'item_type_id asc'),
 		);
 	}
 
@@ -89,10 +90,21 @@ class Element_OphNuIntraoperative_SurgicalCounts  extends  BaseEventTypeElement
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'count_discrepancies' => 'Count discrepancies',
-			'surgeon_notified' => 'Surgeon notified',
-			'comments' => 'Discrepancy comments',
+			'count_type_id' => 'Count type',
 		);
+	}
+
+	public function getAttributeSuffix()
+	{
+	}
+
+	public function afterFind()
+	{
+		if ($this->timestamp) {
+			$this->time = date('H:i',strtotime($this->timestamp));
+		}
+
+		return parent::afterFind();
 	}
 
 	/**
@@ -104,14 +116,25 @@ class Element_OphNuIntraoperative_SurgicalCounts  extends  BaseEventTypeElement
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('id', $this->id, true);
-		$criteria->compare('event_id', $this->event_id, true);
-		$criteria->compare('count_discrepancies', $this->count_discrepancies);
-		$criteria->compare('surgeon_notified', $this->surgeon_notified);
-		$criteria->compare('comments', $this->comments);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
 		));
+	}
+
+	public function getDescription()
+	{
+		$desc = '';
+
+		foreach ($this->items as $i => $item) {
+			if ($i >0) {
+				$desc .= ', ';
+			}
+
+			$desc .= $item->item_type->name.': '.$item->value;
+		}
+
+		return $desc;
 	}
 }
 ?>
