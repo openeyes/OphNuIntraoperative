@@ -71,7 +71,7 @@ class Element_OphNuIntraoperative_PatientId extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, wristband_verified, allergies_verified', 'safe'),
+			array('event_id, wristband_verified, allergies_verified, booking_event_id', 'safe'),
 			array('id, event_id, wristband_verified, allergies_verified', 'safe', 'on' => 'search'),
 		);
 	}

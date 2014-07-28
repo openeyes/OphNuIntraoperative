@@ -18,6 +18,7 @@
  */
 ?>
 	<div class="element-fields">
+		<input type="hidden" name="<?php echo CHtml::modelName($element)?>[booking_event_id]" value="<?php echo $element->id ? $element->booking_event_id : @$_GET['booking_event_id']?>" />
 		<?php echo $form->checkBox($element, 'wristband_verified', array('text-align' => 'right'), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->checkBox($element, 'allergies_verified', array('text-align' => 'right'), array('label' => 3, 'field' => 4))?>
 	</div>

@@ -2,14 +2,73 @@
 
 class DefaultController extends BaseEventTypeController
 {
+	protected $booking_operation;
+	protected $unbooked = false;
+
 	static protected $action_types = array(
 		'validateSpecimen' => self::ACTION_TYPE_FORM,
 		'validateCount' => self::ACTION_TYPE_FORM,
 	);
 
+	protected function initActionCreate()
+	{
+		parent::initActionCreate();
+
+		if (isset($_GET['booking_event_id'])) {
+			if (!$api = Yii::app()->moduleAPI->get('OphTrOperationbooking')) {
+				throw new Exception('invalid request for booking event');
+			}
+			if (!$this->booking_operation = $api->getOperationForEvent($_GET['booking_event_id'])) {
+				throw new Exception('booking event not found');
+			}
+		}
+		elseif (isset($_GET['unbooked'])) {
+			$this->unbooked = true;
+		}
+	}
+
 	public function actionCreate()
 	{
-		parent::actionCreate();
+		$errors = array();
+
+		if (!empty($_POST)) {
+			if (preg_match('/^booking([0-9]+)$/',@$_POST['SelectBooking'],$m)) {
+				$this->redirect(array('/OphNuIntraoperative/Default/create?patient_id='.$this->patient->id.'&booking_event_id='.$m[1]));
+			}
+
+			$errors = array('Operation' => array('Please select a booked operation'));
+		}
+
+		if ($this->booking_operation || $this->unbooked) {
+			parent::actionCreate();
+		} else {
+			// set up form for selecting a booking for the Op note
+			$bookings = array();
+
+			if ($api = Yii::app()->moduleAPI->get('OphTrOperationbooking')) {
+				$bookings = $api->getOpenBookingsForEpisode($this->episode->id);
+			}
+
+			$this->title = !empty($bookings) ? 'Please select booking' : 'No bookings created';
+			$this->event_tabs = array(
+				array(
+					'label' => !empty($bookings) ? 'Select a booking' : 'No bookings created',
+					'active' => true,
+				),
+			);
+			$cancel_url = ($this->episode) ? '/patient/episode/'.$this->episode->id : '/patient/episodes/'.$this->patient->id;
+			$this->event_actions = array(
+				EventAction::link('Cancel',
+					Yii::app()->createUrl($cancel_url),
+					null, array('class' => 'button small warning')
+				)
+			);
+
+			$this->render('select_event',array(
+				'errors' => $errors,
+				'bookings' => $bookings,
+			));
+		}
 	}
 
 	public function actionUpdate($id)
@@ -223,5 +282,28 @@ class DefaultController extends BaseEventTypeController
 				throw new Exception("Unable to delete count: ".print_r($count->errors,true));
 			}
 		}
+	}
+
+	public function getBookingOperation()
+	{
+		foreach ($this->open_elements as $element) {
+			if (CHtml::modelName($element) == 'Element_OphNuIntraoperative_PatientId') {
+				break;
+			}
+		}
+
+		if (!($event_id = $element->id ? $element->booking_event_id : @$_GET['booking_event_id'])) {
+			return false;
+		}
+
+		if (!$api = Yii::app()->moduleAPI->get('OphTrOperationbooking')) {
+			throw new Exception('Operation booking API not found');
+		}
+
+		if (!$operation = $api->getOperationForEvent($event_id)) {
+			throw new Exception("Operation with event_id $event_id not found");
+		}
+
+		return $operation;
 	}
 }

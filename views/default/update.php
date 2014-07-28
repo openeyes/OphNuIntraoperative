@@ -27,6 +27,7 @@ $this->beginContent('//patient/event_container', array());
 	));
 		$this->event_actions[] = EventAction::button('Save', 'save', array('level' => 'save'), array('form'=>'update-form'));
 		$this->displayErrors($errors);
+		$this->renderPartial('_booking_summary_form',array('operation' => $this->getBookingOperation()));
 		$this->renderOpenElements($this->action->id, $form);
 		$this->renderOptionalElements($this->action->id, $form);
 		$this->displayErrors($errors, true);

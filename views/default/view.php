@@ -25,6 +25,7 @@ $this->beginContent('//patient/event_container');
 			This event is pending deletion and has been locked.
 		</div>
 	<?php }
+	$this->renderPartial('_booking_summary_view',array('operation' => $this->getBookingOperation()));
 	$this->renderOpenElements($this->action->id);
 	$this->renderOptionalElements($this->action->id);
 $this->endContent();
