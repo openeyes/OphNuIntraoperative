@@ -105,8 +105,8 @@ class Element_OphNuIntraoperative_Handoff  extends  BaseEventTypeElement
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'hand_off_from_id' => 'Hand off from',
-			'hand_off_to_id' => 'Hand off to',
+			'hand_off_from_id' => 'Hand off from pre-op completed by',
+			'hand_off_to_id' => 'Hand off to OR completed by',
 			'anesthesia_type_id' => 'Anesthesia type',
 			'nonoperative_eye_protected_id' => 'Non-operative eye protected',
 			'tape_or_shield_id' => 'Tape or shield',
