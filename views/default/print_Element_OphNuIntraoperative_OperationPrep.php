@@ -30,6 +30,14 @@
 			<td><span class="big"><?php echo $element->patient_in_sulpine_position ? 'Yes' : 'No'?></span></td>
 		</tr>
 		<tr>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('patient_position_id'))?></td>
+			<td><span class="big"><?php echo $element->patient_position ? $element->patient_position->name : 'None'?></span></td>
+		</tr>
+		<tr>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('other_patient_position'))?></td>
+			<td><span class="big"><?php echo CHtml::encode($element->other_patient_position)?></span></td>
+		</tr>
+		<tr>
 			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('prep_solution_id'))?></td>
 			<td><span class="big"><?php echo $element->prep_solution ? $element->prep_solution->name : 'None'?></span></td>
 		</tr>
