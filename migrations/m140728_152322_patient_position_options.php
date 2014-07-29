@@ -54,6 +54,7 @@ class m140728_152322_patient_position_options extends OEMigration
 
 		// Refresh schema cache.
 		$this->refreshTableSchema('et_ophnuintraoperative_operationprep');
+		$this->refreshTableSchema('et_ophnuintraoperative_operationprep_version');
 	}
 
 	public function down()
@@ -76,5 +77,6 @@ class m140728_152322_patient_position_options extends OEMigration
 		$this->dropTable('ophnuintraoperative_patient_position_version');
 
 		$this->refreshTableSchema('et_ophnuintraoperative_operationprep');
+		$this->refreshTableSchema('et_ophnuintraoperative_operationprep_version');
 	}
 }
