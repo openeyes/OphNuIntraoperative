@@ -23,9 +23,16 @@
 			<div class="large-9 column end"><div class="data-value"><?php echo $element->incision_site ? $element->incision_site->name : 'None'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('patient_in_sulpine_position'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo is_null($element->patient_in_sulpine_position) ? 'Not recorded' : ($element->patient_in_sulpine_position ? 'Yes' : 'No')?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('patient_position_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->patient_position ? $element->patient_position->name : 'None'?></div></div>
 		</div>
+		<?php if ($element->patient_position && $element->patient_position->name == 'Other (please specify)') {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('other_patient_position'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo $element->textWithLineBreaks('other_patient_position')?></div></div>
+			</div>
+		<?php }?>
+
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('prep_solution_id'))?></div></div>
 			<div class="large-9 column end"><div class="data-value"><?php echo $element->prep_solution ? $element->prep_solution->name : 'None'?></div></div>

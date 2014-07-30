@@ -24,7 +24,7 @@
  * @property string $id
  * @property integer $event_id
  * @property integer $incision_site_id
- * @property integer $patient_in_sulpine_position
+ * @property integer $patient_position_id
  * @property integer $prep_solution_id
  * @property string $other_solution
  * @property integer $viscoelastic
@@ -39,6 +39,7 @@
  * @property string $nasal_insert_time
  * @property string $nasal_remove_time
  * @property string $additional_other
+ * @property string $other_patient_position
  *
  * The followings are the available model relations:
  *
@@ -84,8 +85,8 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, incision_site_id, patient_in_sulpine_position, prep_solution_id, other_solution, viscoelastic, viscoelastic_type_id, viscoelastic_quantity_id, grounding_pad, grounding_pad_location_id, grounding_pad_side_id, post_skin_assessment_id, post_skin_assessment_other, nasal_throat_pack, nasal_insert_time, nasal_remove_time, additional_other, additionals', 'safe'),
-			array('id, event_id, incision_site_id, patient_in_sulpine_position, prep_solution_id, other_solution, viscoelastic, viscoelastic_type_id, viscoelastic_quantity_id, grounding_pad, grounding_pad_location_id, grounding_pad_side_id, post_skin_assessment_id, post_skin_assessment_other, nasal_throat_pack, nasal_insert_time, nasal_remove_time, additional_other, ', 'safe', 'on' => 'search'),
+			array('event_id, incision_site_id, patient_position_id, prep_solution_id, other_solution, viscoelastic, viscoelastic_type_id, viscoelastic_quantity_id, grounding_pad, grounding_pad_location_id, grounding_pad_side_id, post_skin_assessment_id, post_skin_assessment_other, nasal_throat_pack, nasal_insert_time, nasal_remove_time, additional_other, additionals, other_patient_position', 'safe'),
+			array('id, event_id, incision_site_id, patient_position_id, prep_solution_id, other_solution, viscoelastic, viscoelastic_type_id, viscoelastic_quantity_id, grounding_pad, grounding_pad_location_id, grounding_pad_side_id, post_skin_assessment_id, post_skin_assessment_other, nasal_throat_pack, nasal_insert_time, nasal_remove_time, additional_other, other_patient_position', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -101,6 +102,7 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 			'incision_site' => array(self::BELONGS_TO, 'OphNuIntraoperative_OperationPrep_IncisionSite', 'incision_site_id'),
+			'patient_position' => array(self::BELONGS_TO, 'OphNuIntraoperative_OperationPrep_PatientPosition', 'patient_position_id'),
 			'prep_solution' => array(self::BELONGS_TO, 'OphNuIntraoperative_OperationPrep_PrepSolution', 'prep_solution_id'),
 			'viscoelastic_type' => array(self::BELONGS_TO, 'OphNuIntraoperative_OperationPrep_ViscoelasticType', 'viscoelastic_type_id'),
 			'viscoelastic_quantity' => array(self::BELONGS_TO, 'OphNuIntraoperative_OperationPrep_ViscoelasticQuantity', 'viscoelastic_quantity_id'),
@@ -121,7 +123,7 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 			'id' => 'ID',
 			'event_id' => 'Event',
 			'incision_site_id' => 'Incision site',
-			'patient_in_sulpine_position' => 'Patient in sulpine position',
+			'patient_position_id' => 'Patient position',
 			'prep_solution_id' => 'Prep done',
 			'other_solution' => 'Other solution',
 			'viscoelastic' => 'Viscoelastic',
@@ -137,6 +139,7 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 			'nasal_remove_time' => 'Removal time',
 			'additional' => 'Additional',
 			'additional_other' => 'Additional other',
+			'other_patient_position' => 'Other patient position',
 		);
 	}
 
@@ -151,7 +154,7 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('event_id', $this->event_id, true);
 		$criteria->compare('incision_site_id', $this->incision_site_id);
-		$criteria->compare('patient_in_sulpine_position', $this->patient_in_sulpine_position);
+		$criteria->compare('patient_position_id', $this->patient_position_id);
 		$criteria->compare('prep_solution_id', $this->prep_solution_id);
 		$criteria->compare('other_solution', $this->other_solution);
 		$criteria->compare('viscoelastic', $this->viscoelastic);
@@ -178,6 +181,12 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 		if ($this->prep_solution && $this->prep_solution->name == 'Other (please specify)') {
 			if (!$this->other_solution) {
 				$this->addError('other_solution',$this->getAttributeLabel('other_solution').' cannot be blank');
+			}
+		}
+
+		if ($this->patient_position && $this->patient_position->name === 'Other (please specify)') {
+			if (!$this->other_patient_position) {
+				$this->addError('other_patient_position',$this->getAttributeLabel('other_patient_position').' cannot be blank');
 			}
 		}
 
