@@ -18,7 +18,7 @@
  */
 ?>
 	<div class="element-fields">
-		<?php echo $form->radioButtons($element, 'specimin_collected_id', CHtml::listData(OphNuIntraoperative_PostOp_SpeciminCollected::model()->findAll(array('order'=>'display_order asc')),'id','name'), null, false, false, false, false, array('class' => 'linked-fields', 'data-linked-fields' => 'specimin_comments', 'data-linked-values' => 'Yes'), array('label' => 3, 'field' => 4))?>
+		<?php echo $form->radioButtons($element, 'specimin_collected_id', CHtml::listData(OphNuIntraoperative_PostOp_SpeciminCollected::model()->findAll(array('order'=>'display_order asc')),'id','name'), null, false, false, false, false, array(), array('label' => 3, 'field' => 4))?>
 		<?php $form->widget('application.widgets.Records', array(
 			'form' => $form,
 			'element' => $element,

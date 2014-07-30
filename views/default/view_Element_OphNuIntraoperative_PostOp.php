@@ -28,16 +28,6 @@
 			'headings' => array('Label','Date/time','Type','Description','Results received'),
 		))?>
 		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('specimin_collected_id'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->specimin_collected ? $element->specimin_collected->name : 'None'?></div></div>
-		</div>
-		<?php if ($element->specimin_collected && $element->specimin_collected->name == 'Yes') {?>
-			<div class="row data-row">
-				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('specimin_comments'))?></div></div>
-				<div class="large-9 column end"><div class="data-value"><?php echo $element->textWithLineBreaks('specimin_comments')?></div></div>
-			</div>
-		<?php }?>
-		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('dressing_items'))?>:</div></div>
 			<div class="large-9 column end"><div class="data-value"><?php if (!$element->dressing_items) {?>
 							No dressing used
