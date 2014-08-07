@@ -21,8 +21,8 @@ $this->beginContent('//patient/event_container');
 		'id'=>'create-form',
 		'enableAjaxValidation'=>false,
 		'layoutColumns' => array(
-			'label' => 2,
-			'field' => 10
+			'label' => 3,
+			'field' => 9
 		)
 	));
 		$this->event_actions[] = EventAction::button('Save', 'save', array('level' => 'save'), array('form'=>'create-form'));
