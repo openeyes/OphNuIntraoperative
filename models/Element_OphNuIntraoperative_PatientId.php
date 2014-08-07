@@ -98,7 +98,7 @@ class Element_OphNuIntraoperative_PatientId extends  BaseEventTypeElement
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'wristband_verified' => 'Patient ID/wristband verified with two identifiers',
+			'wristband_verified' => 'Patient ID verified and ID band applied',
 			'allergies_verified' => 'Allergies verified',
 		);
 	}
