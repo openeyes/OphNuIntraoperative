@@ -46,8 +46,10 @@
  * @property OphNuIntraoperative_Handoff_TapeOrShield $tape_or_shield
  */
 
-class Element_OphNuIntraoperative_PatientId extends  BaseEventTypeElement
+class Element_OphNuIntraoperative_Operation extends  BaseEventTypeElement
 {
+	public $booking_event_id;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return the static model class
@@ -62,7 +64,7 @@ class Element_OphNuIntraoperative_PatientId extends  BaseEventTypeElement
 	 */
 	public function tableName()
 	{
-		return 'et_ophnuintraoperative_patientid';
+		return 'et_ophnuintraoperative_operation';
 	}
 
 	/**
@@ -71,8 +73,8 @@ class Element_OphNuIntraoperative_PatientId extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('wristband_verified, allergies_verified, booking_event_id', 'safe'),
-			array('id, event_id, wristband_verified, allergies_verified', 'safe', 'on' => 'search'),
+			array('eye_id, booking_event_id', 'safe'),
+			array('eye_id', 'required'),
 		);
 	}
 
@@ -98,10 +100,13 @@ class Element_OphNuIntraoperative_PatientId extends  BaseEventTypeElement
 	{
 		return array(
 			'id' => 'ID',
-			'event_id' => 'Event',
-			'wristband_verified' => 'Patient ID verified and ID band applied',
-			'allergies_verified' => 'Allergies verified',
+			'eye_id' => 'Eye',
 		);
+	}
+
+	public function afterFind()
+	{
+		$this->booking_event_id = Element_OphNuIntraoperative_PatientId::model()->find('event_id=?',array($this->event_id))->booking_event_id;
 	}
 
 	/**
@@ -118,6 +123,29 @@ class Element_OphNuIntraoperative_PatientId extends  BaseEventTypeElement
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
 		));
+	}
+
+	public function afterValidate()
+	{
+		$criteria = new CDbCriteria;
+
+		$criteria->addCondition('booking_event_id=:eid');
+		$criteria->params['eid'] = $this->booking_event_id;
+
+		$criteria->addCondition('event.deleted=0 and episode.deleted=0');
+
+		if ($this->id) {
+			$criteria->addCondition('t.id != :id');
+			$criteria->params[':id'] = $this->id;
+		}
+
+		foreach (Element_OphNuIntraoperative_PatientId::model()->with(array('event' => array('with' => 'episode')))->findAll($criteria) as $patient_id) {
+			if (Element_OphNuIntraoperative_Operation::model()->find('event_id=? and eye_id=?',array($patient_id->event_id,$this->eye_id))) {
+				$this->addError('eye_id','There is already an intra-operative record for this operation and the '.strtolower($this->eye->name).' eye');
+			}
+		}
+
+		return parent::afterValidate();
 	}
 }
 ?>

@@ -16,15 +16,16 @@
  * @copyright Copyright (c) 2011-2013, OpenEyes Foundation
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
-if ($this->checkPrintAccess()) {
-	//$this->event_actions[] = EventAction::button('Print', 'print',null,array('class'=>'small button'));
-}
-$this->beginContent('//patient/event_container');
-	if ($this->event->delete_pending) {?>
-		<div class="alert-box alert with-icon">
-			This event is pending deletion and has been locked.
-		</div>
-	<?php }
-	$this->renderOpenElements($this->action->id);
-	$this->renderOptionalElements($this->action->id);
-$this->endContent();
+?>
+	<div class="element-data">
+		<?php
+		$operation = $this->getBookingOperation();
+		$this->renderPartial('_booking_summary_view',array('operation' => $operation));
+
+		if (!$operation || $operation->eye->name == 'Both') {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('eye_id'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo $element->eye->name?></div></div>
+			</div>
+		<?php }?>
+	</div>

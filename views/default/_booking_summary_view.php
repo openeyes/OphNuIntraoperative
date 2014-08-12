@@ -17,45 +17,37 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html the gnu general public license v3.0
  */
 ?>
-<div class="element-data">
-	<div class="row field-row">
-		<div class="large-12 column">
-			<div class="element-fields">
-				<div class="row field-row">
-					<div class="large-3 column">
-						<label>
-							Operation details:
-						</labe>
-					</div>
-					<div class="large-9 column end">
-						<table>
-							<tr>
-								<th>Booking date</th>
-								<th>Procedure(s)</th>
-								<th>Eye</th>
-							</tr>
-							<tr>
-								<?php if (!$operation) {?>
-									<td colspan="3">
-										This intra-operative record is not linked to a booking.
-									</td>
-								<?php }else{?>
-									<td><?php echo $operation->booking->session->NHSDate('date')?></td>
-									<td>
-										<?php foreach ($operation->procedures as $i => $procedure) {
-											if ($i >0) { echo "<br/>"; }
-											echo $procedure->term;
-										}?>
-									</td>
-									<td>
-										<?php echo $operation->eye->name?>
-									</td>
-								<?php }?>
-							</tr>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
+<div class="row field-row">
+	<div class="large-3 column">
+		<label>
+			Operation details:
+		</labe>
+	</div>
+	<div class="large-9 column end">
+		<table>
+			<tr>
+				<th>Booking date</th>
+				<th>Procedure(s)</th>
+				<th>Eye</th>
+			</tr>
+			<tr>
+				<?php if (!$operation) {?>
+					<td colspan="3">
+						This intra-operative record is not linked to a booking.
+					</td>
+				<?php }else{?>
+					<td><?php echo $operation->booking->session->NHSDate('date')?></td>
+					<td>
+						<?php foreach ($operation->procedures as $i => $procedure) {
+							if ($i >0) { echo "<br/>"; }
+							echo $procedure->term;
+						}?>
+					</td>
+					<td>
+						<?php echo $operation->eye->name?>
+					</td>
+				<?php }?>
+			</tr>
+		</table>
 	</div>
 </div>

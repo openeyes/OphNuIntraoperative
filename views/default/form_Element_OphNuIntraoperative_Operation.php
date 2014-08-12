@@ -16,15 +16,14 @@
  * @copyright Copyright (c) 2011-2013, OpenEyes Foundation
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
-if ($this->checkPrintAccess()) {
-	//$this->event_actions[] = EventAction::button('Print', 'print',null,array('class'=>'small button'));
-}
-$this->beginContent('//patient/event_container');
-	if ($this->event->delete_pending) {?>
-		<div class="alert-box alert with-icon">
-			This event is pending deletion and has been locked.
-		</div>
-	<?php }
-	$this->renderOpenElements($this->action->id);
-	$this->renderOptionalElements($this->action->id);
-$this->endContent();
+
+	$operation = $this->getBookingOperation()?>
+	<div class="element-fields">
+		<?php $this->renderPartial('_booking_summary_form',array('operation' => $operation))?>
+		<?php if (!$operation || $operation->eye->name == 'Both') {?>
+			<?php echo $form->radioButtons($element,'eye_id',CHtml::listData(Eye::model()->findAll(array('order'=>'display_order asc','condition'=>"name != 'Both'")),'id','name'),null,false,false,false,false,array(),array('label' => 3, 'field' => 4))?>
+		<?php }else{?>
+			<input type="hidden" name="<?php echo CHtml::modelName($element)?>[eye_id]" value="<?php echo $operation->eye_id?>" />
+		<?php }?>
+		<input type="hidden" name="<?php echo CHtml::modelName($element)?>[booking_event_id]" value="<?php echo $element->id ? $element->booking_event_id : @$_GET['booking_event_id']?>" />
+	</div>
