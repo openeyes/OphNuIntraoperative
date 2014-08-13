@@ -21,65 +21,41 @@ class AdminController extends ModuleAdminController
 {
 	public function actionEditPatientIdentifiers()
 	{
-		$this->render('//admin/generic_admin',array(
-			'title' => 'Patient identifiers',
-			'model' => 'OphNuIntraoperative_Handoff_TwoIdentifiers',
-		));
+		$this->genericAdmin('Patient identifiers','OphNuIntraoperative_Handoff_TwoIdentifiers');
 	}
 
 	public function actionEditAnesthesiaType()
 	{
-		$this->render('//admin/generic_admin',array(
-			'title' => 'Anesthesia type',
-			'model' => 'OphNuIntraoperative_Handoff_Anaesthesia_Type',
-		));
+		$this->genericAdmin('Anesthesia type','OphNuIntraoperative_Handoff_Anaesthesia_Type');
 	}
 
 	public function actionEditIncisionSite()
 	{
-		$this->render('//admin/generic_admin',array(
-			'title' => 'Incision site',
-			'model' => 'OphNuIntraoperative_OperationPrep_IncisionSite',
-		));
+		$this->genericAdmin('Incision site','OphNuIntraoperative_OperationPrep_IncisionSite');
 	}
 
 	public function actionEditPrepDone()
 	{
-		$this->render('//admin/generic_admin',array(
-			'title' => 'Operation prep done',
-			'model' => 'OphNuIntraoperative_OperationPrep_PrepSolution',
-		));
+		$this->genericAdmin('Operation prep done','OphNuIntraoperative_OperationPrep_PrepSolution');
 	}
 
 	public function actionEditPrepAdditional()
 	{
-		$this->render('//admin/generic_admin',array(
-			'title' => 'Operation prep additional',
-			'model' => 'OphNuIntraoperative_OperationPrep_Additional',
-		));
+		$this->genericAdmin('Operation prep additional','OphNuIntraoperative_OperationPrep_Additional');
 	}
 
 	public function actionEditIOLType()
 	{
-		$this->render('//admin/generic_admin',array(
-			'title' => 'IOL type',
-			'model' => 'OphNuIntraoperative_ImplantProsthesisScleral_IolType',
-		));
+		$this->genericAdmin('IOL type','OphNuIntraoperative_ImplantProsthesisScleral_IolType');
 	}
 
 	public function actionEditIOLSize()
 	{
-		$this->render('//admin/generic_admin',array(
-			'title' => 'IOL size',
-			'model' => 'OphNuIntraoperative_ImplantProsthesisScleral_IolSize',
-		));
+		$this->genericAdmin('IOL size','OphNuIntraoperative_ImplantProsthesisScleral_IolSize');
 	}
 
 	public function actionEditPostOpDressing()
 	{
-		$this->render('//admin/generic_admin',array(
-			'title' => 'Post-op dressing',
-			'model' => 'OphNuIntraoperative_PostOp_DressingItem',
-		));
+		$this->genericAdmin('Post-op dressing','OphNuIntraoperative_PostOp_DressingItem');
 	}
 }
