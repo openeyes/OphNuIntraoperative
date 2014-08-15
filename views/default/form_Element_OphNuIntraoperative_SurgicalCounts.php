@@ -34,6 +34,7 @@
 							'type' => 'dropdown',
 							'options' => CHtml::listData(OphNuIntraoperative_SurgicalCounts_CountType::model()->findAll(array('order'=>'display_order asc')),'id','name'),
 							'cycle_on_add' => true,
+							'once_per_row' => true,
 						),
 						array(
 							'field' => 'items',

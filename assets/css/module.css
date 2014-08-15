@@ -22,11 +22,11 @@
 }
 /* line 19, ../sass/components/_event.scss */
 .event .event-content {
-  background-image: url('../img/watermark.png?1407422328');
+  background-image: url('../img/watermark.png?1407516195');
 }
 /* line 22, ../sass/components/_event.scss */
 .event .event-title {
-  background-image: url('../img/medium.png?1407422259');
+  background-image: url('../img/medium.png?1407516195');
 }
 
 /* line 29, ../sass/components/_event.scss */
@@ -61,7 +61,7 @@
 }
 /* line 56, ../sass/components/_event.scss */
 .addRecordItemDiv .recordTimestamp {
-  width: 6.4em;
+  width: 6.8em;
   display: inline-block;
 }
 /* line 60, ../sass/components/_event.scss */
