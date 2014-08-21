@@ -17,7 +17,7 @@
  */
 
 /**
- * This is the model class for table "ophnuintraoperative_operationprep_grounding_pad_side".
+ * This is the model class for table "ophnuintraoperative_closing_eyedrops_assign".
  *
  * The followings are the available columns in table:
  * @property string $id
@@ -32,7 +32,7 @@
  * @property User $usermodified
  */
 
-class OphNuIntraoperative_OperationPrep_GroundingPadSide extends BaseActiveRecordVersioned
+class OphNuIntraoperative_Closing_Eyedrops_Assignment extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -48,7 +48,7 @@ class OphNuIntraoperative_OperationPrep_GroundingPadSide extends BaseActiveRecor
 	 */
 	public function tableName()
 	{
-		return 'ophnuintraoperative_operationprep_grounding_pad_side';
+		return 'ophnuintraoperative_closing_eyedrops_assign';
 	}
 
 	/**
@@ -57,8 +57,8 @@ class OphNuIntraoperative_OperationPrep_GroundingPadSide extends BaseActiveRecor
 	public function rules()
 	{
 		return array(
-			array('name', 'safe'),
-			array('name', 'required'),
+			array('eyedrops_id', 'safe'),
+			array('eyedrops_id', 'required'),
 			array('id, name', 'safe', 'on' => 'search'),
 		);
 	}
@@ -69,11 +69,8 @@ class OphNuIntraoperative_OperationPrep_GroundingPadSide extends BaseActiveRecor
 	public function relations()
 	{
 		return array(
-			'element_type' => array(self::HAS_ONE, 'ElementType', 'id','on' => "element_type.class_name='".get_class($this)."'"),
-			'eventType' => array(self::BELONGS_TO, 'EventType', 'event_type_id'),
-			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
-			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
-			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
+			'element' => array(self::BELONGS_TO, 'Element_OphNuIntraoperative_Closing', 'element_id'),
+			'eyedrops' => array(self::BELONGS_TO, 'OphNuIntraoperative_Closing_Eyedrops', 'eyedrops_id'),
 		);
 	}
 

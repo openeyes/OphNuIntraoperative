@@ -17,22 +17,22 @@
  */
 
 /**
- * This is the model class for table "ophnuintraoperative_operationprep_additionals".
+ * This is the model class for table "ophnuintraoperative_closing_dressing_assign".
  *
  * The followings are the available columns in table:
  * @property string $id
- * @property integer $element_id
- * @property integer $additional_id
+ * @property string $name
  *
  * The followings are the available model relations:
  *
- * @property Element_OphNuIntraoperative_OperationPrep $element
- * @property OphNuIntraoperative_OperationPrep_Additional $ophnuintraoperative_operationprep_additional
+ * @property ElementType $element_type
+ * @property EventType $eventType
+ * @property Event $event
  * @property User $user
  * @property User $usermodified
  */
 
-class OphNuIntraoperative_OperationPrep_Additionals extends BaseActiveRecordVersioned
+class OphNuIntraoperative_Closing_Dressing_Assignment extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -48,7 +48,7 @@ class OphNuIntraoperative_OperationPrep_Additionals extends BaseActiveRecordVers
 	 */
 	public function tableName()
 	{
-		return 'ophnuintraoperative_operationprep_additionals';
+		return 'ophnuintraoperative_closing_dressing_assign';
 	}
 
 	/**
@@ -57,9 +57,9 @@ class OphNuIntraoperative_OperationPrep_Additionals extends BaseActiveRecordVers
 	public function rules()
 	{
 		return array(
-			array('element_id, additional_id', 'safe'),
-			array('element_id, additional_id', 'required'),
-			array('id, element_id, additional_id', 'safe', 'on' => 'search'),
+			array('dressing_id', 'safe'),
+			array('dressing_id', 'required'),
+			array('id, name', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -69,10 +69,8 @@ class OphNuIntraoperative_OperationPrep_Additionals extends BaseActiveRecordVers
 	public function relations()
 	{
 		return array(
-			'element' => array(self::BELONGS_TO, 'Element_OphNuIntraoperative_OperationPrep', 'element_id'),
-			'ophnuintraoperative_operationprep_additional' => array(self::BELONGS_TO, 'OphNuIntraoperative_OperationPrep_Additional', 'additional_id'),
-			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
-			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
+			'element' => array(self::BELONGS_TO, 'Element_OphNuIntraoperative_Closing', 'element_id'),
+			'dressing' => array(self::BELONGS_TO, 'OphNuIntraoperative_Closing_Dressing', 'dressing_id'),
 		);
 	}
 
@@ -101,11 +99,6 @@ class OphNuIntraoperative_OperationPrep_Additionals extends BaseActiveRecordVers
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
 		));
-	}
-
-	public function getName()
-	{
-		return $this->ophnuintraoperative_operationprep_additional->name;
 	}
 }
 ?>

@@ -17,7 +17,7 @@
  */
 
 /**
- * This is the model class for table "ophnuintraoperative_operationprep_incision_site".
+ * This is the model class for table "ophnuintraoperative_closing_dressing".
  *
  * The followings are the available columns in table:
  * @property string $id
@@ -32,7 +32,7 @@
  * @property User $usermodified
  */
 
-class OphNuIntraoperative_OperationPrep_IncisionSite extends BaseActiveRecordVersioned
+class OphNuIntraoperative_Closing_Dressing extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -48,7 +48,7 @@ class OphNuIntraoperative_OperationPrep_IncisionSite extends BaseActiveRecordVer
 	 */
 	public function tableName()
 	{
-		return 'ophnuintraoperative_operationprep_incision_site';
+		return 'ophnuintraoperative_closing_dressing';
 	}
 
 	/**

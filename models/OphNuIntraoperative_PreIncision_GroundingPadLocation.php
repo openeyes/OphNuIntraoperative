@@ -17,7 +17,7 @@
  */
 
 /**
- * This is the model class for table "ophnuintraoperative_implantprosthesis_iol_type".
+ * This is the model class for table "ophnuintraoperative_preincision_grounding_pad_location".
  *
  * The followings are the available columns in table:
  * @property string $id
@@ -32,7 +32,7 @@
  * @property User $usermodified
  */
 
-class OphNuIntraoperative_ImplantProsthesisScleral_IolType extends BaseActiveRecordVersioned
+class OphNuIntraoperative_PreIncision_GroundingPadLocation extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -48,7 +48,7 @@ class OphNuIntraoperative_ImplantProsthesisScleral_IolType extends BaseActiveRec
 	 */
 	public function tableName()
 	{
-		return 'ophnuintraoperative_implantprosthesis_iol_type';
+		return 'ophnuintraoperative_preincision_grounding_pad_location';
 	}
 
 	/**

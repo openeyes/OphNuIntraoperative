@@ -17,7 +17,7 @@
  */
 
 /**
- * This is the model class for table "ophnuintraoperative_postop_dressing_item".
+ * This is the model class for table "ophnuintraoperative_preincision_tape_or_shield".
  *
  * The followings are the available columns in table:
  * @property string $id
@@ -32,7 +32,7 @@
  * @property User $usermodified
  */
 
-class OphNuIntraoperative_PostOp_Specimen_Type extends BaseActiveRecordVersioned
+class OphNuIntraoperative_PreIncision_TapeOrShield extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -48,7 +48,7 @@ class OphNuIntraoperative_PostOp_Specimen_Type extends BaseActiveRecordVersioned
 	 */
 	public function tableName()
 	{
-		return 'ophnuintraoperative_postop_specimen_type';
+		return 'ophnuintraoperative_preincision_tape_or_shield';
 	}
 
 	/**

@@ -18,11 +18,10 @@
  */
 ?>
 	<div class="element-fields">
-		<?php echo $form->radioButtons($element, 'specimin_collected_id', CHtml::listData(OphNuIntraoperative_PostOp_SpeciminCollected::model()->findAll(array('order'=>'display_order asc')),'id','name'), null, false, false, false, false, array(), array('label' => 3, 'field' => 4))?>
 		<?php $form->widget('application.widgets.Records', array(
 			'form' => $form,
 			'element' => $element,
-			'model' => new OphNuIntraoperative_PostOp_Specimen,
+			'model' => new OphNuIntraoperative_Specimens_Specimen,
 			'field' => 'specimens',
 			'validate_method' => '/OphNuIntraoperative/default/validateSpecimen',
 			'row_view' => 'protected/modules/OphNuIntraoperative/views/default/_specimen_row.php',
@@ -37,7 +36,7 @@
 						array(
 							'field' => 'type_id',
 							'type' => 'dropdown',
-							'options' => CHtml::listData(OphNuIntraoperative_PostOp_Specimen_Type::model()->findAll(array('order'=>'display_order asc')),'id','name'),
+							'options' => CHtml::listData(OphNuIntraoperative_Specimens_Specimen_Type::model()->findAll(array('order'=>'display_order asc')),'id','name'),
 						),
 						array(
 							'field' => 'location',
@@ -59,20 +58,5 @@
 			'use_last_button_text' => false,
 			'headings' => array('Label','Date/time','Type','Description','Results received'),
 		))?>
-		<?php echo $form->multiSelectList($element, 'dressing_items', 'dressing_items', 'dressing_item_id', CHtml::listData(OphNuIntraoperative_PostOp_DressingItem::model()->findAll(array('order'=>'display_order asc')),'id','name'), array(), array('empty' => '- Please select -', 'label' => 'Dressing','class' => 'linked-fields', 'data-linked-fields' => 'dressing_other', 'data-linked-values' => 'Other (please specify)'), false, false, null, false, false, array('label' => 3, 'field' => 4),false,'No dressing used')?>
-		<?php echo $form->textArea($element, 'dressing_other', array(), !$element->hasMultiSelectValue('dressing_items','Other (please specify)'), array(), array('label' => 3, 'field' => 4))?>
-		<?php $form->widget('application.widgets.ProcedureSelection',array(
-			'element' => $element,
-			'field' => 'procedures',
-			'durations' => false,
-			'procedureListPosition' => 'vertical',
-			'layoutColumns' => array(
-				'label' => 3,
-				'field' => 4,
-				'procedures' => 6,
-			),
-			'label' => 'Actual procedures performed',
-		))?>
-		<?php echo $form->dropDownList($element, 'circulating_nurse_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc,last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false,array('label'=>3,'field'=>4))?>
-		<?php echo $form->dropDownList($element, 'scrub_nurse_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc,last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false,array('label'=>3,'field'=>4))?>
+		<input type="hidden" name="<?php echo CHtml::modelName($element)?>[present]" value="1" />
 	</div>

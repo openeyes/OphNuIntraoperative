@@ -17,7 +17,7 @@
  */
 
 /**
- * This is the model class for table "ophnuintraoperative_operationprep_prep_solution".
+ * This is the model class for table "ophnuintraoperative_preincision_anaesthesia_type".
  *
  * The followings are the available columns in table:
  * @property string $id
@@ -32,7 +32,7 @@
  * @property User $usermodified
  */
 
-class OphNuIntraoperative_OperationPrep_PrepSolution extends BaseActiveRecordVersioned
+class OphNuIntraoperative_PreIncision_Anaesthesia_Type extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -48,7 +48,7 @@ class OphNuIntraoperative_OperationPrep_PrepSolution extends BaseActiveRecordVer
 	 */
 	public function tableName()
 	{
-		return 'ophnuintraoperative_operationprep_prep_solution';
+		return 'ophnuintraoperative_preincision_anaesthesia_type';
 	}
 
 	/**

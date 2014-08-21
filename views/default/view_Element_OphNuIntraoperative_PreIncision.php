@@ -19,6 +19,30 @@
 ?>
 	<div class="element-data">
 		<div class="row data-row">
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('who_timeout_completed'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo is_null($element->who_timeout_completed) ? 'Not recorded' : ($element->who_timeout_completed ? 'Yes' : 'No')?></div></div>
+		</div>
+		<?php if ($element->who_timeout_completed) {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('who_timeout_lead_by_id'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo $element->who_timeout_lead_by->fullName?></div></div>
+			</div>
+		<?php }?>
+		<div class="row data-row">
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('nonoperative_eye_protected_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->nonoperative_eye_protected ? $element->nonoperative_eye_protected->name : 'None'?></div></div>
+		</div>
+		<?php if ($element->nonoperative_eye_protected && $element->nonoperative_eye_protected->name == 'Yes') {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('tape_or_shield_id'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo $element->tape_or_shield ? $element->tape_or_shield->name : 'None'?></div></div>
+			</div>
+		<?php }?>
+		<div class="row data-row">
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('anesthesia_type_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->anesthesia_type ? $element->anesthesia_type->name : 'None'?></div></div>
+		</div>
+		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('incision_site_id'))?></div></div>
 			<div class="large-9 column end"><div class="data-value"><?php echo $element->incision_site ? $element->incision_site->name : 'None'?></div></div>
 		</div>
@@ -41,20 +65,6 @@
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('other_solution'))?></div></div>
 				<div class="large-9 column end"><div class="data-value"><?php echo $element->textWithLineBreaks('other_solution')?></div></div>
-			</div>
-		<?php }?>
-		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('viscoelastic'))?>:</div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo is_null($element->viscoelastic) ? 'Not recorded' : ($element->viscoelastic ? 'Yes' : 'No')?></div></div>
-		</div>
-		<?php if ($element->viscoelastic) {?>
-			<div class="row data-row">
-				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('viscoelastic_type_id'))?></div></div>
-				<div class="large-9 column end"><div class="data-value"><?php echo $element->viscoelastic_type ? $element->viscoelastic_type->name : 'None'?></div></div>
-			</div>
-			<div class="row data-row">
-				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('viscoelastic_quantity_id'))?></div></div>
-				<div class="large-9 column end"><div class="data-value"><?php echo $element->viscoelastic_quantity ? $element->viscoelastic_quantity->name : 'None'?></div></div>
 			</div>
 		<?php }?>
 		<div class="row data-row">
@@ -93,23 +103,6 @@
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('nasal_remove_time'))?></div></div>
 				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->nasal_remove_time)?></div></div>
-			</div>
-		<?php }?>
-		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('additional'))?>:</div></div>
-			<div class="large-9 column end"><div class="data-value"><?php if (!$element->additionals) {?>
-							None
-						<?php } else {?>
-								<?php foreach ($element->additionals as $item) {
-									echo $item->name?><br/>
-								<?php }?>
-						<?php }?>
-			</div></div>
-		</div>
-		<?php if ($element->hasMultiSelectValue('additionals','Other (please specify)')) {?>
-			<div class="row data-row">
-				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('additional_other'))?></div></div>
-				<div class="large-9 column end"><div class="data-value"><?php echo $element->textWithLineBreaks('additional_other')?></div></div>
 			</div>
 		<?php }?>
 	</div>

@@ -17,7 +17,7 @@
  */
 
 /**
- * This is the model class for table "ophnuintraoperative_operationprep_additional".
+ * This is the model class for table "ophnuintraoperative_preincision_post_skin_assessment".
  *
  * The followings are the available columns in table:
  * @property string $id
@@ -32,7 +32,7 @@
  * @property User $usermodified
  */
 
-class OphNuIntraoperative_OperationPrep_Additional extends BaseActiveRecordVersioned
+class OphNuIntraoperative_PreIncision_PostSkinAssessment extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -48,7 +48,7 @@ class OphNuIntraoperative_OperationPrep_Additional extends BaseActiveRecordVersi
 	 */
 	public function tableName()
 	{
-		return 'ophnuintraoperative_operationprep_additional';
+		return 'ophnuintraoperative_preincision_post_skin_assessment';
 	}
 
 	/**

@@ -19,38 +19,68 @@
 
 class AdminController extends ModuleAdminController
 {
-	public function actionEditAnesthesiaType()
+	public function actionEditClosingDressing()
 	{
-		$this->genericAdmin('Anesthesia type','OphNuIntraoperative_Handoff_Anaesthesia_Type');
+		$this->genericAdmin('Dressing','OphNuIntraoperative_Closing_Dressing');
 	}
 
-	public function actionEditIncisionSite()
+	public function actionEditClosingEyedrops()
 	{
-		$this->genericAdmin('Incision site','OphNuIntraoperative_OperationPrep_IncisionSite');
+		$this->genericAdmin('Eyedrops','OphNuIntraoperative_Closing_Eyedrops');
 	}
 
-	public function actionEditPrepDone()
+	public function actionEditPreIncisionAnaesthesiaType()
 	{
-		$this->genericAdmin('Operation prep done','OphNuIntraoperative_OperationPrep_PrepSolution');
+		$this->genericAdmin('Anesthesia types','OphNuIntraoperative_PreIncision_Anaesthesia_Type');
 	}
 
-	public function actionEditPrepAdditional()
+	public function actionEditPreIncisionGroundingPadLocation()
 	{
-		$this->genericAdmin('Operation prep additional','OphNuIntraoperative_OperationPrep_Additional');
+		$this->genericAdmin('Grounding pad locations','OphNuIntraoperative_PreIncision_GroundingPadLocation');
 	}
 
-	public function actionEditIOLType()
+	public function actionEditPreIncisionGroundingPadSide()
 	{
-		$this->genericAdmin('IOL type','OphNuIntraoperative_ImplantProsthesisScleral_IolType');
+		$this->genericAdmin('Grounding pad sides','OphNuIntraoperative_PreIncision_GroundingPadSide');
 	}
 
-	public function actionEditIOLSize()
+	public function actionEditPreIncisionIncisionSites()
 	{
-		$this->genericAdmin('IOL size','OphNuIntraoperative_ImplantProsthesisScleral_IolSize');
+		$this->genericAdmin('Incision sites','OphNuIntraoperative_PreIncision_IncisionSite');
 	}
 
-	public function actionEditPostOpDressing()
+	public function actionEditPreIncisionPatientPosition()
 	{
-		$this->genericAdmin('Post-op dressing','OphNuIntraoperative_PostOp_DressingItem');
+		$this->genericAdmin('Patient positions','OphNuIntraoperative_PreIncision_PatientPosition');
+	}
+
+	public function actionEditPreIncisionPostSkinAssessment()
+	{
+		$this->genericAdmin('Skin assessments','OphNuIntraoperative_PreIncision_PostSkinAssessment');
+	}
+
+	public function actionEditPreIncisionPrepSolution()
+	{
+		$this->genericAdmin('Prep solutions','OphNuIntraoperative_PreIncision_PrepSolution');
+	}
+
+	public function actionEditSurgicalCountsCountItemType()
+	{
+		$this->genericAdmin('Count item types','OphNuIntraoperative_SurgicalCounts_CountItemType');
+	}
+
+	public function actionEditWHOEquipmentProblems()
+	{
+		$this->genericAdmin('WHO equipment problems','OphNuIntraoperative_WHOSignOut_EquipmentProblems');
+	}
+
+	public function actionEditWHOInstructions()
+	{
+		$this->genericAdmin('WHO instructions','OphNuIntraoperative_WHOSignOut_InstructionsProvided');
+	}
+
+	public function actionEditWHOLabelling()
+	{
+		$this->genericAdmin('WHO labelling','OphNuIntraoperative_WHOSignOut_Labelling');
 	}
 }

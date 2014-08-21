@@ -17,7 +17,7 @@
  */
 
 /**
- * This is the model class for table "ophnuintraoperative_handoff_tape_or_shield".
+ * This is the model class for table "ophnuintraoperative_preincision_incision_site".
  *
  * The followings are the available columns in table:
  * @property string $id
@@ -32,7 +32,7 @@
  * @property User $usermodified
  */
 
-class OphNuIntraoperative_Handoff_TapeOrShield extends BaseActiveRecordVersioned
+class OphNuIntraoperative_PreIncision_IncisionSite extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -48,7 +48,7 @@ class OphNuIntraoperative_Handoff_TapeOrShield extends BaseActiveRecordVersioned
 	 */
 	public function tableName()
 	{
-		return 'ophnuintraoperative_handoff_tape_or_shield';
+		return 'ophnuintraoperative_preincision_incision_site';
 	}
 
 	/**

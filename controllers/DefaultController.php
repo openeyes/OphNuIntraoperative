@@ -101,7 +101,7 @@ class DefaultController extends BaseEventTypeController
 
 	public function actionValidateSpecimen()
 	{
-		$specimen = new OphNuIntraoperative_PostOp_Specimen;
+		$specimen = new OphNuIntraoperative_Specimens_Specimen;
 		$specimen->attributes = $_POST;
 
 		$specimen->validate();
@@ -120,18 +120,18 @@ class DefaultController extends BaseEventTypeController
 		echo json_encode($errors);
 	}
 
-	protected function setComplexAttributes_Element_OphNuIntraoperative_PostOp($element, $data, $index)
+	protected function setComplexAttributes_Element_OphNuIntraoperative_Specimens($element, $data, $index)
 	{
 		$specimens = array();
 
-		if (!empty($data['OphNuIntraoperative_PostOp_Specimen']['label'])) {
-			foreach ($data['OphNuIntraoperative_PostOp_Specimen']['label'] as $i => $label) {
-				$specimen = new OphNuIntraoperative_PostOp_Specimen;
+		if (!empty($data['OphNuIntraoperative_Specimens_Specimen']['label'])) {
+			foreach ($data['OphNuIntraoperative_Specimens_Specimen']['label'] as $i => $label) {
+				$specimen = new OphNuIntraoperative_Specimens_Specimen;
 				$specimen->element_id = $element->id;
 				$specimen->label = $label;
 
 				foreach (array('type_id','location','centre_name','doctor_name','timestamp','results_received','results_received_timestamp') as $field) {
-					$specimen->$field = $data['OphNuIntraoperative_PostOp_Specimen'][$field][$i];
+					$specimen->$field = $data['OphNuIntraoperative_Specimens_Specimen'][$field][$i];
 				}
 
 				$specimen->time = date('H:i',strtotime($specimen->timestamp));
@@ -144,7 +144,7 @@ class DefaultController extends BaseEventTypeController
 		$element->specimens = $specimens;
 	}
 
-	protected function saveComplexAttributes_Element_OphNuIntraoperative_PostOp($element, $data, $index)
+	protected function saveComplexAttributes_Element_OphNuIntraoperative_Specimens($element, $data, $index)
 	{
 		$ids = array();
 
@@ -166,7 +166,7 @@ class DefaultController extends BaseEventTypeController
 			$criteria->addNotInCondition('id',$ids);
 		}
 
-		OphNuIntraoperative_PostOp_Specimen::model()->deleteAll($criteria);
+		OphNuIntraoperative_Specimens_Specimen::model()->deleteAll($criteria);
 	}
 
 	public function actionValidateCount()

@@ -17,7 +17,7 @@
  */
 
 /**
- * This is the model class for table "ophnuintraoperative_postop_specimin_collected".
+ * This is the model class for table "ophnuintraoperative_specimens_dressing_item".
  *
  * The followings are the available columns in table:
  * @property string $id
@@ -32,7 +32,7 @@
  * @property User $usermodified
  */
 
-class OphNuIntraoperative_PostOp_SpeciminCollected extends BaseActiveRecordVersioned
+class OphNuIntraoperative_Specimens_Specimen_Type extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -48,7 +48,7 @@ class OphNuIntraoperative_PostOp_SpeciminCollected extends BaseActiveRecordVersi
 	 */
 	public function tableName()
 	{
-		return 'ophnuintraoperative_postop_specimin_collected';
+		return 'ophnuintraoperative_specimens_specimen_type';
 	}
 
 	/**

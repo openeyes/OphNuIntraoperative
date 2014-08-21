@@ -18,7 +18,7 @@
  */
 
 /**
- * This is the model class for table "et_ophnuintraoperative_postop".
+ * This is the model class for table "et_ophnuintraoperative_specimens".
  *
  * The followings are the available columns in table:
  * @property string $id
@@ -36,14 +36,14 @@
  * @property Event $event
  * @property User $user
  * @property User $usermodified
- * @property OphNuIntraoperative_PostOp_SpeciminCollected $specimin_collected
- * @property OphNuIntraoperative_PostOp_DressingItems $dressing_itemss
+ * @property OphNuIntraoperative_Specimens_SpeciminCollected $specimin_collected
+ * @property OphNuIntraoperative_Specimens_DressingItems $dressing_itemss
  * @property OphnuintraoperativePostopProceduresPerformedProceduresPerformed $procedures_performeds
  * @property User $circulating_nurse
  * @property User $scrub_nurse
  */
 
-class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
+class Element_OphNuIntraoperative_Specimens  extends  BaseEventTypeElement
 {
 	public $auto_update_relations = true;
 
@@ -61,7 +61,7 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 	 */
 	public function tableName()
 	{
-		return 'et_ophnuintraoperative_postop';
+		return 'et_ophnuintraoperative_specimens';
 	}
 
 	/**
@@ -70,8 +70,6 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, specimin_collected_id, dressing_other, circulating_nurse_id, scrub_nurse_id, dressing_items, procedures', 'safe'),
-			array('id, event_id, specimin_collected_id, circulating_nurse_id, scrub_nurse_id, ', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -86,14 +84,7 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-			'specimin_collected' => array(self::BELONGS_TO, 'OphNuIntraoperative_PostOp_SpeciminCollected', 'specimin_collected_id'),
-			'dressing_items' => array(self::HAS_MANY, 'OphNuIntraoperative_PostOp_DressingItem', 'dressing_item_id', 'through' => 'dressing_items_assignment'),
-			'dressing_items_assignment' => array(self::HAS_MANY, 'OphNuIntraoperative_PostOp_DressingItems', 'element_id'),
-			'procedures' => array(self::HAS_MANY, 'Procedure', 'proc_id', 'through' => 'procedure_assignment'),
-			'procedure_assignment' => array(self::HAS_MANY, 'OphNuIntraoperative_PostOp_Procedures_Performed_Assignment', 'element_id'),
-			'circulating_nurse' => array(self::BELONGS_TO, 'User', 'circulating_nurse_id'),
-			'scrub_nurse' => array(self::BELONGS_TO, 'User', 'scrub_nurse_id'),
-			'specimens' => array(self::HAS_MANY, 'OphNuIntraoperative_PostOp_Specimen', 'element_id'),
+			'specimens' => array(self::HAS_MANY, 'OphNuIntraoperative_Specimens_Specimen', 'element_id'),
 		);
 	}
 
@@ -105,12 +96,6 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'specimin_collected_id' => 'Specimen collected and documented',
-			'dressing_items' => 'Dressing',
-			'dressing_other' => 'Other dressing',
-			'procedures' => 'Actual procedures performed',
-			'circulating_nurse_id' => 'Circulating nurse',
-			'scrub_nurse_id' => 'Scrub nurse',
 		);
 	}
 
@@ -124,32 +109,10 @@ class Element_OphNuIntraoperative_PostOp  extends  BaseEventTypeElement
 
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('event_id', $this->event_id, true);
-		$criteria->compare('specimin_collected_id', $this->specimin_collected_id);
-		$criteria->compare('dressing_items', $this->dressing_items);
-		$criteria->compare('procedures_performed', $this->procedures_performed);
-		$criteria->compare('circulating_nurse_id', $this->circulating_nurse_id);
-		$criteria->compare('scrub_nurse_id', $this->scrub_nurse_id);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
 		));
-	}
-
-	protected function beforeValidate()
-	{
-		if ($this->specimin_collected && $this->specimin_collected->name == 'Yes') {
-			if (empty($this->specimens)) {
-				$this->addError('specimens','Please enter at least one specimen.');
-			}
-		}
-
-		if ($this->hasMultiSelectValue('dressing_items','Other (please specify)')) {
-			if (!$this->dressing_other) {
-				$this->addError('dressing_other',$this->getAttributeLabel('dressing_other').' cannot be blank');
-			}
-		}
-
-		return parent::beforeValidate();
 	}
 }
 ?>

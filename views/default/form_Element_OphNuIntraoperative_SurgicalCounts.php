@@ -54,6 +54,6 @@
 			'headings' => array('Date/time','Count','Description'),
 		))?>
 		<?php echo $form->radioBoolean($element, 'count_discrepancies', array('class'=>'linked-fields','data-linked-fields'=>'surgeon_notified,comments','data-linked-values'=>'Yes'), array('label' => 3, 'field' => 4))?>
-		<?php echo $form->checkBox($element, 'surgeon_notified', array('text-align' => 'right', 'hide' => !$element->count_discrepancies), array('label' => 3, 'field' => 4))?>
+		<?php echo $form->radioBoolean($element, 'surgeon_notified', array(), array('label' => 3, 'field' => 4), !$element->count_discrepancies)?>
 		<?php echo $form->textArea($element, 'comments', array(), !$element->count_discrepancies, array(), array('label' => 3, 'field' => 4))?>
 	</div>

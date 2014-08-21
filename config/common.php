@@ -20,13 +20,19 @@
 return array(
 	'params' => array(
 		'admin_menu' => array(
-			'Anesthesia type' => '/OphNuIntraoperative/admin/editAnesthesiaType',
-			'Incision site' => '/OphNuIntraoperative/admin/editIncisionSite',
-			'Operation prep done' => '/OphNuIntraoperative/admin/editPrepDone',
-			'Operation prep additional' => '/OphNuIntraoperative/admin/editPrepAdditional',
-			'IOL type' => '/OphNuIntraoperative/admin/editIOLType',
-			'IOL size' => '/OphNuIntraoperative/admin/editIOLSize',
-			'Post-op dressing' => '/OphNuIntraoperative/admin/editPostOpDressing',
-		),
-	),
+			'Dressing' => '/OphNuIntraoperative/admin/editClosingDressing',
+			'Eyedrops' => '/OphNuIntraoperative/admin/editClosingEyedrops',
+			'Anesthesia types' => '/OphNuIntraoperative/admin/editPreIncisionAnaesthesiaType',
+			'Grounding pad locations' => '/OphNuIntraoperative/admin/editPreIncisionGroundingPadLocation',
+			'Grounding pad sides' => '/OphNuIntraoperative/admin/editPreIncisionGroundingPadSide',
+			'Incision sites' => '/OphNuIntraoperative/admin/editPreIncisionIncisionSites',
+			'Patient positions' => '/OphNuIntraoperative/admin/editPreIncisionPatientPosition',
+			'Skin assessments' => '/OphNuIntraoperative/admin/editPreIncisionPostSkinAssessment',
+			'Prep solutions' => '/OphNuIntraoperative/admin/editPreIncisionPrepSolution',
+			'Count item types' => '/OphNuIntraoperative/admin/editSurgicalCountsCountItemType',
+			'WHO equipment problems' => '/OphNuIntraoperative/admin/editWHOEquipmentProblems',
+			'WHO instructions' => '/OphNuIntraoperative/admin/editWHOInstructions',
+			'WHO labelling' => '/OphNuIntraoperative/admin/editWHOLabelling',
+		)
+	)
 );

@@ -17,7 +17,7 @@
  */
 
 /**
- * This is the model class for table "ophnuintraoperative_postop_dressing_item".
+ * This is the model class for table "ophnuintraoperative_preincision_grounding_pad_side".
  *
  * The followings are the available columns in table:
  * @property string $id
@@ -32,11 +32,8 @@
  * @property User $usermodified
  */
 
-class OphNuIntraoperative_PostOp_Specimen extends BaseActiveRecordVersioned
+class OphNuIntraoperative_PreIncision_GroundingPadSide extends BaseActiveRecordVersioned
 {
-	public $time;
-	public $results_received_time;
-
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return the static model class
@@ -51,7 +48,7 @@ class OphNuIntraoperative_PostOp_Specimen extends BaseActiveRecordVersioned
 	 */
 	public function tableName()
 	{
-		return 'ophnuintraoperative_postop_specimen';
+		return 'ophnuintraoperative_preincision_grounding_pad_side';
 	}
 
 	/**
@@ -60,8 +57,9 @@ class OphNuIntraoperative_PostOp_Specimen extends BaseActiveRecordVersioned
 	public function rules()
 	{
 		return array(
-			array('timestamp, label, type_id, location, centre_name, doctor_name, results_received, results_received_timestamp, time, results_received_time', 'safe'),
-			array('timestamp, label, type_id, location, centre_name, doctor_name', 'required'),
+			array('name', 'safe'),
+			array('name', 'required'),
+			array('id, name', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -76,7 +74,6 @@ class OphNuIntraoperative_PostOp_Specimen extends BaseActiveRecordVersioned
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-			'type' => array(self::BELONGS_TO, 'OphNuIntraoperative_PostOp_Specimen_Type', 'type_id'),
 		);
 	}
 
@@ -88,16 +85,7 @@ class OphNuIntraoperative_PostOp_Specimen extends BaseActiveRecordVersioned
 		return array(
 			'id' => 'ID',
 			'name' => 'Name',
-			'label' => 'Label ID',
-			'type_id' => 'Type',
-			'location' => 'Location/description',
-			'centre_name' => 'Name of pathology centre',
-			'doctor_name' => 'Local hospital doctor name',
 		);
-	}
-
-	public function getAttributeSuffix($attribute)
-	{
 	}
 
 	/**
@@ -114,24 +102,6 @@ class OphNuIntraoperative_PostOp_Specimen extends BaseActiveRecordVersioned
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
 		));
-	}
-
-	public function afterFind()
-	{
-		if ($this->timestamp) {
-			$this->time = date('H:i',strtotime($this->timestamp));
-		}
-
-		if ($this->results_received_timestamp) {
-			$this->results_received_time = date('H:i',strtotime($this->results_received_timestamp));
-		}
-
-		return parent::afterFind();
-	}
-
-	public function getDescription()
-	{
-		return $this->location.', collected by: '.$this->doctor_name;
 	}
 }
 ?>

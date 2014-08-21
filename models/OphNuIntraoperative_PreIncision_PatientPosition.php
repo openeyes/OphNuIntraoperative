@@ -17,38 +17,31 @@
  */
 
 /**
- * This is the model class for table "ophnuintraoperative_postop_dressing_item".
+ * This is the model class for table "ophnuintraoperative_patient_position".
  *
- * The followings are the available columns in table:
+ * The followings are the available columns in table 'ophnuintraoperative_patient_position':
  * @property string $id
  * @property string $name
+ * @property integer $is_other
+ * @property string $display_order
+ * @property string $last_modified_user_id
+ * @property string $last_modified_date
+ * @property string $created_user_id
+ * @property string $created_date
  *
  * The followings are the available model relations:
- *
- * @property ElementType $element_type
- * @property EventType $eventType
- * @property Event $event
- * @property User $user
- * @property User $usermodified
+ * @property EtOphnuintraoperativeOperationprep[] $etOphnuintraoperativeOperationpreps
+ * @property User $lastModifiedUser
+ * @property User $createdUser
  */
-
-class OphNuIntraoperative_PostOp_DressingItem extends BaseActiveRecordVersioned
+class OphNuIntraoperative_PreIncision_PatientPosition extends BaseActiveRecordVersioned
 {
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @return the static model class
-	 */
-	public static function model($className = __CLASS__)
-	{
-		return parent::model($className);
-	}
-
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'ophnuintraoperative_postop_dressing_item';
+		return 'ophnuintraoperative_patient_position';
 	}
 
 	/**
@@ -56,10 +49,15 @@ class OphNuIntraoperative_PostOp_DressingItem extends BaseActiveRecordVersioned
 	 */
 	public function rules()
 	{
+		// NOTE: you should only define rules for those attributes that
+		// will receive user inputs.
 		return array(
-			array('name', 'safe'),
 			array('name', 'required'),
-			array('id, name', 'safe', 'on' => 'search'),
+			array('name', 'length', 'max'=>128),
+			array('display_order', 'length', 'max'=>10),
+			// The following rule is used by search().
+			// @todo Please remove those attributes that should not be searched.
+			array('name', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -85,23 +83,40 @@ class OphNuIntraoperative_PostOp_DressingItem extends BaseActiveRecordVersioned
 		return array(
 			'id' => 'ID',
 			'name' => 'Name',
+			'display_order' => 'Display Order',
 		);
 	}
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 *
+	 * Typical usecase:
+	 * - Initialize the model fields with values from filter form.
+	 * - Execute this method to get CActiveDataProvider instance which will filter
+	 * models according to data in model fields.
+	 * - Pass data provider to CGridView, CListView or any similar widget.
+	 *
+	 * @return CActiveDataProvider the data provider that can return the models
+	 * based on the search/filter conditions.
 	 */
 	public function search()
 	{
-		$criteria = new CDbCriteria;
+		$criteria=new CDbCriteria;
+		$criteria->compare('name',$this->name,true);
 
-		$criteria->compare('id', $this->id, true);
-		$criteria->compare('name', $this->name, true);
-
-		return new CActiveDataProvider(get_class($this), array(
-			'criteria' => $criteria,
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
 		));
 	}
+
+	/**
+	 * Returns the static model of the specified AR class.
+	 * Please note that you should have this exact method in all your CActiveRecord descendants!
+	 * @param string $className active record class name.
+	 * @return OphNuIntraoperative_PreIncision_PatientPosition the static model class
+	 */
+	public static function model($className=__CLASS__)
+	{
+		return parent::model($className);
+	}
 }
-?>

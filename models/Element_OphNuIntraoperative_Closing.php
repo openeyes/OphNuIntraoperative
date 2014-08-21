@@ -1,4 +1,5 @@
-<?php /**
+<?php
+/**
  * OpenEyes
  *
  * (C) Moorfields Eye Hospital NHS Foundation Trust, 2008-2011
@@ -16,24 +17,10 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
 
-/**
- * This is the model class for table "ophnuintraoperative_operationprep_viscoelastic_type".
- *
- * The followings are the available columns in table:
- * @property string $id
- * @property string $name
- *
- * The followings are the available model relations:
- *
- * @property ElementType $element_type
- * @property EventType $eventType
- * @property Event $event
- * @property User $user
- * @property User $usermodified
- */
-
-class OphNuIntraoperative_OperationPrep_ViscoelasticType extends BaseActiveRecordVersioned
+class Element_OphNuIntraoperative_Closing  extends	BaseEventTypeElement
 {
+	public $auto_update_relations = true;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return the static model class
@@ -48,7 +35,7 @@ class OphNuIntraoperative_OperationPrep_ViscoelasticType extends BaseActiveRecor
 	 */
 	public function tableName()
 	{
-		return 'ophnuintraoperative_operationprep_viscoelastic_type';
+		return 'et_ophnuintraoperative_closing';
 	}
 
 	/**
@@ -57,9 +44,7 @@ class OphNuIntraoperative_OperationPrep_ViscoelasticType extends BaseActiveRecor
 	public function rules()
 	{
 		return array(
-			array('name', 'safe'),
-			array('name', 'required'),
-			array('id, name', 'safe', 'on' => 'search'),
+			array('dressings,eyedrops,dressing_other,eyedrops_other','safe'),
 		);
 	}
 
@@ -74,6 +59,10 @@ class OphNuIntraoperative_OperationPrep_ViscoelasticType extends BaseActiveRecor
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
+			'dressing_assignment' => array(self::HAS_MANY, 'OphNuIntraoperative_Closing_Dressing_Assignment', 'element_id'),
+			'dressings' => array(self::HAS_MANY, 'OphNuIntraoperative_Closing_Dressing', 'dressing_id', 'through' => 'dressing_assignment'),
+			'eyedrops_assignment' => array(self::HAS_MANY, 'OphNuIntraoperative_Closing_Eyedrops_Assignment', 'element_id'),
+			'eyedrops' => array(self::HAS_MANY, 'OphNuIntraoperative_Closing_Eyedrops', 'eyedrops_id', 'through' => 'eyedrops_assignment'),
 		);
 	}
 
@@ -84,7 +73,9 @@ class OphNuIntraoperative_OperationPrep_ViscoelasticType extends BaseActiveRecor
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Name',
+			'event_id' => 'Event',
+			'dressings' => 'Dressing',
+			'eyedrops' => 'Eye drops / ointment given',
 		);
 	}
 
@@ -97,11 +88,27 @@ class OphNuIntraoperative_OperationPrep_ViscoelasticType extends BaseActiveRecor
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('id', $this->id, true);
-		$criteria->compare('name', $this->name, true);
+		$criteria->compare('event_id', $this->event_id, true);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
 		));
 	}
+
+	public function afterValidate()
+	{
+		if ($this->hasMultiSelectValue('dressings','Other (please specify)')) {
+			if (!$this->dressing_other) {
+				$this->addError('dressing_other',$this->getAttributeLabel('dressing_other').' cannot be blank');
+			}
+		}
+
+		if ($this->hasMultiSelectValue('eyedrops','Other (please specify)')) {
+			if (!$this->eyedrops_other) {
+				$this->addError('eyedrops_other',$this->getAttributeLabel('eyedrops_other').' cannot be blank');
+			}
+		}
+
+		return parent::afterValidate();
+	}
 }
-?>

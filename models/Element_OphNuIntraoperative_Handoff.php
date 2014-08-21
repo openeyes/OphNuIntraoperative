@@ -73,8 +73,8 @@ class Element_OphNuIntraoperative_Handoff  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, hand_off_from_id, hand_off_to_id, anesthesia_type_id, nonoperative_eye_protected_id, tape_or_shield_id', 'safe'),
-			array('id, event_id, hand_off_from_id, hand_off_to_id, anesthesia_type_id, nonoperative_eye_protected_id, tape_or_shield_id, ', 'safe', 'on' => 'search'),
+			array('event_id, hand_off_from_id, hand_off_to_id', 'safe'),
+			array('id, event_id, hand_off_from_id, hand_off_to_id', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -91,9 +91,6 @@ class Element_OphNuIntraoperative_Handoff  extends  BaseEventTypeElement
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 			'hand_off_from' => array(self::BELONGS_TO, 'User', 'hand_off_from_id'),
 			'hand_off_to' => array(self::BELONGS_TO, 'User', 'hand_off_to_id'),
-			'anesthesia_type' => array(self::BELONGS_TO, 'OphNuIntraoperative_Handoff_Anaesthesia_Type', 'anesthesia_type_id'),
-			'nonoperative_eye_protected' => array(self::BELONGS_TO, 'OphNuIntraoperative_Handoff_NonoperativeEyeProtected', 'nonoperative_eye_protected_id'),
-			'tape_or_shield' => array(self::BELONGS_TO, 'OphNuIntraoperative_Handoff_TapeOrShield', 'tape_or_shield_id'),
 		);
 	}
 
@@ -107,9 +104,6 @@ class Element_OphNuIntraoperative_Handoff  extends  BaseEventTypeElement
 			'event_id' => 'Event',
 			'hand_off_from_id' => 'Hand off from pre-op completed by',
 			'hand_off_to_id' => 'Hand off to OR completed by',
-			'anesthesia_type_id' => 'Anesthesia type',
-			'nonoperative_eye_protected_id' => 'Non-operative eye protected',
-			'tape_or_shield_id' => 'Tape or shield',
 		);
 	}
 
@@ -125,24 +119,10 @@ class Element_OphNuIntraoperative_Handoff  extends  BaseEventTypeElement
 		$criteria->compare('event_id', $this->event_id, true);
 		$criteria->compare('hand_off_from_id', $this->hand_off_from_id);
 		$criteria->compare('hand_off_to_id', $this->hand_off_to_id);
-		$criteria->compare('anesthesia_type_id', $this->anesthesia_type_id);
-		$criteria->compare('nonoperative_eye_protected_id', $this->nonoperative_eye_protected_id);
-		$criteria->compare('tape_or_shield_id', $this->tape_or_shield_id);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
 		));
-	}
-
-	public function beforeValidate()
-	{
-		if ($this->nonoperative_eye_protected && $this->nonoperative_eye_protected->name == 'Yes') {
-			if (!$this->tape_or_shield) {
-				$this->addError('tape_or_shield_id',$this->getAttributeLabel('tape_or_shield_id').' cannot be blank.');
-			}
-		}
-
-		return parent::beforeValidate();
 	}
 }
 ?>

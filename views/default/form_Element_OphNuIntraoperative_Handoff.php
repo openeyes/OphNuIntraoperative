@@ -21,7 +21,4 @@
 		<?php echo $form->dropDownList($element, 'hand_off_from_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty' => '- Select -'),false,array('label' => 3, 'field' => 4))?>
 		<?php echo $form->dropDownList($element, 'hand_off_to_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty' => '- Select -'),false,array('label' => 3, 'field' =>
 		 4))?>
-		<?php echo $form->dropDownList($element, 'anesthesia_type_id', CHtml::listData(OphNuIntraoperative_Handoff_Anaesthesia_Type::model()->findAll(array('order' => 'id asc')),'id','name'),array('empty' => '- Select -'),false,array('label' => 3, 'field' => 4))?>
-		<?php echo $form->radioButtons($element, 'nonoperative_eye_protected_id', CHtml::listData(OphNuIntraoperative_Handoff_NonoperativeEyeProtected::model()->findAll(array('order' => 'display_order asc')),'id','name'),null,false,false,false,false,array('class' => 'linked-fields', 'data-linked-fields' => 'tape_or_shield_id', 'data-linked-values' => 'Yes'),array('label'=>3,'field'=>4))?>
-		<?php echo $form->radioButtons($element, 'tape_or_shield_id', CHtml::listData(OphNuIntraoperative_Handoff_TapeOrShield::model()->findAll(array('order' => 'display_order asc')),'id','name'),null,false,!$element->nonoperative_eye_protected || $element->nonoperative_eye_protected->name != 'Yes',false,false,array(),array('label'=>3,'field'=>4))?>
 	</div>

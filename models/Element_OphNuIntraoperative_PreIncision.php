@@ -17,48 +17,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
 
-/**
- * This is the model class for table "et_ophnuintraoperative_operationprep".
- *
- * The followings are the available columns in table:
- * @property string $id
- * @property integer $event_id
- * @property integer $incision_site_id
- * @property integer $patient_position_id
- * @property integer $prep_solution_id
- * @property string $other_solution
- * @property integer $viscoelastic
- * @property integer $viscoelastic_type_id
- * @property integer $viscoelastic_quantity_id
- * @property integer $grounding_pad
- * @property integer $grounding_pad_location_id
- * @property integer $grounding_pad_side_id
- * @property integer $post_skin_assessment_id
- * @property string $post_skin_assessment_other
- * @property integer $nasal_throat_pack
- * @property string $nasal_insert_time
- * @property string $nasal_remove_time
- * @property string $additional_other
- * @property string $other_patient_position
- *
- * The followings are the available model relations:
- *
- * @property ElementType $element_type
- * @property EventType $eventType
- * @property Event $event
- * @property User $user
- * @property User $usermodified
- * @property OphNuIntraoperative_OperationPrep_IncisionSite $incision_site
- * @property OphNuIntraoperative_OperationPrep_PrepSolution $prep_solution
- * @property OphNuIntraoperative_OperationPrep_ViscoelasticType $viscoelastic_type
- * @property OphNuIntraoperative_OperationPrep_ViscoelasticQuantity $viscoelastic_quantity
- * @property OphNuIntraoperative_OperationPrep_GroundingPadLocation $grounding_pad_location
- * @property OphNuIntraoperative_OperationPrep_GroundingPadSide $grounding_pad_side
- * @property OphNuIntraoperative_OperationPrep_PostSkinAssessment $post_skin_assessment
- * @property Element_OphNuIntraoperative_OperationPrep_Additionals $additionals
- */
-
-class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
+class Element_OphNuIntraoperative_PreIncision  extends	BaseEventTypeElement
 {
 	public $auto_update_relations = true;
 
@@ -76,7 +35,7 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 	 */
 	public function tableName()
 	{
-		return 'et_ophnuintraoperative_operationprep';
+		return 'et_ophnuintraoperative_preincision';
 	}
 
 	/**
@@ -85,8 +44,8 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, incision_site_id, patient_position_id, prep_solution_id, other_solution, viscoelastic, viscoelastic_type_id, viscoelastic_quantity_id, grounding_pad, grounding_pad_location_id, grounding_pad_side_id, post_skin_assessment_id, post_skin_assessment_other, nasal_throat_pack, nasal_insert_time, nasal_remove_time, additional_other, additionals, other_patient_position', 'safe'),
-			array('id, event_id, incision_site_id, patient_position_id, prep_solution_id, other_solution, viscoelastic, viscoelastic_type_id, viscoelastic_quantity_id, grounding_pad, grounding_pad_location_id, grounding_pad_side_id, post_skin_assessment_id, post_skin_assessment_other, nasal_throat_pack, nasal_insert_time, nasal_remove_time, additional_other, other_patient_position', 'safe', 'on' => 'search'),
+			array('event_id, incision_site_id, patient_position_id, prep_solution_id, other_solution, grounding_pad, grounding_pad_location_id, grounding_pad_side_id, post_skin_assessment_id, post_skin_assessment_other, nasal_throat_pack, nasal_insert_time, nasal_remove_time, other_patient_position, anesthesia_type_id, nonoperative_eye_protected_id, tape_or_shield_id, who_timeout_completed, who_timeout_lead_by_id', 'safe'),
+			array('id, event_id, incision_site_id, patient_position_id, prep_solution_id, other_solution, grounding_pad, grounding_pad_location_id, grounding_pad_side_id, post_skin_assessment_id, post_skin_assessment_other, nasal_throat_pack, nasal_insert_time, nasal_remove_time, other_patient_position', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -101,16 +60,16 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-			'incision_site' => array(self::BELONGS_TO, 'OphNuIntraoperative_OperationPrep_IncisionSite', 'incision_site_id'),
-			'patient_position' => array(self::BELONGS_TO, 'OphNuIntraoperative_OperationPrep_PatientPosition', 'patient_position_id'),
-			'prep_solution' => array(self::BELONGS_TO, 'OphNuIntraoperative_OperationPrep_PrepSolution', 'prep_solution_id'),
-			'viscoelastic_type' => array(self::BELONGS_TO, 'OphNuIntraoperative_OperationPrep_ViscoelasticType', 'viscoelastic_type_id'),
-			'viscoelastic_quantity' => array(self::BELONGS_TO, 'OphNuIntraoperative_OperationPrep_ViscoelasticQuantity', 'viscoelastic_quantity_id'),
-			'grounding_pad_location' => array(self::BELONGS_TO, 'OphNuIntraoperative_OperationPrep_GroundingPadLocation', 'grounding_pad_location_id'),
-			'grounding_pad_side' => array(self::BELONGS_TO, 'OphNuIntraoperative_OperationPrep_GroundingPadSide', 'grounding_pad_side_id'),
-			'post_skin_assessment' => array(self::BELONGS_TO, 'OphNuIntraoperative_OperationPrep_PostSkinAssessment', 'post_skin_assessment_id'),
-			'additionals' => array(self::HAS_MANY, 'OphNuIntraoperative_OperationPrep_PrepSolution', 'additional_id', 'through' => 'additionals_assignment'),
-			'additionals_assignment' => array(self::HAS_MANY, 'OphNuIntraoperative_OperationPrep_Additionals', 'element_id'),
+			'incision_site' => array(self::BELONGS_TO, 'OphNuIntraoperative_PreIncision_IncisionSite', 'incision_site_id'),
+			'patient_position' => array(self::BELONGS_TO, 'OphNuIntraoperative_PreIncision_PatientPosition', 'patient_position_id'),
+			'prep_solution' => array(self::BELONGS_TO, 'OphNuIntraoperative_PreIncision_PrepSolution', 'prep_solution_id'),
+			'grounding_pad_location' => array(self::BELONGS_TO, 'OphNuIntraoperative_PreIncision_GroundingPadLocation', 'grounding_pad_location_id'),
+			'grounding_pad_side' => array(self::BELONGS_TO, 'OphNuIntraoperative_PreIncision_GroundingPadSide', 'grounding_pad_side_id'),
+			'post_skin_assessment' => array(self::BELONGS_TO, 'OphNuIntraoperative_PreIncision_PostSkinAssessment', 'post_skin_assessment_id'),
+			'anesthesia_type' => array(self::BELONGS_TO, 'OphNuIntraoperative_PreIncision_Anaesthesia_Type', 'anesthesia_type_id'),
+			'nonoperative_eye_protected' => array(self::BELONGS_TO, 'OphNuIntraoperative_PreIncision_NonoperativeEyeProtected', 'nonoperative_eye_protected_id'),
+			'tape_or_shield' => array(self::BELONGS_TO, 'OphNuIntraoperative_PreIncision_TapeOrShield', 'tape_or_shield_id'),
+			'who_timeout_lead_by' => array(self::BELONGS_TO, 'User', 'who_timeout_lead_by_id'),
 		);
 	}
 
@@ -126,9 +85,6 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 			'patient_position_id' => 'Patient position',
 			'prep_solution_id' => 'Prep done',
 			'other_solution' => 'Other solution',
-			'viscoelastic' => 'Viscoelastic',
-			'viscoelastic_type_id' => 'Viscoelastic type',
-			'viscoelastic_quantity_id' => 'Viscoelastic quantity',
 			'grounding_pad' => 'Grounding pad',
 			'grounding_pad_location_id' => 'Grounding pad location',
 			'grounding_pad_side_id' => 'Grounding pad side',
@@ -137,9 +93,12 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 			'nasal_throat_pack' => 'Nasal pack / throat pack',
 			'nasal_insert_time' => 'Inserted time',
 			'nasal_remove_time' => 'Removal time',
-			'additional' => 'Additional',
-			'additional_other' => 'Additional other',
 			'other_patient_position' => 'Other patient position',
+			'anesthesia_type_id' => 'Anesthesia type',
+			'nonoperative_eye_protected_id' => 'Non-operative eye protected',
+			'tape_or_shield_id' => 'Tape or shield',
+			'who_timeout_completed' => 'WHO TIME OUT Completed',
+			'who_timeout_lead_by_id' => 'Time out lead by',
 		);
 	}
 
@@ -157,9 +116,6 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 		$criteria->compare('patient_position_id', $this->patient_position_id);
 		$criteria->compare('prep_solution_id', $this->prep_solution_id);
 		$criteria->compare('other_solution', $this->other_solution);
-		$criteria->compare('viscoelastic', $this->viscoelastic);
-		$criteria->compare('viscoelastic_type_id', $this->viscoelastic_type_id);
-		$criteria->compare('viscoelastic_quantity_id', $this->viscoelastic_quantity_id);
 		$criteria->compare('grounding_pad', $this->grounding_pad);
 		$criteria->compare('grounding_pad_location_id', $this->grounding_pad_location_id);
 		$criteria->compare('grounding_pad_side_id', $this->grounding_pad_side_id);
@@ -168,8 +124,6 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 		$criteria->compare('nasal_throat_pack', $this->nasal_throat_pack);
 		$criteria->compare('nasal_insert_time', $this->nasal_insert_time);
 		$criteria->compare('nasal_remove_time', $this->nasal_remove_time);
-		$criteria->compare('additional', $this->additional);
-		$criteria->compare('additional_other', $this->additional_other);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
@@ -178,6 +132,12 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 
 	protected function beforeValidate()
 	{
+		if ($this->who_timeout_completed) {
+			if (!$this->who_timeout_lead_by) {
+				$this->addError('who_timeout_lead_by',$this->getAttributeLabel('who_timeout_lead_by').' cannot be blank');
+			}
+		}
+
 		if ($this->prep_solution && $this->prep_solution->name == 'Other (please specify)') {
 			if (!$this->other_solution) {
 				$this->addError('other_solution',$this->getAttributeLabel('other_solution').' cannot be blank');
@@ -187,14 +147,6 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 		if ($this->patient_position && $this->patient_position->name === 'Other (please specify)') {
 			if (!$this->other_patient_position) {
 				$this->addError('other_patient_position',$this->getAttributeLabel('other_patient_position').' cannot be blank');
-			}
-		}
-
-		if ($this->viscoelastic) {
-			foreach (array('viscoelastic_type_id','viscoelastic_quantity_id') as $field) {
-				if (!$this->$field) {
-					$this->addError($field,$this->getAttributeLabel($field).' cannot be blank');
-				}
 			}
 		}
 
@@ -228,9 +180,9 @@ class Element_OphNuIntraoperative_OperationPrep  extends  BaseEventTypeElement
 			}
 		}
 
-		if ($this->hasMultiSelectValue('additionals','Other (please specify)')) {
-			if (!$this->additional_other) {
-				$this->addError('additional_other',$this->getAttributeLabel('additional_other').' cannot be blank');
+		if ($this->nonoperative_eye_protected && $this->nonoperative_eye_protected->name == 'Yes') {
+			if (!$this->tape_or_shield) {
+				$this->addError('tape_or_shield_id',$this->getAttributeLabel('tape_or_shield_id').' cannot be blank.');
 			}
 		}
 
