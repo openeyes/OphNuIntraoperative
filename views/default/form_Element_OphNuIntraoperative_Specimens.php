@@ -25,6 +25,10 @@
 			'field' => 'specimens',
 			'validate_method' => '/OphNuIntraoperative/default/validateSpecimen',
 			'row_view' => 'protected/modules/OphNuIntraoperative/views/default/_specimen_row.php',
+			'sort_table_after_save' => array(
+				'type' => 'date',
+				'column' => 1
+			),
 			'columns' => array(
 				array(
 					'width' => 9,
