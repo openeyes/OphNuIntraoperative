@@ -74,12 +74,4 @@
 				<div class="large-9 column end"><div class="data-value"><?php echo $element->textWithLineBreaks('other')?></div></div>
 			</div>
 		<?php }?>
-		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('who_timeout_completed'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->who_timeout_completed ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('time_out_lead_by_id'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->time_out_lead_by ? $element->time_out_lead_by->fullName : 'None'?></div></div>
-		</div>
 	</div>

@@ -79,8 +79,8 @@ class Element_OphNuIntraoperative_Personnel  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, surgeon_id, scrub_nurse_id, surgical_assistant_id, trainee_scrub_nurse_id, anesthesiologist_id, trainee_circulating_nurse_id, anesthetic_assistant_id, translator, anesthetic_trainee_id, other, who_timeout_completed, time_out_lead_by_id, second_surgical_assistant_id, circulating_nurse_id', 'safe'),
-			array('id, event_id, surgeon_id, scrub_nurse_id, surgical_assistant_id, trainee_scrub_nurse_id, anesthesiologist_id, trainee_circulating_nurse_id, anesthetic_assistant_id, translator, anesthetic_trainee_id, other, who_timeout_completed, time_out_lead_by_id, ', 'safe', 'on' => 'search'),
+			array('event_id, surgeon_id, scrub_nurse_id, surgical_assistant_id, trainee_scrub_nurse_id, anesthesiologist_id, trainee_circulating_nurse_id, anesthetic_assistant_id, translator, anesthetic_trainee_id, other, second_surgical_assistant_id, circulating_nurse_id', 'safe'),
+			array('id, event_id, surgeon_id, scrub_nurse_id, surgical_assistant_id, trainee_scrub_nurse_id, anesthesiologist_id, trainee_circulating_nurse_id, anesthetic_assistant_id, translator, anesthetic_trainee_id, other', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -103,7 +103,6 @@ class Element_OphNuIntraoperative_Personnel  extends  BaseEventTypeElement
 			'trainee_circulating_nurse' => array(self::BELONGS_TO, 'User', 'trainee_circulating_nurse_id'),
 			'anesthetic_assistant' => array(self::BELONGS_TO, 'User', 'anesthetic_assistant_id'),
 			'anesthetic_trainee' => array(self::BELONGS_TO, 'User', 'anesthetic_trainee_id'),
-			'time_out_lead_by' => array(self::BELONGS_TO, 'User', 'time_out_lead_by_id'),
 			'second_surgical_assistant' => array(self::BELONGS_TO, 'User', 'second_surgical_assistant_id'),
 			'circulating_nurse' => array(self::BELONGS_TO, 'User', 'circulating_nurse_id'),
 		);
@@ -127,8 +126,6 @@ class Element_OphNuIntraoperative_Personnel  extends  BaseEventTypeElement
 			'translator' => 'Translator',
 			'anesthetic_trainee_id' => 'Anesthetic trainee',
 			'other' => 'Other',
-			'who_timeout_completed' => 'WHO timeout completed',
-			'time_out_lead_by_id' => 'Time out lead by',
 			'second_surgical_assistant_id' => 'Second surgical assistant',
 			'circulating_nurse_id' => 'Circulating nurse',
 		);
@@ -154,20 +151,10 @@ class Element_OphNuIntraoperative_Personnel  extends  BaseEventTypeElement
 		$criteria->compare('translator', $this->translator);
 		$criteria->compare('anesthetic_trainee_id', $this->anesthetic_trainee_id);
 		$criteria->compare('other', $this->other);
-		$criteria->compare('who_timeout_completed', $this->who_timeout_completed);
-		$criteria->compare('time_out_lead_by_id', $this->time_out_lead_by_id);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
 		));
-	}
-
-
-
-	protected function afterSave()
-	{
-
-		return parent::afterSave();
 	}
 }
 ?>
