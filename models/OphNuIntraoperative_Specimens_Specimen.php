@@ -131,7 +131,7 @@ class OphNuIntraoperative_Specimens_Specimen extends BaseActiveRecordVersioned
 
 	public function getDescription()
 	{
-		return $this->location.', collected by: '.$this->doctor_name;
+		return $this->location.', collected by: '.$this->doctor_name.' at: '.$this->centre_name;
 	}
 }
 ?>

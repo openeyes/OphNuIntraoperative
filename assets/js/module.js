@@ -48,8 +48,19 @@ $(document).ready(function() {
 
 		$(this).closest('td').next('td').children('.resultsReceived').val(1);
 		$(this).closest('td').next('td').children('.resultsReceivedTimestamp').val($.datepicker.formatDate('yy-mm-dd',d)+' '+h+':'+m+':'+s);
-		$(this).closest('td').next('td').children('.editRecordItemDiv').remove();
-		$(this).closest('td').html($.datepicker.formatDate('d M yy',d)+' '+h+':'+m);
+		$(this).closest('td').find('.specimenResultReceived').hide();
+		$(this).closest('td').children('.specimenReceived').children('label').text($.datepicker.formatDate('d M yy',d)+' '+h+':'+m);
+		$(this).closest('td').children('.specimenReceived').find('.unmarkReceived').show();
+	});
+
+	$('.unmarkReceived').die('click').live('click',function(e) {
+		e.preventDefault();
+
+		$(this).closest('td').next('td').children('.resultsReceived').val(0);
+		$(this).closest('td').next('td').children('.resultsReceivedTimestamp').val('');
+		$(this).closest('td').find('.specimenResultReceived').show();
+		$(this).closest('td').children('.specimenReceived').children('label').text('Received');
+		$(this).hide();
 	});
 });
 

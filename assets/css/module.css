@@ -119,3 +119,8 @@
 .Element_OphNuIntraoperative_SurgicalCounts .recordsTable .editRecordItemDiv {
   display: inline;
 }
+
+/* line 119, ../sass/components/_event.scss */
+.unmarkReceived {
+  display: block;
+}

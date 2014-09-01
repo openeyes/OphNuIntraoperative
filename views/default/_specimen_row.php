@@ -32,21 +32,19 @@
 		<?php echo $item->description?>
 	</td>
 	<td>
-		<?php if ($item->results_received) {?>
-			<?php echo $item->NHSDate('results_received_timestamp')?>
-			<?php echo date('H:i',strtotime($item->results_received_timestamp))?>
-		<?php }else{?>
+		<div class="specimenReceived">
+			<input type="checkbox" class="specimenResultReceived" name="specimenResultReceived<?php echo $i?>" id="specimenResultReceived<?php echo $i?>"<?php if (!$edit || $item->results_received) {?> style="display: none"<?php }?> />
 			<?php if ($edit) {?>
-				<div class="specimenReceived">
-					<input type="checkbox" class="specimenResultReceived" name="specimenResultReceived<?php echo $i?>" id="specimenResultReceived<?php echo $i?>" />
-					<label for="specimenResultReceived<?php echo $i?>">
-						Received
-					</label>
-				</div>
+				<label for="specimenResultReceived<?php echo $i?>"><?php if (!$item->results_received) {?>Received<?php }else{?><?php echo $item->NHSDate('results_received_timestamp').' '.date('H:i',strtotime($item->results_received_timestamp))?><?php }?></label>
+				<a class="unmarkReceived"<?php if (!$item->results_received) {?> style="display: none"<?php }?>>Not received</a>
 			<?php }else{?>
-				Not received
+				<?php if ($item->results_received) {?>
+					<?php echo $item->NHSDate('results_received_timestamp').' '.date('H:i',strtotime($item->results_received_timestamp))?>
+				<?php }else{?>
+					Not received
+				<?php }?>
 			<?php }?>
-		<?php }?>
+		</div>
 	</td>
 	<?php if ($edit) {?>
 		<td>
