@@ -317,11 +317,11 @@ class DefaultController extends BaseEventTypeController
 
 		$criteria = new CDbCriteria;
 
-		$criteria->addCondition(array("active = :active"));
-		$criteria->addCondition(array("LOWER(concat_ws(' ',first_name,last_name)) LIKE :term"));
+		$criteria->addCondition("active = :active");
+		$criteria->addCondition("lower(first_name) like :term or lower(last_name) like :term or LOWER(concat_ws(' ',first_name,last_name)) LIKE :term");
 
 		$params[':active'] = 1;
-		$params[':term'] = '%' . strtolower(strtr($_GET['term'], array('%' => '\%'))) . '%';
+		$params[':term'] = strtolower(strtr($_GET['term'], array('%' => '\%'))) . '%';
 
 		$criteria->params = $params;
 		$criteria->order = 'first_name, last_name';
@@ -339,6 +339,10 @@ class DefaultController extends BaseEventTypeController
 
 				$consultant_name = false;
 
+				$title = $contact->title ? $contact->title : $user->title;
+				$first_name = $contact->first_name ? $contact->first_name : $user->first_name;
+				$last_name = $contact->last_name ? $contact->last_name : $user->last_name;
+
 				// if we have a consultant for the firm, and its not the matched user, attach the consultant name to the entry
 				if ($consultant && $user->id != $consultant->id) {
 					$consultant_name = trim($consultant->contact->title.' '.$consultant->contact->first_name.' '.$consultant->contact->last_name);
@@ -346,8 +350,8 @@ class DefaultController extends BaseEventTypeController
 
 				$users[] = array(
 					'id' => $user->id,
-					'value' => trim($contact->title.' '.$contact->first_name.' '.$contact->last_name.' '.$contact->qualifications).' ('.$user->role.')',
-					'fullname' => trim($contact->title.' '.$contact->first_name.' '.$contact->last_name.' '.$contact->qualifications),
+					'value' => trim($title.' '.$first_name.' '.$last_name.' '.$contact->qualifications).' ('.$user->role.')',
+					'fullname' => trim($title.' '.$first_name.' '.$last_name.' '.$contact->qualifications),
 					'role' => $user->role,
 					'consultant' => $consultant_name,
 				);
