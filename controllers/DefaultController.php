@@ -47,7 +47,7 @@ class DefaultController extends BaseEventTypeController
 			$bookings = array();
 
 			if ($api = Yii::app()->moduleAPI->get('OphTrOperationbooking')) {
-				$bookings = $api->getOpenBookingsForEpisode($this->episode->id);
+				$bookings = $api->getOpenAndCompletedBookingsForEpisode($this->episode->id);
 			}
 
 			$this->title = !empty($bookings) ? 'Please select booking' : 'No bookings created';
