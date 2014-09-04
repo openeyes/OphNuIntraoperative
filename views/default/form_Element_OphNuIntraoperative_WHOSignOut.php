@@ -18,7 +18,37 @@
  */
 ?>
 	<div class="element-fields">
-		<?php echo $form->dropDownList($element, 'signout_lead_by_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty' => '- Please select -'),false,array('label' => 3, 'field' => 4))?>
+		<div id="div_Element_OphNuIntraoperative_WHOSignOut_signout_lead_by_id" class="row field-row">
+			<div class="large-3 column">
+				<label for="Element_OphNuIntraoperative_WHOSignOut_signout_lead_by_id">
+					<?php echo $element->getAttributeLabel('signout_lead_by_id')?>:
+				</label>
+			</div>
+			<div class="large-3 column end">
+				<?php echo $form->dropDownList($element, 'signout_lead_by_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('nowrapper' => true, 'empty' => '- Please select -'),false,array('label' => 3, 'field' => 4))?>
+				<?php
+				$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
+					'name' => 'Element_OphNuIntraoperative_WHOSignOut_signout_lead_by_id_autocomplete',
+					'id' => 'Element_OphNuIntraoperative_WHOSignOut_signout_lead_by_id_autocomplete',
+					'source' => "js:function(request, response) {
+						$.getJSON('".$this->createUrl('users')."', {
+							term : request.term,
+						}, response);
+					}",
+					'options' => array(
+						'select' => "js:function(event, ui) {
+						$('#Element_OphNuIntraoperative_WHOSignOut_signout_lead_by_id').val(ui.item.id);
+						$(this).val('');
+						return false;
+					}"
+					),
+					'htmlOptions' => array(
+						'placeholder' => 'search person by name',
+						'class'=> 'autocomplete-top'
+					)
+				))?>
+			</div>
+		</div>
 		<?php echo $form->radioBoolean($element, 'surgical_count_completed', array(), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->radioButtons($element, 'labelling_id', CHtml::listData(OphNuIntraoperative_WHOSignOut_Labelling::model()->findAll(array('order' => 'display_order asc')),'id','name'), null, false, false, false, false, array(), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->radioBoolean($element, 'equipment_problems', array('class' => 'linked-fields', 'data-linked-fields' => 'problems,equipment_problems_comments', 'data-linked-values' => 'Yes'), array('label' => 3, 'field' => 4))?>
